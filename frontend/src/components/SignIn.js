@@ -21,7 +21,7 @@ const SignIn = () => {
                     <div className="error-message"></div>
                 </div>
                 <div className="MotDePasseOublie">
-                    <a href="#">Forgot Password ?</a>
+                    <a href="">Forgot Password ?</a>
                 </div>
                 <div className="Remember">
                     <input type="checkbox" id="remember" name="remember" />

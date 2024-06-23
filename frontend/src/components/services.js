@@ -9,20 +9,20 @@ const Services = () => {
         <div className='services'> 
              <div className='service'>
                 <p>Question From File</p>
-                <img src={fileIcon} className='serviceIcon' />
+                <img src={fileIcon} className='serviceIcon' alt='fileIcon'/>
              </div>
              <div className='service' >
                 <p>Question From Audio</p>
-                <img src={audioIcon} className='serviceIcon' />
+                <img src={audioIcon} className='serviceIcon' alt='audioIcon' />
              </div>
              <div className='service'>
                <p>Question From Video</p>
-               <img src={youtubIcon} className='serviceIcon'/>
+               <img src={youtubIcon} className='serviceIcon' alt='youtubIcon'/>
              </div>
              
              <div className='service'>
                 <p>Question From Image</p>
-                <img src={imageIcon} className='serviceIcon' />
+                <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
              </div>
 
           </div>
