@@ -1,0 +1,45 @@
+.navbar {
+    margin-top: -15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(236, 9, 198);
+}
+
+.logo {
+    height:70px;
+    width: 150px;
+    margin-left: 2%;
+}
+
+.language{
+    padding-right: 2%;
+    font-weight: bold;
+    font-size: larger;
+    margin-top: 1%;
+    cursor: pointer;
+
+}
+
+
+.dropdown-menu {
+    top: 70%; 
+    border: none;
+    width:10px;
+}
+
+.language:hover .dropdown-menu {
+    display: block; 
+}
+
+.dropdown-item {
+    cursor: pointer;
+
+}
+
+
+
+
+
+
+
