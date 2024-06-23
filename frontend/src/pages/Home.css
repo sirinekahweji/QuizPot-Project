@@ -1,18 +1,16 @@
 
 @import url('https://fonts.google.com/specimen/Oswald?preview.text=Discover%20the%20power%20of%20AI');
-.navbar-divider{
-    margin-top: -10px;
 
-}
 .home{
     background-color: rgba(199, 243, 245, 0.217);
   
 
 }
-.partie1{
+.pageGarde{
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding-left: 20px;
+    padding-top: 2%;
 }
 .title{
     text-align: left;
@@ -48,3 +46,6 @@
     display: flex;
     align-items: center;
 }
+
+
+

@@ -1,0 +1,30 @@
+
+.services{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-left:10%;
+    padding-right:10%;
+    background-color: rgb(228, 64, 139);
+    margin-top: -17px;
+    height: 50px;
+
+}
+
+.service{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    margin-right: 10px;
+    color: white;
+}
+.service p{
+    padding-top: 10px;
+    font-weight: bold;
+}
+
+.serviceIcon{
+    width:20%;
+    height:20% ;
+    margin-left: 2px;;
+}
