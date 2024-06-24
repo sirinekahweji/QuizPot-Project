@@ -1,41 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import logo from '../assets/logo.png';
 import './NavBar.css';
+import { LangContext } from '../context/LangContext';
 
 const NavBar = () => {
-    const [language, setLanguage] = useState('EN');
-    const [showDropdown, setShowDropdown] = useState(false);
+    const { language, changeLanguage, currentLangData } = useContext(LangContext);
 
     const handleLanguageChange = (lang) => {
-        setLanguage(lang);
-        setShowDropdown(false);
-    };
-
-    const handleDropdownDisplay = () => {
-        setShowDropdown(true);
-    };
-
-    const handleDropdownHide = () => {
-        setShowDropdown(false);
+        changeLanguage(lang);
     };
 
     return (
         <nav className="navbar">
             <img src={logo} alt="QuizBot Logo" className="logo" />
-            <div className="ml-auto language"
-                onMouseEnter={handleDropdownDisplay}
-                onMouseLeave={handleDropdownHide}
-            >
-                <span className={`language-text ${showDropdown ? 'hovered' : ''}`} onClick={() => setShowDropdown(!showDropdown)}>
-                    {language} <i className="dropdown-toggle"></i>
+            <div className="ml-auto language">
+                <span className="language-text">
+                    {currentLangData.navbar[language.toLowerCase()]} <i className="bi bi-chevron-down"></i>
                 </span>
-                {showDropdown && (
-                    <div className="dropdown-menu">
-                        <button className={`dropdown-item ${language === 'FR' ? 'selected' : ''}`} onClick={() => handleLanguageChange('FR')}><b>FR</b></button>
-                        <button className={`dropdown-item ${language === 'EN' ? 'selected' : ''}`} onClick={() => handleLanguageChange('EN')}><b>EN</b></button>
-                    </div>
-                )}
-              
+                <div className="dropdown-menu">
+                    <button className={`dropdown-item ${language === 'FR' ? 'selected' : ''}`} onClick={() => handleLanguageChange('FR')}>
+                        {currentLangData.navbar.fr}
+                    </button>
+                    <button className={`dropdown-item ${language === 'EN' ? 'selected' : ''}`} onClick={() => handleLanguageChange('EN')}>
+                        {currentLangData.navbar.en}
+                    </button>
+                </div>
             </div>
         </nav>
     );

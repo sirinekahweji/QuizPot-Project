@@ -19,7 +19,7 @@
     font-weight: bold;
     padding-left: 2%;
 }
-.discription{
+.description{
     color: rgb(228, 64, 139);
     font-family: 'Microsoft YaHei UI';
     font-weight: bold;
@@ -27,8 +27,8 @@
 
 }
 .pagegardeimg{
-    margin-top: -8%;
-    width: 100%;
+    margin-top: -10%;
+    width:85%;
     height: auto;
 }
 
@@ -38,6 +38,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 60%;
 }
 
 

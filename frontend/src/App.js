@@ -3,10 +3,13 @@ import Home from './pages/Home';
 import NavBar from './components/NavBar';
 import './index.css'; 
 import './'
+import { LangProvider } from './context/LangContext';
+
 
 
 function App() {
   return (
+    <LangProvider>
     <div className="App">
       <BrowserRouter>
       <NavBar></NavBar>
@@ -16,6 +19,7 @@ function App() {
       </BrowserRouter>
       
     </div>
+    </LangProvider>
   );
 }
 

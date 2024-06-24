@@ -11,14 +11,14 @@
     padding: 12px;
   }
   .FormField label {
-    margin-bottom: 5px; /* Ajoute un espace de 5px en bas du libellé */
+    margin-bottom: 5px; 
     width: fit-content;
     user-select: none;
   }
   .FormField input{
     padding: 8px;
      padding-bottom: 18px;  
-     padding-top: 18px; /* Ajoute un espace de 5px en bas du libellé */
+     padding-top: 18px; 
   }
   .remember{
     font-size: 10px;
@@ -48,6 +48,7 @@
     text-align: center;
     margin-top: 10px;
     font-size:11px;
+    font-weight: bold;
   }
   #username,#password{
     border-radius: 4px;

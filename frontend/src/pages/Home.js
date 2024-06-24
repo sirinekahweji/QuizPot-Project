@@ -2,10 +2,14 @@ import './Home.css';
 import SignIn from '../components/SignIn';
 import Services from '../components/services';
 import image from '../assets/imagePageGarde.png';
+import React, { useContext } from 'react';
+import { LangContext } from '../context/LangContext';
 
 
 
 const Home = () => {
+    const { currentLangData } = useContext(LangContext); 
+
     return (  
         <div className="home">
             <Services></Services>
@@ -13,8 +17,8 @@ const Home = () => {
           <div className='pageGarde'>
             
           <div className="left-container">
-                <h1 className='title'>Discover the power of AI</h1>
-                <h3 className='discription'>Transform learning into a fun adventure <br />with our Quizbot</h3>
+                <h1 className='title'>{currentLangData.title}</h1>
+                <h3 className='description'>{currentLangData.descriptionP1} <br />{currentLangData.descriptionP2} </h3>
                 <img src={image} className='pagegardeimg' alt="Page Garde" />
             </div>
 
