@@ -22,6 +22,15 @@
         "signInButton": "Sign in",
         "noAccount": "Don't have an account?",
         "signUpHere": "Sign up here"
+      },
+      "signUpPage": {
+        "title": "Sign Up",
+        "fullNameLabel": "Full Name *",
+        "emailLabel": "Email *",
+        "passwordLabel": "Password *",
+        "confirmPasswordLabel": "Confirm Password *",
+        "signUpButton": "Sign Up ",
+        "signInLink": "Sign in "
       }
     },
     "FR": {
@@ -47,7 +56,16 @@
         "signInButton": "Se connecter",
         "noAccount": "Vous n'avez pas de compte?",
         "signUpHere": "Inscrivez-vous ici"
-      }
+      },
+      "signUpPage": {
+      "title": "Inscrivez-vous",
+      "fullNameLabel": "Nom Complet *",
+      "emailLabel": "E-mail *",
+      "passwordLabel": "Mot de passe *",
+      "confirmPasswordLabel": "Confirmer le mot de passe *",
+      "signUpButton": "S'inscrire",
+      "signInLink": "Se connecter"
+    }
     }
   }
   

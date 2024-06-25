@@ -1,6 +1,8 @@
 import './SignIn.css'; 
 import React, { useContext } from 'react';
 import { LangContext } from '../context/LangContext';
+import { Link } from "react-router-dom";
+
 
 const SignIn = () => {
     const { currentLangData } = useContext(LangContext); 
@@ -35,7 +37,13 @@ const SignIn = () => {
             </form>
             <p className="Inscrivez">
             {currentLangData.signIn.noAccount}<br /> 
-                <a href="/SignUp" className='signup'>{currentLangData.signIn.signUpHere}</a>
+                <Link to="/signup"
+               style={{ 
+                color:"rgb(0, 161, 225)",
+                textDecoration:"none"
+
+
+            }}>{currentLangData.signIn.signUpHere}</Link>
             </p>
         </div>
     );

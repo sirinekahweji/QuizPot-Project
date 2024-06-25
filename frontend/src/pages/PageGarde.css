@@ -1,0 +1,52 @@
+
+@import url('https://fonts.google.com/specimen/Oswald?preview.text=Discover%20the%20power%20of%20AI');
+
+.home{
+    background-color: rgba(199, 243, 245, 0.217);
+  
+
+}
+.pageGarde{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-top: 2%;
+}
+.title{
+    text-align: left;
+    color: rgb(171, 206, 74);
+    font-family: 'Oswald';
+    font-weight: bold;
+    padding-left: 2%;
+}
+.description{
+    color: rgb(228, 64, 139);
+    font-family: 'Microsoft YaHei UI';
+    font-weight: bold;
+    padding-left: 2%;
+
+}
+.pagegardeimg{
+    margin-top: -10%;
+    width:85%;
+    height: auto;
+}
+
+
+
+.left-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 60%;
+}
+
+
+.signin-container {
+    margin-top: -12%;
+    display: flex;
+    align-items: center;
+}
+
+
+
