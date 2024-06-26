@@ -1,0 +1,13 @@
+.steps {
+    background-color: rgb(253, 229, 229);
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin-left: 2%;
+    align-items: center; 
+}
+
+.steps p {
+    margin: 2px;
+}

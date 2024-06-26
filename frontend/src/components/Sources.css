@@ -1,0 +1,31 @@
+.sources {
+    text-align: center;
+}
+
+.source-container {
+    display: flex;
+    justify-content: left; 
+    gap: 130px; 
+    margin-left: 8%;
+    
+}
+
+.source {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.sourceIcon {
+    width: 100%; 
+    height: 100%;
+}
+.sources h3{
+    text-align: left;
+    color: rgb(2, 7,72); 
+    font-family: 'Oswald';
+    font-weight: bold;
+    padding: 3%;
+    margin-left: 2%;
+
+}

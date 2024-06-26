@@ -1,0 +1,36 @@
+
+
+.profilebar {
+    position: fixed;
+    top:58px;
+    right: 0;
+    width: 180px; 
+    height: 100%;
+    background-color: rgb(2, 7,72); 
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px; 
+}
+
+.noimage {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px; 
+    border-color: white;
+    border-width: thick;
+
+
+}
+
+.username, .useremail, .quizzes {
+    margin: 10px 0; 
+}
+
+.quizzes{
+  font-family: 'Britannic';
+  font-size: 20px;
+}
