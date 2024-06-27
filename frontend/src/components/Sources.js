@@ -4,6 +4,8 @@ import youtubIcon from '../assets/youtubicon.png';
 import imageIcon from '../assets/imageicon.png';
 import audioIcon from '../assets/audioicon.png';
 import './Sources.css'; 
+import VideoSource from './VideoSource';
+
 
 const Sources = () => {
     const [selectedSource, setSelectedSource] = useState('video');
@@ -46,6 +48,8 @@ const Sources = () => {
                  <p>Image</p>
              </div>
           </div>
+          <VideoSource></VideoSource>
+
     </div>);
 }
 

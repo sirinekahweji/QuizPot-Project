@@ -1,0 +1,22 @@
+.videoSource{
+    border-radius: 12px;
+    background-color: rgba(2,7, 72, 13%);
+    padding:20px;
+    width: 60%;
+    margin-left: 12%;
+    margin-top:25px;
+}
+.videoSource-container{
+    border-radius: 20px;
+    background-color:white;
+    text-align: left;
+    padding-left:3%;
+    padding-top: 7px;
+    color:rgb(133, 131, 131)23, 123, 123);
+}
+.videoSource h5{
+  text-align: left;
+    color: rgb(2, 7,72); 
+    font-weight: bold;
+
+}
