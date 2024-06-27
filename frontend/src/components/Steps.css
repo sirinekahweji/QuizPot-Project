@@ -1,13 +1,25 @@
+
 .steps {
     background-color: rgb(253, 229, 229);
     border-radius: 20px;
     display: flex;
     justify-content: space-around;
     width: 50%;
-    margin-left: 2%;
-    align-items: center; 
+    margin-top: 20px ;
+    padding: 2px; 
+    margin-left: 5%;
+    align-items: center;
 }
+
 
 .steps p {
     margin: 2px;
+    font-weight: bold;
+    color: rgb(2, 7,72); 
+    font-family: 'Britannic';
+
+}
+.steps p:first-of-type {
+    color: rgb(236, 9, 198);
+
 }

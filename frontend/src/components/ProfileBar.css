@@ -25,12 +25,22 @@
 
 
 }
-
-.username, .useremail, .quizzes {
+.username{
+    font-size: 20px;
+    
+}
+.useremail, .quizzes {
     margin: 10px 0; 
 }
 
 .quizzes{
   font-family: 'Britannic';
   font-size: 20px;
+  margin-top: 20%;
+}
+
+.logout{
+    margin-top: 80%;
+    margin-right: 0%;
+    font-size: 30px;
 }

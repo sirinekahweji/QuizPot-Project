@@ -8,6 +8,7 @@ const ProfileBar = () => {
         <h3 className="username">User Name</h3>
         <p className="useremail">username@gmail.com</p>
         <p className="quizzes">My Quizzes</p>
+        <p className='logout'><i class="bi bi-box-arrow-right"></i></p>
 
     </div> );
 }

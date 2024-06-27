@@ -1,12 +1,13 @@
 .sources {
     text-align: center;
+    margin-top: -1%;
 }
 
 .source-container {
     display: flex;
     justify-content: left; 
-    gap: 130px; 
-    margin-left: 8%;
+    gap: 90px; 
+    margin-left: 15%;
     
 }
 
@@ -14,11 +15,20 @@
     display: flex;
     flex-direction: column;
     align-items: center; 
+    padding: 1% 2%;
+    border-radius: 10%;
+}
+
+.source p{
+    font-family: 'Britannic';
 }
 
 .sourceIcon {
     width: 100%; 
     height: 100%;
+}
+.sourceIcon:hover{
+    cursor: pointer;
 }
 .sources h3{
     text-align: left;
@@ -28,4 +38,20 @@
     padding: 3%;
     margin-left: 2%;
 
+}
+
+.selected-file {
+    background-color:rgb(249, 255, 173);
+}
+
+.selected-audio {
+    background-color:rgb(223, 248, 254);
+}
+
+.selected-video {
+    background-color:rgb(253, 229, 229);
+}
+
+.selected-image {
+    background-color: rgba(218, 113, 245, 28%);
 }
