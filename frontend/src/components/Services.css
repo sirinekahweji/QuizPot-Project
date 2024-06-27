@@ -1,30 +1,38 @@
-
-.services{
+.services {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-left:6%;
-    padding-right:6%;
+    padding-left: 6%;
+    padding-right: 3%;
     background-color: rgb(228, 64, 139);
     margin-top: -17px;
     height: 50px;
-
 }
 
-.service{
+.service {
     display: flex;
     align-items: center;
     padding: 20px 10px;
-    margin-right:5px;
+    margin-right: 5px;
     color: white;
 }
-.service p{
+
+.service p {
     padding-top: 10px;
     font-weight: bold;
 }
 
-.serviceIcon{
-    width:18%;
-    height:18% ;
-    margin-left: 1px;;
+.serviceIcon {
+    width: 18%;
+    height: 18%;
+    margin-left: 1px;
+}
+
+.profileIcon {
+    margin-left: auto; /* Pushes the icon to the right */
+    border: 2px solid white; /* White border */
+    font-weight: bolder; /* Bold border */
+    width: 45px; /* Adjust size as needed */
+    height: 45px; /* Adjust size as needed */
+    border-radius: 50%;
 }

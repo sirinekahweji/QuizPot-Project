@@ -8,7 +8,6 @@ import React, { useContext } from 'react';
 import './Services.css'; 
 import { LangContext } from '../context/LangContext'; 
 
-
 const Services = () => {
    const { currentLangData } = useContext(LangContext); 
 
@@ -31,10 +30,9 @@ const Services = () => {
              <p>{currentLangData.services.questionImage}</p>
              <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
              </div>
-             <img src={noImage}  className='noimage' alt="profilePhoto"/>
-
-          </div>
-     );
+             <img src={noImage} className='profileIcon' alt="profilePhoto"/>
+        </div>
+    );
 }
- 
+
 export default Services;
