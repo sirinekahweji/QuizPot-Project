@@ -5,9 +5,11 @@
     display: flex;
     justify-content: space-around;
     width: 50%;
-    margin-top: 20px ;
+    /*margin-top: 20px ;*/
+    margin-top: 10px ;
     padding: 2px; 
-    margin-left: 5%;
+    /*margin-left: 5%;*/
+    margin-left:3%;
     align-items: center;
 }
 

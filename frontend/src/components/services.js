@@ -2,6 +2,8 @@ import fileIcon from '../assets/fileicon.png';
 import youtubIcon from '../assets/youtubicon.png';
 import imageIcon from '../assets/imageicon1.png';
 import audioIcon from '../assets/audioicon.png';
+import noImage from '../assets/noimage.png';
+
 import React, { useContext } from 'react';
 import './Services.css'; 
 import { LangContext } from '../context/LangContext'; 
@@ -29,6 +31,7 @@ const Services = () => {
              <p>{currentLangData.services.questionImage}</p>
              <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
              </div>
+             <img src={noImage}  className='noimage' alt="profilePhoto"/>
 
           </div>
      );

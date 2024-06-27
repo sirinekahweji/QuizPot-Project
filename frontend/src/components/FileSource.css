@@ -1,29 +1,29 @@
-.videoSource{
+.filesource{
     border-radius: 12px;
     background-color: rgba(2,7, 72, 13%);
     padding:20px;
     width: 60%;
     margin-left: 19%;
-    margin-top:25px;
+    margin-top:10px;
 }
-.videoSource-container{
+.fileSource-container{
     border-radius: 20px;
     background-color:white;
-    text-align: left;
-    padding-left:3%;
-    padding-top: 10px;
-    padding-bottom:1px ;
+    padding-top: 5px;
     color:rgb(58, 58, 58);
     width: 70%;
-    margin-left: 12%;
+    margin-left: 15%;
 }
-.videoSource h5{
-  text-align: left;
+.fileSource-container h6{
+    color: rgb(2, 7,72); 
+    font-weight: bold;
+}
+.filesource h5{
+    text-align: left;
     color: rgb(2, 7,72); 
     font-weight: bold;
 
 }
-.addFile{
-    color: rgb(2, 7,72); 
-    font-size: 30px;
+.filesource p {
+    margin: 1px 0; 
 }

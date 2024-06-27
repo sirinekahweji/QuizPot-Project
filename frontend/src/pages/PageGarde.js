@@ -9,7 +9,6 @@ import { LangContext } from '../context/LangContext';
 
 const PageGarde = () => {
     const { currentLangData } = useContext(LangContext); 
-
     return (  
         <div className="home">
             <Services></Services>
