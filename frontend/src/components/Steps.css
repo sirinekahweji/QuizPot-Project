@@ -1,27 +1,26 @@
-
 .steps {
-    background-color: #fbefe9;
-    border-radius: 20px;
     display: flex;
     justify-content: space-around;
+    background-color: #fbefe9;
+    border-radius: 20px;
     width: 50%;
-    /*margin-top: 20px ;*/
     margin-top: 10px ;
     padding: 2px; 
-    /*margin-left: 5%;*/
     margin-left:3%;
     align-items: center;
+
 }
 
+.selected-step {
+    color: #f34079; /* Couleur rose */
+    font-weight: bold; /* Optionnel : mise en gras */
+    cursor: pointer;
 
-.steps p {
-    margin: 2px;
-    font-weight: bold;
-    color: rgb(2, 7,72); 
+}
+.steps p{
     font-family: 'Britannic';
+    margin: 2px;
 
-}
-.steps p:first-of-type {
-    color:#f34079; 
+
 
 }

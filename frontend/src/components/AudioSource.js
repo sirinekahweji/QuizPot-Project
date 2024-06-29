@@ -3,7 +3,7 @@ import './AudioSource.css';
 const AudioSource = () => {
     return ( 
         <div className="audiosource">
-        <h5>Give Quizbot an audio or video file, it will create the questions about its content!</h5>
+        <h5>Give Quizbot an audio file, it will create the questions about its content!</h5>
         <div className="audioSource-container">
             <h6>Click here to upload a file</h6>
             <p className='addFile'><i class="bi bi-file-earmark-plus-fill"></i></p>

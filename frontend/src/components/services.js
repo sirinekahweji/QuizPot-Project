@@ -4,22 +4,18 @@ import imageIcon from '../assets/imageicon1.png';
 import audioIcon from '../assets/audioicon.png';
 import noImage from '../assets/noimage.png';
 
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Services.css'; 
 import { LangContext } from '../context/LangContext'; 
-import { Modal, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Services = () => {
   const { currentLangData } = useContext(LangContext); 
-  const [showModal, setShowModal] = useState(false);
   const location = useLocation();
-
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
 
   return ( 
     <div className='services'> 
@@ -41,34 +37,28 @@ const Services = () => {
       </div>
 
       {location.pathname !== '/' && (
-        <img 
-          src={noImage} 
-          className='profileIcon' 
-          alt="profilePhoto" 
-          onClick={handleShowModal}
-          style={{ cursor: 'pointer' }}
-        />
+        <div className='profileIconContainer'>
+          <img 
+            src={noImage} 
+            className='profileIcon' 
+            alt="profilePhoto" 
+            style={{ cursor: 'pointer' }}
+          />
+          <div className="custom-modal">
+            <Button className="dropdown-item" 
+            >
+              <Link to="/profile" style={{ textDecoration: "none" , color: "black"}}>
+                Voir profile
+              </Link>
+            </Button>
+            <Button className="dropdown-item">
+              <Link to="/" style={{ textDecoration: "none" ,  color: "black" }}>
+                Log out
+              </Link>
+            </Button>
+          </div>
+        </div>
       )}
-
-      <Modal 
-        show={showModal} 
-        onHide={handleCloseModal} 
-        backdrop={false} 
-        animation={false}
-        className="custom-modal"
-      >
-        <Modal.Body>
-          <ul className="dropdown-menu show">
-            <li><Button className="dropdown-item" onClick={handleCloseModal}><Link  to="/profile" style={{ 
-                textDecoration:"none"
-            }}> Voir profile</Link></Button></li>
-            <hr className="dropdown-divider" />
-            <li><Button className="dropdown-item" onClick={handleCloseModal}><Link  to="/" style={{ 
-                textDecoration:"none"
-            }}> Log out</Link></Button></li>
-          </ul>
-        </Modal.Body>
-      </Modal>
     </div>
   );
 }
