@@ -60,5 +60,6 @@
   
   .custom-modal .dropdown-item {
     cursor: pointer;
+    text-decoration: none;
   }
   

@@ -5,14 +5,18 @@ import audioIcon from '../assets/audioicon.png';
 import noImage from '../assets/noimage.png';
 
 import React, { useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './Services.css'; 
 import { LangContext } from '../context/LangContext'; 
 import { Modal, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Services = () => {
   const { currentLangData } = useContext(LangContext); 
   const [showModal, setShowModal] = useState(false);
+  const location = useLocation();
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -35,13 +39,16 @@ const Services = () => {
         <p>{currentLangData.services.questionImage}</p>
         <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
       </div>
-      <img 
-        src={noImage} 
-        className='profileIcon' 
-        alt="profilePhoto" 
-        onClick={handleShowModal}
-        style={{ cursor: 'pointer' }}
-      />
+
+      {location.pathname !== '/' && (
+        <img 
+          src={noImage} 
+          className='profileIcon' 
+          alt="profilePhoto" 
+          onClick={handleShowModal}
+          style={{ cursor: 'pointer' }}
+        />
+      )}
 
       <Modal 
         show={showModal} 
@@ -52,9 +59,13 @@ const Services = () => {
       >
         <Modal.Body>
           <ul className="dropdown-menu show">
-            <li><Button className="dropdown-item" onClick={handleCloseModal}>Voir profile</Button></li>
+            <li><Button className="dropdown-item" onClick={handleCloseModal}><Link  to="/profile" style={{ 
+                textDecoration:"none"
+            }}> Voir profile</Link></Button></li>
             <hr className="dropdown-divider" />
-            <li><Button className="dropdown-item" onClick={handleCloseModal}>Log out</Button></li>
+            <li><Button className="dropdown-item" onClick={handleCloseModal}><Link  to="/" style={{ 
+                textDecoration:"none"
+            }}> Log out</Link></Button></li>
           </ul>
         </Modal.Body>
       </Modal>
