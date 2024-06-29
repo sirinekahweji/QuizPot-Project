@@ -3,10 +3,11 @@
     justify-content: space-around;
     align-items: center;
     padding-left: 6%;
-    padding-right: 3%;
-    background-color: rgb(228, 64, 139);
+    padding-right: 2%;
+    background-image: linear-gradient(135deg, #f34079 40%,  #fda270 );
     margin-top: -17px;
     height: 50px;
+
 }
 
 .service {
@@ -36,3 +37,28 @@
     height: 45px; /* Adjust size as needed */
     border-radius: 50%;
 }
+.custom-modal .modal-content {
+    border: none;
+    box-shadow: none;
+    width: 120px;
+    top: 90px;
+    left:150%;
+  }
+  
+  .custom-modal .modal-body {
+    padding: 0;
+  }
+  
+  .custom-modal .dropdown-menu {
+    display: block;
+    position: static;
+    float: none;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+  
+  .custom-modal .dropdown-item {
+    cursor: pointer;
+  }
+  

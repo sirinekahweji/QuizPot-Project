@@ -1,6 +1,7 @@
 import{BrowserRouter,Routes,Route} from 'react-router-dom'
 import PageGarde from './pages/PageGarde';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import './index.css'; 
 import './'
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<PageGarde/>} />
             <Route path="/signup" element={<SignUp/>} />
             <Route path="/quizbot" element={<Home/>} />
+            <Route path="/profile" element={<Profile/>} />
          </Routes>
       </BrowserRouter>
       

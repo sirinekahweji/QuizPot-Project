@@ -65,6 +65,7 @@ const Sources = () => {
                 </div>
             </div>
             {renderSelectedSource()}
+            <button className='continuer'>Continuer</button>
         </div>
     );
 }

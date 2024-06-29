@@ -1,6 +1,6 @@
 
 .steps {
-    background-color: rgb(253, 229, 229);
+    background-color: #fbefe9;
     border-radius: 20px;
     display: flex;
     justify-content: space-around;
@@ -22,6 +22,6 @@
 
 }
 .steps p:first-of-type {
-    color: rgb(236, 9, 198);
+    color:#f34079; 
 
 }

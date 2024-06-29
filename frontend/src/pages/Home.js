@@ -3,6 +3,7 @@ import Steps from '../components/steps';
 import Profile from '../components/ProfileBar';
 import Sources from '../components/Sources';
 import Services from '../components/services';
+import  QuestionType from '../components/QuestionsType';
 
 
 const Home = () => {

@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgb(236, 9, 198);
+    color:#f34079; 
 
 }
 
@@ -27,7 +27,7 @@
 }
 
 .language-text.hovered {
-    color: rgb(236, 9, 198);
+    color:#f34079; 
 }
 
 .dropdown-menu {
@@ -57,7 +57,7 @@
 }
 
 .dropdown-item.selected {
-    color: rgb(236, 9, 198);
+    color:#f34079; 
 
 }
 

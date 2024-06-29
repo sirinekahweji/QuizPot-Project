@@ -37,9 +37,9 @@ const SignUp = () => {
             <Link to="/"
                style={{ 
                 backgroundColor: "white",
-                color: "rgb(228, 64, 139)",
+                color: "#f34079",
                 fontWeight: "bold",
-                marginTop: "25px",
+                marginTop: "40px",
                 cursor: "pointer",
                 fontFamily: "Cooper",
                 paddingLeft: "3%",
