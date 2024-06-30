@@ -8,7 +8,6 @@ import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import './Services.css'; 
 import { LangContext } from '../context/LangContext'; 
-import { Button } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -45,17 +44,17 @@ const Services = () => {
             style={{ cursor: 'pointer' }}
           />
           <div className="custom-modal">
-            <Button className="dropdown-item" 
+            <p className="modal-item" 
             >
-              <Link to="/profile" style={{ textDecoration: "none" , color: "black"}}>
-                Voir profile
+              <Link to="/profile" style={{ textDecoration: "none" , color: "rgb(2, 7,72)"}}>
+              <i class="bi bi-person"></i>  Profile
               </Link>
-            </Button>
-            <Button className="dropdown-item">
-              <Link to="/" style={{ textDecoration: "none" ,  color: "black" }}>
-                Log out
+            </p>
+            <p className="modal-item">
+              <Link to="/" style={{ textDecoration: "none" ,  color: "rgb(2, 7,72)" }}>
+              <i class="bi bi-box-arrow-right"></i> Log out
               </Link>
-            </Button>
+            </p>
           </div>
         </div>
       )}

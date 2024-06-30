@@ -1,0 +1,42 @@
+.choicediv{
+    display: flex;
+    justify-content: space-between;
+
+
+
+}
+.choice-content{
+    border: 2px solid #9ec6f5; 
+    padding: 10px; 
+    margin-bottom: 10px ;
+    border-radius: 25px;
+    width: 80%;
+    padding-left: 20px;
+}
+.checkbox{
+    width: 25px;
+    height: 25px;
+    margin-left: 50px;
+}
+.listQuestionsQCM{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    max-height: 350px; 
+    overflow-y: auto;
+    width: 65%;
+    margin-left: 20%;
+}
+
+
+.listQuestionsQCM::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  .listQuestionsQCM {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+  }
+
+
+

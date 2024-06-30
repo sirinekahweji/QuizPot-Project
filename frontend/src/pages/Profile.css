@@ -1,0 +1,16 @@
+.titleQuizz{
+    text-align: left;
+    color: #f34079;
+    font-family: 'Oswald';
+    font-weight: bold;
+    margin-left: 20%;
+    padding-top: 2%;
+}
+.ProfilePage{
+    background-color: rgba(187, 243, 246, 0.217);
+}
+.myquizz{
+    background-color: white;
+
+}
+

@@ -17,15 +17,14 @@
     font-weight: bold;
 
 }
+
 .type2-container{
     background-color: rgba(2,7, 72, 13%);
     border-radius: 12px;
     padding:20px;
     width: 60%;
     margin-left: 19%;
-    margin-top: -6%;
-
-
+    margin-top: -5%;
 }
 .questionType h3{
     text-align: left;
@@ -68,4 +67,12 @@
     font-family: 'Britannic';
     margin-left: 85%;
 
+}
+
+.formCheck  .formCheck[type="checkbox"]:checked + .formCheck::before {
+    background-color: #f34079; /* Couleur rose */
+}
+
+.formCheck .formCheck[type="checkbox"]:not(:checked) + .formCheck::before {
+    background-color: #fff; /* Fond blanc par défaut pour les non cochées */
 }
