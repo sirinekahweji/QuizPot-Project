@@ -36,6 +36,12 @@
           "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Text",
           "maxSize": "Max 200 MB"
       },
+      "audioSource": {
+          "title": "Give Quizbot an audio file, it will create questions about its content!",
+          "uploadPrompt": "Click here to upload a file",
+          "supportedFormats": "MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM",
+          "maxSize": "Max 25 MB"
+      },
       "signIn": {
           "titleSignIn": "Sign in",
           "emailLabel": "Email Address",
@@ -89,9 +95,15 @@
       },
       "fileSource": {
           "title": "Donnez à Quizbot un document, et il créera des questions sur son contenu!",
-          "uploadPrompt": "Cliquez ici pour charger un fichier",
+          "uploadPrompt": "Cliquez ici pour télécharger un fichier",
           "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Texte",
           "maxSize": "Max 200 MB"
+      },
+      "audioSource": {
+          "title": "Donnez à Quizbot un fichier audio, il créera des questions sur son contenu!",
+          "uploadPrompt": "Cliquez ici pour charger un fichier",
+          "supportedFormats": "MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM",
+          "maxSize": "Max 25 MB"
       },
       "signIn": {
           "titleSignIn": "Connectez-Vous",

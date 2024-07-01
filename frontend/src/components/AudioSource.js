@@ -1,12 +1,16 @@
+import React, { useContext } from 'react';
+import './AudioSource.css';
+import { LangContext } from '../context/LangContext';
 
-import './AudioSource.css'; 
 const AudioSource = () => {
-    return ( 
+    const { currentLangData } = useContext(LangContext);
+
+    return (
         <div className="audiosource">
-        <h5>Give Quizbot an audio file, it will create the questions about its content!</h5>
-        <div className="audioSource-container">
-            <h6>Click here to upload a file</h6>
-            <label htmlFor="fileInput" className='addFile'>
+            <h5>{currentLangData.audioSource.title}</h5>
+            <div className="audioSource-container">
+                <h6>{currentLangData.audioSource.uploadPrompt}</h6>
+                <label htmlFor="fileInput" className='addFile'>
                     <i className="bi bi-file-earmark-plus-fill"></i>
                 </label>
                 <input
@@ -14,10 +18,10 @@ const AudioSource = () => {
                     type="file"
                     style={{ display: 'none' }} 
                 />            
-                <p>MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM</p>
-            <p>Max 25 MB</p>
+                <p>{currentLangData.audioSource.supportedFormats}</p>
+                <p>{currentLangData.audioSource.maxSize}</p>
+            </div>
         </div>
-    </div>
     );
 }
  
