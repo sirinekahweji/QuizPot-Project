@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './FileSource.css';
+import { LangContext } from '../context/LangContext';
 
 const FileSource = () => {
+    const { currentLangData } = useContext(LangContext);
+
     return (
         <div className="filesource">
-            <h5>Give Quizbot a document, and it will create questions about its content!</h5>
+            <h5>{currentLangData.fileSource.title}</h5>
             <div className="fileSource-container">
-                <h6>Click here to upload a file</h6>
+                <h6>{currentLangData.fileSource.uploadPrompt}</h6>
                 <label htmlFor="fileInput" className='addFile'>
                     <i className="bi bi-file-earmark-plus-fill"></i>
                 </label>
@@ -15,8 +18,8 @@ const FileSource = () => {
                     type="file"
                     style={{ display: 'none' }} 
                 />
-                <p>PDF, PowerPoint, OpenDocuments, Pages, Text</p>
-                <p>Max 200 MB</p>
+                <p>{currentLangData.fileSource.supportedFormats}</p>
+                <p>{currentLangData.fileSource.maxSize}</p>
             </div>
         </div>
     );

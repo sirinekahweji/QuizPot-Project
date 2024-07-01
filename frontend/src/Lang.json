@@ -30,6 +30,12 @@
           "title": "Give Quizbot a link to a YouTube video, and it will create questions about its content!",
           "placeholder": "https://www.youtube.com"
       },
+      "fileSource": {
+          "title": "Give Quizbot a document, and it will create questions about its content!",
+          "uploadPrompt": "Click here to upload a file",
+          "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Text",
+          "maxSize": "Max 200 MB"
+      },
       "signIn": {
           "titleSignIn": "Sign in",
           "emailLabel": "Email Address",
@@ -80,6 +86,12 @@
       "videoSource": {
           "title": "Donnez à Quizbot un lien vers une vidéo YouTube, et il créera des questions sur son contenu!",
           "placeholder": "https://www.youtube.com"
+      },
+      "fileSource": {
+          "title": "Donnez à Quizbot un document, et il créera des questions sur son contenu!",
+          "uploadPrompt": "Cliquez ici pour charger un fichier",
+          "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Texte",
+          "maxSize": "Max 200 MB"
       },
       "signIn": {
           "titleSignIn": "Connectez-Vous",
