@@ -1,71 +1,104 @@
 {
-    "EN": {
+  "EN": {
       "navbar": {
-        "en": "EN",
-        "fr": "FR"
+          "en": "EN",
+          "fr": "FR"
       },
       "title": "Discover the power of AI",
-      "descriptionP1":"Transform learning into a fun adventure  ",
-      "descriptionP2":" with our Quizbot ",
+      "descriptionP1": "Transform learning into a fun adventure",
+      "descriptionP2": "with our Quizbot",
       "services": {
-        "questionVideo": "Question From Video",
-        "questionFile": "Question From File",
-        "questionAudio": "Question From Audio",
-        "questionImage": "Question From Image"
+          "questionVideo": "Question From Video",
+          "questionFile": "Question From File",
+          "questionAudio": "Question From Audio",
+          "questionImage": "Question From Image"
       },
-      "signIn":{
-        "titleSignIn": "Sign in",
-        "emailLabel": "Email Address",
-        "passwordLabel": "Password",
-        "forgotPassword": "Forgot Password?",
-        "rememberMe": "Remember me",
-        "signInButton": "Sign in",
-        "noAccount": "Don't have an account?",
-        "signUpHere": "Sign up here"
+      "steps": {
+          "source": "Source",
+          "questionsType": "Questions Type",
+          "questions": "Questions"
+      },
+      "sources": {
+          "title": "From which source would you like to generate questions?",
+          "file": "File",
+          "video": "Video",
+          "audio": "Audio",
+          "image": "Image",
+          "continue": "Continue"
+      },
+      "videoSource": {
+          "title": "Give Quizbot a link to a YouTube video, and it will create questions about its content!",
+          "placeholder": "https://www.youtube.com"
+      },
+      "signIn": {
+          "titleSignIn": "Sign in",
+          "emailLabel": "Email Address",
+          "passwordLabel": "Password",
+          "forgotPassword": "Forgot Password?",
+          "rememberMe": "Remember me",
+          "signInButton": "Sign in",
+          "noAccount": "Don't have an account?",
+          "signUpHere": "Sign up here"
       },
       "signUpPage": {
-        "title": "Sign Up",
-        "fullNameLabel": "Full Name *",
-        "emailLabel": "Email *",
-        "passwordLabel": "Password *",
-        "confirmPasswordLabel": "Confirm Password *",
-        "signUpButton": "Sign Up ",
-        "signInLink": "Sign in "
+          "title": "Sign Up",
+          "fullNameLabel": "Full Name *",
+          "emailLabel": "Email *",
+          "passwordLabel": "Password *",
+          "confirmPasswordLabel": "Confirm Password *",
+          "signUpButton": "Sign Up ",
+          "signInLink": "Sign in "
       }
-    },
-    "FR": {
+  },
+  "FR": {
       "navbar": {
-        "en": "EN",
-        "fr": "FR"
+          "en": "EN",
+          "fr": "FR"
       },
       "title": "Découvrez la puissance de l'IA",
-      "descriptionP1":"Transformez l'apprentissage en une aventure",
-      "descriptionP2":"amusante avec notre Quizbot ",
+      "descriptionP1": "Transformez l'apprentissage en une aventure",
+      "descriptionP2": "amusante avec notre Quizbot",
       "services": {
-        "questionVideo": "Question à partir du vidéo",
-        "questionFile": "Question à partir du fichier",
-        "questionAudio": "Question à partir d' audio",
-        "questionImage": "Question à partir d'image"
+          "questionVideo": "Question à partir du vidéo",
+          "questionFile": "Question à partir du fichier",
+          "questionAudio": "Question à partir d'audio",
+          "questionImage": "Question à partir d'image"
       },
-      "signIn":{
-        "titleSignIn": "Connectez-Vous",
-        "emailLabel": "e-mail",
-        "passwordLabel": "Mot de passe",
-        "forgotPassword": "Mot de passe oublié?",
-        "rememberMe": "Mémoriser le mot de passe ?",
-        "signInButton": "Se connecter",
-        "noAccount": "Vous n'avez pas de compte?",
-        "signUpHere": "Inscrivez-vous ici"
+      "steps": {
+          "source": "Source",
+          "questionsType": "Type de Questions",
+          "questions": "Questions"
+      },
+      "sources": {
+          "title": "De quelle source souhaitez-vous générer des questions?",
+          "file": "Fichier",
+          "video": "Vidéo",
+          "audio": "Audio",
+          "image": "Image",
+          "continue": "Continuer"
+      },
+      "videoSource": {
+          "title": "Donnez à Quizbot un lien vers une vidéo YouTube, et il créera des questions sur son contenu!",
+          "placeholder": "https://www.youtube.com"
+      },
+      "signIn": {
+          "titleSignIn": "Connectez-Vous",
+          "emailLabel": "e-mail",
+          "passwordLabel": "Mot de passe",
+          "forgotPassword": "Mot de passe oublié?",
+          "rememberMe": "Mémoriser le mot de passe ?",
+          "signInButton": "Se connecter",
+          "noAccount": "Vous n'avez pas de compte?",
+          "signUpHere": "Inscrivez-vous ici"
       },
       "signUpPage": {
-      "title": "Inscrivez-vous",
-      "fullNameLabel": "Nom Complet *",
-      "emailLabel": "E-mail *",
-      "passwordLabel": "Mot de passe *",
-      "confirmPasswordLabel": "Confirmer le mot de passe *",
-      "signUpButton": "S'inscrire",
-      "signInLink": "Se connecter"
-    }
-    }
+          "title": "Inscrivez-vous",
+          "fullNameLabel": "Nom Complet *",
+          "emailLabel": "E-mail *",
+          "passwordLabel": "Mot de passe *",
+          "confirmPasswordLabel": "Confirmer le mot de passe *",
+          "signUpButton": "S'inscrire",
+          "signInLink": "Se connecter"
+      }
   }
-  
+}

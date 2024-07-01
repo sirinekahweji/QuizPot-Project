@@ -4,16 +4,15 @@
 
 
 
-p {
+.search-container p {
     font-family: 'Nunito';
     font-weight: 800;
     color: #f9f9f9;
-
-    margin: 0; /* Ajouté pour centrer verticalement */
+    margin: 0; 
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Ajouté pour centrer verticalement */
+    height: 100%; 
 }
 
 #searchBox {
@@ -26,9 +25,8 @@ p {
     z-index: 999;
 }
 
-.container {
+.search-container {
     position: relative;
-    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -48,7 +46,7 @@ p {
     font-family: 'Nunito';
     font-weight: 800;
     width: 300px;
-    height: 50px; /* Ajustement de la hauteur pour correspondre à la hauteur des bulles */
+    height: 50px; 
     border-radius: 10px;
     border: none;
     background:white;
@@ -56,8 +54,8 @@ p {
     z-index: 2;
     color: #080130;
     cursor: auto;
-    line-height: 50px; /* Centrer le texte verticalement */
-    padding: 0; /* Retirer le padding pour un centrage vertical parfait */
+    line-height: 50px; 
+    padding: 0; 
 }
 
 .bubble {

@@ -32,7 +32,7 @@ const SearchComponent = () => {
     };
 
     return (
-        <div className="container">
+        <div className="search-container">
             <div 
                 className="search-wrapper" 
                 onMouseOver={handleMouseOver} 

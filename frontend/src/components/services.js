@@ -35,7 +35,7 @@ const Services = () => {
         <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
       </div>
 
-      {location.pathname !== '/' && (
+      {(location.pathname !== '/' && location.pathname !== '/profile') && (
         <div className='profileIconContainer'>
           <img 
             src={noImage} 

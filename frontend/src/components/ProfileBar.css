@@ -2,7 +2,7 @@
 
 .profilebar {
     position: fixed;
-    top:60px;
+    top:100px;
     width: 180px; 
     height: 100%;
     background-color: rgb(25, 144,175); 
@@ -31,7 +31,8 @@
 
 
 .logout{
-    margin-top:130%;
+    margin-top:110%;
     margin-right: 0%;
     font-size: 20px;
 }
+
