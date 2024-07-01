@@ -1,12 +1,16 @@
-import './ImageSource.css'; 
+import React, { useContext } from 'react';
+import './ImageSource.css';
+import { LangContext } from '../context/LangContext';
 
 const ImageSource = () => {
-    return (  
+    const { currentLangData } = useContext(LangContext);
+
+    return (
         <div className="imagesource">
-        <h5>Give Quizbot an image file, it will create the questions about its content!</h5>
-        <div className="imageSource-container">
-            <h6>Click here to upload a file</h6>
-            <label htmlFor="fileInput" className='addFile'>
+            <h5>{currentLangData.imageSource.title}</h5>
+            <div className="imageSource-container">
+                <h6>{currentLangData.imageSource.uploadPrompt}</h6>
+                <label htmlFor="fileInput" className='addFile'>
                     <i className="bi bi-file-earmark-plus-fill"></i>
                 </label>
                 <input
@@ -14,10 +18,10 @@ const ImageSource = () => {
                     type="file"
                     style={{ display: 'none' }} 
                 />
-            <p>PEG ,PNG,GIF ,BMP ,TIFF </p>
+                <p>{currentLangData.imageSource.supportedFormats}</p>
+            </div>
         </div>
-    </div>        
     );
 }
- 
+
 export default ImageSource;
