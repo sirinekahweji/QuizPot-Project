@@ -13,6 +13,20 @@
           "questionAudio": "Question From Audio",
           "questionImage": "Question From Image"
       },
+      "questionsType": {
+        "title": "What type of content would you like to create?",
+        "multipleChoice": {
+            "title": "Multiple choice questions",
+            "description": "Generate MCQ statements, their correct answers and associated distractors",
+            "correctAnswers": "Number of correct answers*",
+            "falseAnswers": "Number of false answers*"
+        },
+        "openQuestions": {
+            "title": "Open questions",
+            "description": "Generate open-ended question statements and associated correct answers"
+        },
+        "generateQuizButton": "Generate Quiz"
+    },
       "steps": {
           "source": "Source",
           "questionsType": "Questions Type",
@@ -81,6 +95,20 @@
           "questionAudio": "Question à partir d'audio",
           "questionImage": "Question à partir d'image"
       },
+      "questionsType": {
+        "title": "Quel type de contenu souhaitez-vous créer?",
+        "multipleChoice": {
+            "title": "Questions à choix multiples",
+            "description": "Générez des énoncés de QCM, leurs réponses correctes et des distracteurs associés",
+            "correctAnswers": "Nombre de réponses correctes*",
+            "falseAnswers": "Nombre de mauvaises réponses*"
+        },
+        "openQuestions": {
+            "title": "Questions ouvertes",
+            "description": "Générez des énoncés de questions ouvertes et des réponses correctes associées"
+        },
+        "generateQuizButton": "Générer Quiz"
+    },
       "steps": {
           "source": "Source",
           "questionsType": "Type de Questions",
