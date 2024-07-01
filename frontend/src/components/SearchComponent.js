@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import './SearchComponent.css';
+import { LangContext } from '../context/LangContext';
 
 const SearchComponent = () => {
+    const { currentLangData } = useContext(LangContext);
+
     const [inputVisible, setInputVisible] = useState(false);
     const [counter, setCounter] = useState(0);
     const bubblesRef = useRef([]);
@@ -31,6 +34,8 @@ const SearchComponent = () => {
         setInputVisible(false);
     };
 
+    const searchLetters = currentLangData.searchLetters;
+
     return (
         <div className="search-container">
             <div 
@@ -44,7 +49,7 @@ const SearchComponent = () => {
                             <input 
                                 type="text" 
                                 className="inputSearch" 
-                                placeholder=" type something..." 
+                                placeholder={currentLangData.search}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter') {
                                         console.log('Now I am removing text but you can do whatever you want with text value 😊');
@@ -53,15 +58,20 @@ const SearchComponent = () => {
                                 }}
                             /> 
                             : 
-                            <p className="S" style={{ color: '#4C83F0' }}>S</p>
+                            <p className="S" style={{ color: '#4C83F0' }}>{searchLetters[0]}</p>
                         }
                     </div>
-                    <div className="bubble" style={{ left: '50px' }} ref={el => bubblesRef.current[1] = el}><p style={{ color: ' #f34079' }}>E</p></div>
-                    <div className="bubble" style={{ left: '100px' }} ref={el => bubblesRef.current[2] = el}><p style={{ color: '#EEB80B' }}>A</p></div>
-                    <div className="bubble" style={{ left: '150px' }} ref={el => bubblesRef.current[3] = el}><p style={{ color: '#4C83F0' }}>R</p></div>
-                    <div className="bubble" style={{ left: '200px' }} ref={el => bubblesRef.current[4] = el}><p style={{ color: '#1CAF60' }}>C</p></div>
-                    <div className="bubble" style={{ left: '250px' }} ref={el => bubblesRef.current[5] = el}><p style={{ color: '#f34079' }}>H</p></div>
-                    <div className="bubble" style={{ left: '300px' }} ref={el => bubblesRef.current[6] = el}><p>🔎</p></div>
+                    {searchLetters.slice(1).map((letter, index) => (
+                        <div 
+                            className="bubble" 
+                            style={{ left: `${(index + 1) * 50}px` }} 
+                            ref={el => bubblesRef.current[index + 1] = el} 
+                            key={index}
+                        >
+                            <p style={{ color: index % 2 === 0 ? '#4C83F0' : '#f34079' }}>{letter}</p>
+                        </div>
+                    ))}
+                    <div className="bubble" style={{ left: `${searchLetters.length * 50}px` }} ref={el => bubblesRef.current[searchLetters.length] = el}><p>🔎</p></div>
                 </div>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1">

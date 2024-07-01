@@ -2,8 +2,12 @@
   "EN": {
       "navbar": {
           "en": "EN",
-          "fr": "FR"
+          "fr": "FR",
+          "home":"Home"
       },
+      "search": "type something...",
+        "logout": "Log Out",
+      "searchLetters": ["S", "E", "A", "R", "C", "H"],
       "title": "Discover the power of AI",
       "descriptionP1": "Transform learning into a fun adventure",
       "descriptionP2": "with our Quizbot",
@@ -105,13 +109,23 @@
     "mcqType": {
       "text": "Multiple Choice Questions",
       "description": "Generate MCQ statements, their correct answers and associated distractors"
+    },
+    "profile": {
+      "myQuizzesTitle": "My Quizzes",
+      "createQuizFolder": "Create Folder",
+      "exportButton": "Export"
     }
   },
   "FR": {
       "navbar": {
           "en": "EN",
-          "fr": "FR"
+          "fr": "FR",
+          "home":"Acceuil"
+
       },
+      "logout": "Se Déconnecter",
+      "search": "tape quelque chose...",
+      "searchLetters": ["C", "H", "E", "R", "C", "H", "E", "R"],
       "title": "Découvrez la puissance de l'IA",
       "descriptionP1": "Transformez l'apprentissage en une aventure",
       "descriptionP2": "amusante avec notre Quizbot",
@@ -213,6 +227,12 @@
     "mcqType": {
       "text": "Questions à choix multiples",
       "description": "Générez des énoncés de QCM, leurs réponses correctes et des distracteurs associés"
+    }
+    ,
+    "profile": {
+      "myQuizzesTitle": "Mes Quiz",
+      "createQuizFolder": "Créer un dossier",
+      "exportButton": "Exporter"
     }
   }
 }

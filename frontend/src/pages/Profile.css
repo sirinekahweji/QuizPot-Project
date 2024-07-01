@@ -89,8 +89,10 @@
     cursor: pointer;
 
 }
-.add-quiz
-{
+.add-quiz {
+    position: fixed;
+    bottom: 30px; 
+    right: 25px; 
     border-radius: 25px;
     background-color: white;
     font-weight: bold;
@@ -100,14 +102,12 @@
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
-    margin-left: 85%;
-    margin-top: -50px;
     padding-top: 5px;
     padding-bottom: 5px;
-    background-image: linear-gradient(135deg,  rgb(25, 144,175) 40%, #96f1cd);
-
-
+    background-image: linear-gradient(135deg, rgb(25, 144, 175) 40%, #96f1cd);
+    z-index: 1000; 
 }
+
 
 .add-quiz i{
     font-size: 15px;

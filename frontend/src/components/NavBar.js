@@ -18,7 +18,7 @@ const NavBar = () => {
         <nav className="navbar">
             <img src={logo} alt="QuizBot Logo" className="logo" />
             {(location.pathname !== '/' && location.pathname !== '/signup' && location.pathname!=='/quizbot') && (
-            <Link to='/quizbot'style={{ textDecoration: "none" , color: "#f34079" , fontWeight:"bold" , marginLeft:"70%",marginTop:"10px"}}><i class="bi bi-house-heart-fill"></i>  Home</Link>
+            <Link to='/quizbot'style={{ textDecoration: "none" , color: "#f34079" , fontWeight:"bold" , marginLeft:"70%",marginTop:"10px"}}><i class="bi bi-house-heart-fill"></i>  {currentLangData.navbar.home}</Link>
             )}
             <div className="ml-auto language">
                 <span className="language-text">
