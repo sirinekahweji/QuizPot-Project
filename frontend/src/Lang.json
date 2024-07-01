@@ -79,7 +79,33 @@
           "confirmPasswordLabel": "Confirm Password *",
           "signUpButton": "Sign Up ",
           "signInLink": "Sign in "
-      }
+      },
+      "questions": {
+            "title": "Questions",
+            "content": "Content",
+            "mcq": {
+                "icon": "bi bi-list-check",
+                "text": "MCQ"
+            },
+            "open": {
+                "icon": "bi bi-chat-square-fill",
+                "text": "Open Questions"
+            },
+            "buttons": {
+                "export": "Export",
+                "save": "Save"
+            }
+        }
+        ,
+        "openQType": {
+      "title": "Open Questions",
+      "addQuestion": "Add a question manually",
+      "generateMore": "Generate more content on the same section"
+    },
+    "mcqType": {
+      "text": "Multiple Choice Questions",
+      "description": "Generate MCQ statements, their correct answers and associated distractors"
+    }
   },
   "FR": {
       "navbar": {
@@ -162,5 +188,31 @@
           "signUpButton": "S'inscrire",
           "signInLink": "Se connecter"
       }
+      ,
+      "questions": {
+        "title": "Questions",
+        "content": "Contenu",
+        "mcq": {
+            "icon": "bi bi-list-check",
+            "text": "Questions à choix multiples"
+        },
+        "open": {
+            "icon": "bi bi-chat-square-fill",
+            "text": "Questions ouvertes"
+        },
+        "buttons": {
+            "export": "Exporter",
+            "save": "Sauvegarder"
+        }
+    },
+    "openQType": {
+      "title": "Questions ouvertes",
+      "addQuestion": "Ajouter une question manuellement",
+      "generateMore": "Générer plus de contenu dans la même section"
+    },
+    "mcqType": {
+      "text": "Questions à choix multiples",
+      "description": "Générez des énoncés de QCM, leurs réponses correctes et des distracteurs associés"
+    }
   }
 }

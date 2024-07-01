@@ -1,9 +1,14 @@
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
-import './QCMType.css'; 
+import './QCMType.css';
+import { useContext } from 'react';
+import { LangContext } from '../context/LangContext';
+
 const QCMType = () => {
+    const { currentLangData } = useContext(LangContext);
+
     return ( 
         <div className='listQuestionsQCM' > 
-        <p className='titleList'> <i class="bi bi-list-check"></i> MCQ</p>
+        <p className='titleList'> <i class="bi bi-list-check"></i> {currentLangData.mcqType.text}</p>
         <div className='quizexemple'>
             <div className='quizdiv'>
             <p className='quiz'>What are the Solid Principles?</p>
@@ -17,7 +22,7 @@ const QCMType = () => {
                 </div>
                 <div className="choicediv">
                     <FormCheckInput className="checkbox"></FormCheckInput>
-                    <p  className='choice-content'>A set of principles that help developers write better code</p>
+                    <p  className='choice-content'>{currentLangData.mcqType.description}</p>
                     <p className='deleteIcon'>  <i class="bi bi-trash-fill" ></i> </p>
                 </div>
                 <div className="choicediv">
@@ -41,7 +46,7 @@ const QCMType = () => {
                 </div>
                 <div className="choicediv">
                     <FormCheckInput className="checkbox"></FormCheckInput>
-                    <p  className='choice-content'>A set of principles that help developers write better code</p>
+                    <p  className='choice-content'>{currentLangData.mcqType.description}</p>
                     <p className='deleteIcon'>  <i class="bi bi-trash-fill" ></i> </p>
                 </div>
                 <div className="choicediv">
@@ -65,7 +70,7 @@ const QCMType = () => {
                 </div>
                 <div className="choicediv">
                     <FormCheckInput className="checkbox"></FormCheckInput>
-                    <p  className='choice-content'>A set of principles that help developers write better code</p>
+                    <p  className='choice-content'>{currentLangData.mcqType.description}</p>
                     <p className='deleteIcon'>  <i class="bi bi-trash-fill" ></i> </p>
                 </div>
                 <div className="choicediv">
@@ -77,8 +82,8 @@ const QCMType = () => {
         </div>
         <hr></hr>
        
-        <button className="add"> <i class="bi bi-plus-lg"></i>    Add a question manually</button>
-        <button className="more"> <i class="bi bi-arrow-clockwise"></i>   Generate more content on the same sectionAdd a question manually</button>
+        <button className="add"> <i class="bi bi-plus-lg"></i>    {currentLangData.openQType.addQuestion}</button>
+        <button className="more"> <i class="bi bi-arrow-clockwise"></i>   {currentLangData.openQType.generateMore}</button>
 
     </div>
     );
