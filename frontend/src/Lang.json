@@ -6,7 +6,7 @@
           "home":"Home"
       },
       "search": "type something...",
-        "logout": "Log Out",
+      "logout": "Log Out",
       "searchLetters": ["S", "E", "A", "R", "C", "H"],
       "title": "Discover the power of AI",
       "descriptionP1": "Transform learning into a fun adventure",
@@ -15,7 +15,9 @@
           "questionVideo": "Question From Video",
           "questionFile": "Question From File",
           "questionAudio": "Question From Audio",
-          "questionImage": "Question From Image"
+          "questionImage": "Question From Image",
+          "profile":"Profile",
+          "logout":"Log Out"
       },
       "questionsType": {
         "title": "What type of content would you like to create?",
@@ -133,7 +135,9 @@
           "questionVideo": "Question à partir du vidéo",
           "questionFile": "Question à partir du fichier",
           "questionAudio": "Question à partir d'audio",
-          "questionImage": "Question à partir d'image"
+          "questionImage": "Question à partir d'image",
+          "profile":"Profil",
+          "logout":"Déconnexion"
       },
       "questionsType": {
         "title": "Quel type de contenu souhaitez-vous créer?",

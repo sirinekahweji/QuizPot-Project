@@ -68,9 +68,9 @@
 }
 
 .formCheck  .formCheck[type="checkbox"]:checked + .formCheck::before {
-    background-color: #f34079; /* Couleur rose */
+    background-color: #f34079; 
 }
 
 .formCheck .formCheck[type="checkbox"]:not(:checked) + .formCheck::before {
-    background-color: #fff; /* Fond blanc par défaut pour les non cochées */
+    background-color: #fff; 
 }

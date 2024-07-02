@@ -25,13 +25,12 @@ const Questions = () => {
                         <i className={currentLangData.questions.open.icon}></i> {currentLangData.questions.open.text}
                     </p>
                 </div>
-                {/* List Questions */}
                 {selectedType === 'MCQ' && <QCMType />}
                 {selectedType === 'Open' && <OpenQType />}
             </div>
             <div className='btns'> 
-                <button className='btn'>{currentLangData.questions.buttons.export}</button>
-                <button className='btn'>{currentLangData.questions.buttons.save}</button>
+                <button className='btn'><i className="bi bi-download"></i>   {currentLangData.questions.buttons.export} </button>
+                <button className='btn'>{currentLangData.questions.buttons.save} <i class="bi bi-chevron-right"></i></button>
             </div>
         </div>
     );

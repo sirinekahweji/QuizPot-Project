@@ -34,7 +34,6 @@ const Services = () => {
         <p>{currentLangData.services.questionImage}</p>
         <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
       </div>
-
       {(location.pathname !== '/' && location.pathname !== '/profile') && (
         <div className='profileIconContainer'>
           <img 
@@ -47,12 +46,12 @@ const Services = () => {
             <p className="modal-item" 
             >
               <Link to="/profile" style={{ textDecoration: "none" , color: "rgb(2, 7,72)"}}>
-              <i class="bi bi-person"></i>  Profile
+              <i class="bi bi-person"></i> {currentLangData.services.profile} 
               </Link>
             </p>
             <p className="modal-item">
               <Link to="/" style={{ textDecoration: "none" ,  color: "rgb(2, 7,72)" }}>
-              <i class="bi bi-box-arrow-right"></i> Log out
+              <i class="bi bi-box-arrow-right"></i> {currentLangData.services.logout}
               </Link>
             </p>
           </div>

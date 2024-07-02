@@ -20,22 +20,31 @@
      padding-bottom: 18px;  
      padding-top: 18px; 
   }
-  .remember{
+.remember{
     font-size: 10px;
     color:rgb(49, 49, 49);
   }
-  .Remember .remember {
-    margin-left: 5px; /* Ajoute un espace de 5px entre la case à cocher et le libellé */
+.Remember .remember {
+    margin-left: 5px; 
   }
-  .Remember {
-    display: flex; /* Utiliser un modèle de mise en page flexbox */
+.Remember {
+    display: flex; 
   }
-  .MotDePasseOublie
-  {
+
+.MotDePasseOublie 
+{
     text-align: right;
    margin-top: 5px;
    margin-bottom: 5px;
     font-size: 12px;
+}
+.MotDePasseOublie a
+{
+ 
+    color: rgb(0, 161, 225);
+    text-decoration: none;
+    font-weight: bold;
+
   }
   .FormField{
     margin-bottom: 15px;
@@ -76,9 +85,7 @@
   }
 
  
-  .Inscrivez a:hover,.MotDePasseOublie a:hover{
-     text-decoration: underline;
-  }
+
   .email,.MotPasse{
     color:rgb(106,106,106);
     font-size: 13px;
@@ -108,6 +115,10 @@
       border: none;
       cursor: pointer;
   }
+  .PasswordToggleBtn i{
+    font-size: 20px;
+
+  }
   
   .PasswordToggleBtn:focus {
       outline: none;
@@ -130,12 +141,7 @@
     font-size: 7px;
     color:rgb(49, 49, 49);
   }
-  .MotDePasseOublie
-  {
-    text-align: right;
-    margin-top:10px;
-    font-size: 10px;
-  }
+ 
   .FormField{
     margin-bottom: 10px;
   
@@ -171,7 +177,6 @@
   }
   }
   
-  /* Media query pour les écrans de taille inférieure à 12000px et supérieure ou égale à 1000px */
   @media screen and (max-width: 1200px) and (min-width: 1000px) {
     .SignIn{
     margin-right:10px;

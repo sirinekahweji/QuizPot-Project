@@ -58,6 +58,9 @@
     font-family: 'Britannic';
     cursor: pointer;
 }
+.btn i{
+    font-size: 15px;
+}
 
 
 

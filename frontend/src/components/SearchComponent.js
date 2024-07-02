@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, useCallback } from 'react';
 import './SearchComponent.css';
 import { LangContext } from '../context/LangContext';
 
@@ -8,19 +8,20 @@ const SearchComponent = () => {
     const [inputVisible, setInputVisible] = useState(false);
     const [counter, setCounter] = useState(0);
     const bubblesRef = useRef([]);
+    const colors =['#1CAF60','#4C83F0' ,'#EEB80B','#f34079','#1CAF60','#4C83F0' ,'#EEB80B','#f34079']
 
-    useEffect(() => {
-        bubbling();
-    }, [counter]);
-
-    const bubbling = () => {
+    const bubbling = useCallback(() => {
         if (counter < bubblesRef.current.length) {
             setTimeout(() => {
                 bubblesRef.current[counter].classList.add('animate');
                 setCounter(counter + 1);
             }, 80);
         }
-    };
+    }, [counter]);
+
+    useEffect(() => {
+        bubbling();
+    }, [counter, bubbling]);
 
     const handleMouseOver = () => {
         bubblesRef.current[0].style = 'width: 350px; border-radius: 10px;  z-index: 1;';
@@ -68,7 +69,7 @@ const SearchComponent = () => {
                             ref={el => bubblesRef.current[index + 1] = el} 
                             key={index}
                         >
-                            <p style={{ color: index % 2 === 0 ? '#4C83F0' : '#f34079' }}>{letter}</p>
+                            <p style={{ color:colors[index]  }}>{letter}</p>
                         </div>
                     ))}
                     <div className="bubble" style={{ left: `${searchLetters.length * 50}px` }} ref={el => bubblesRef.current[searchLetters.length] = el}><p>🔎</p></div>
