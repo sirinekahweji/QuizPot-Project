@@ -2,18 +2,19 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding-left: 6%;
-  padding-right: 2%;
+  padding-left: 1%;
+  padding-right: 1%;
   background-image: linear-gradient(135deg, #f34079 40%,  #fda270 );
   margin-top: -17px;
   height: 50px;
+  font-size:14px;
 }
 
 .service {
   display: flex;
   align-items: center;
-  padding: 20px 10px;
-  margin-right: 5px;
+  padding: 10px 10px;
+  margin-right: 3px;
   color: white;
 }
 
@@ -25,7 +26,6 @@
 .serviceIcon {
   width: 18%;
   height: 18%;
-  margin-left: 1px;
 }
 
 .profileIcon {

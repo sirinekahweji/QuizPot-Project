@@ -16,6 +16,8 @@
           "questionFile": "Question From File",
           "questionAudio": "Question From Audio",
           "questionImage": "Question From Image",
+          "questionForm": "Question From subject",
+
           "profile":"Profile",
           "logout":"Log Out"
       },
@@ -44,6 +46,7 @@
           "video": "Video",
           "audio": "Audio",
           "image": "Image",
+          "form": "Form",
           "continue": "Continue"
       },
       "videoSource": {
@@ -55,6 +58,11 @@
           "uploadPrompt": "Click here to upload a file",
           "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Text",
           "maxSize": "Max 200 MB"
+      },
+      "formSource": {
+          "title": "Give Quizbot informations , and it will create questions personalizate for you!",
+          "uploadPrompt":"Click here to open the form"
+        
       },
       "audioSource": {
           "title": "Give Quizbot an audio file, it will create questions about its content!",
@@ -136,6 +144,7 @@
           "questionFile": "Question à partir du fichier",
           "questionAudio": "Question à partir d'audio",
           "questionImage": "Question à partir d'image",
+          "questionForm": "Question à partir d'sujet",
           "profile":"Profil",
           "logout":"Déconnexion"
       },
@@ -164,6 +173,7 @@
           "video": "Vidéo",
           "audio": "Audio",
           "image": "Image",
+          "form": "Formulaire",
           "continue": "Continuer"
       },
       "videoSource": {
@@ -175,6 +185,10 @@
           "uploadPrompt": "Cliquez ici pour charger un fichier",
           "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Texte",
           "maxSize": "Max 200 MB"
+      },
+      "formSource": {
+          "title": "Donnez des informations à Quizbot, et il créera des questions personnalisées pour vous!",
+          "uploadPrompt": "Cliquez ici pour ouvrir le formulaire "
       },
       "audioSource": {
           "title": "Donnez à Quizbot un fichier audio, il créera des questions sur son contenu!",

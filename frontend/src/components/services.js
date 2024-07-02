@@ -2,6 +2,7 @@ import fileIcon from '../assets/fileicon.png';
 import youtubIcon from '../assets/youtubicon.png';
 import imageIcon from '../assets/imageicon1.png';
 import audioIcon from '../assets/audioicon.png';
+import formIcon from '../assets/formicon.png';
 import noImage from '../assets/noimage.png';
 
 import React, { useContext } from 'react';
@@ -27,6 +28,10 @@ const Services = () => {
         <img src={audioIcon} className='serviceIcon' alt='audioIcon' />
       </div>
       <div className='service'>
+        <p>{currentLangData.services.questionForm}</p>
+        <img src={formIcon} className='serviceIcon' alt='formIcon' />
+      </div>
+      <div className='service'>
         <p>{currentLangData.services.questionVideo}</p>
         <img src={youtubIcon} className='serviceIcon' alt='youtubIcon'/>
       </div>
@@ -34,6 +39,7 @@ const Services = () => {
         <p>{currentLangData.services.questionImage}</p>
         <img src={imageIcon} className='serviceIcon' alt='imageIcon' />
       </div>
+  
       {(location.pathname !== '/' && location.pathname !== '/profile') && (
         <div className='profileIconContainer'>
           <img 

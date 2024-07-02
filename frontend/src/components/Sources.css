@@ -42,6 +42,9 @@
 .selected-file {
     background-color: rgb(249, 255, 173);
 }
+.selected-form {
+    background-color: rgba(166, 250, 118, 0.534);
+}
 
 .selected-audio {
     background-color: rgb(223, 248, 254);

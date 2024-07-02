@@ -3,11 +3,13 @@ import fileIcon from '../assets/fileicon.png';
 import youtubIcon from '../assets/youtubicon.png';
 import imageIcon from '../assets/imageicon.png';
 import audioIcon from '../assets/audioicon.png';
+import formIcon from '../assets/formicon2.png';
 import './Sources.css';
 import VideoSource from './VideoSource';
 import FileSource from './FileSource';
 import AudioSource from './AudioSource';
 import ImageSource from './ImageSource';
+import FormSource from './FormSource';
 import { LangContext } from '../context/LangContext';
 
 const Sources = ({ onContinue }) => {
@@ -32,6 +34,8 @@ const Sources = ({ onContinue }) => {
                 return <AudioSource />;
             case 'image':
                 return <ImageSource />;
+            case 'form':
+                return <FormSource />;
             default:
                 return null;
         }
@@ -55,12 +59,20 @@ const Sources = ({ onContinue }) => {
                     <img src={youtubIcon} className='sourceIcon' alt='youtubIcon' />
                     <p>{currentLangData.sources.video}</p>
                 </div>
+           
                 <div
                     className={`source ${selectedSource === 'audio' ? 'selected-audio' : ''}`}
                     onClick={() => handleClick('audio')}
                 >
                     <img src={audioIcon} className='sourceIcon' alt='audioIcon' />
                     <p>{currentLangData.sources.audio}</p>
+                </div>
+                <div
+                    className={`source ${selectedSource === 'form' ? 'selected-form' : ''}`}
+                    onClick={() => handleClick('form')}
+                >
+                    <img src={formIcon} className='sourceIcon' alt='formIcon' />
+                    <p>{currentLangData.sources.form}</p>
                 </div>
                 <div
                     className={`source ${selectedSource === 'image' ? 'selected-image' : ''}`}
