@@ -12,6 +12,7 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [passwordConf, setPasswordConf] = useState('');
     const { signup, error, isLoading } = useSignup();
+    const [passwordVisible, setPasswordVisible] = useState(false); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,6 +22,10 @@ const SignUp = () => {
         }
         await signup(name, email, password);
     }
+
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
 
     return (
         <div className="signup">
@@ -37,7 +42,23 @@ const SignUp = () => {
                     </div>
                     <div className="FormSignUp">
                         <label htmlFor="passworduser" className="passworduser">{currentLangData.signUpPage.passwordLabel}</label>
-                        <input type="password" id="passworduser" placeholder="" onChange={(e) => setPassword(e.target.value)} value={password} required />
+                        <div className="PasswordContainer">
+                            <input 
+                                type={passwordVisible ? "text" : "password"} 
+                                id="passworduser" 
+                                placeholder="" 
+                                onChange={(e) => setPassword(e.target.value)} 
+                                value={password} 
+                                required 
+                            />
+                            <button 
+                                type="button" 
+                                className="PasswordToggleBtn" 
+                                onClick={togglePasswordVisibility}
+                            >
+                                <i className={passwordVisible ? "bi bi-eye-fill" : "bi bi-eye-slash-fill"}></i>
+                            </button>
+                        </div>
                     </div>
                     <div className="FormSignUp">
                         <label htmlFor="passwordconfirm" className="confirmpassword">{currentLangData.signUpPage.confirmPasswordLabel}</label>

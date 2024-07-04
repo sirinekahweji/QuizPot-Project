@@ -4,6 +4,7 @@ import imageIcon from '../assets/imageicon1.png';
 import audioIcon from '../assets/audioicon.png';
 import formIcon from '../assets/formicon.png';
 import noImage from '../assets/noimage.png';
+import { useLogout } from "../Hooks/useLogout";
 
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -16,6 +17,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Services = () => {
   const { currentLangData } = useContext(LangContext); 
   const location = useLocation();
+   const logout = useLogout(); 
+
+    const handleClick = () => {
+        logout();
+    };
 
   return ( 
     <div className='services'> 
@@ -56,9 +62,9 @@ const Services = () => {
               </Link>
             </p>
             <p className="modal-item">
-              <Link to="/" style={{ textDecoration: "none" ,  color: "rgb(2, 7,72)" }}>
+              <button onClick={handleClick}style={{ textDecoration: "none" ,  color: "rgb(2, 7,72)" }}>
               <i class="bi bi-box-arrow-right"></i> {currentLangData.services.logout}
-              </Link>
+              </button>
             </p>
           </div>
         </div>
