@@ -21,11 +21,14 @@ const loginUser = async (req , res) =>{
     catch(error){
         res.status(400).json({error:error.message})
 
-    }
+    
+        }
+
 
 }
 //signup user
 const signupUser = async (req , res) =>{
+
     const {name,email, password} = req.body;
 
     try{
@@ -43,4 +46,5 @@ const signupUser = async (req , res) =>{
     }
 }
 
-module.exports = { signupUser, loginUser };
+
+module.exports = { signupUser, loginUser }
