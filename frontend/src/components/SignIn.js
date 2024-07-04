@@ -2,10 +2,19 @@ import React, { useState, useContext } from 'react';
 import { LangContext } from '../context/LangContext';
 import { Link } from "react-router-dom";
 import './SignIn.css';
+import { useSignin } from '../Hooks/useSignIn';
 
 const SignIn = () => {
     const { currentLangData } = useContext(LangContext); 
     const [passwordVisible, setPasswordVisible] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const { signin, error, isLoading } = useSignin();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await signin(email, password);
+    }
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -14,10 +23,18 @@ const SignIn = () => {
     return ( 
         <div className="SignIn">
             <h2 className="TitleSignIn">{currentLangData.signIn.titleSignIn}</h2>
-            <form className="loginForm">
+            <form className="loginForm" onSubmit={handleSubmit}>
                 <div className="FormField">
-                    <label htmlFor="username" className="email">{currentLangData.signIn.emailLabel}</label>
-                    <input type="email" id="username" name="username" placeholder="" required />
+                    <label htmlFor="usermail" className="email">{currentLangData.signIn.emailLabel}</label>
+                    <input 
+                        type="email" 
+                        id="usermail" 
+                        name="usermail" 
+                        placeholder="" 
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required 
+                    />
                 </div>
                 <div className="FormField">
                     <label htmlFor="password" className="MotPasse">{currentLangData.signIn.passwordLabel}</label>
@@ -27,6 +44,8 @@ const SignIn = () => {
                             id="password" 
                             name="password" 
                             placeholder="" 
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             required 
                         />
                         <button 
@@ -37,7 +56,7 @@ const SignIn = () => {
                             <i className={passwordVisible ? "bi bi-eye-fill" : "bi bi-eye-slash-fill"}></i>
                         </button>
                     </div>
-                    <div className="error-message"></div>
+                    {error && <div className="error-message">{error}</div>}
                 </div>
                 <div className="MotDePasseOublie">
                     <a href="">{currentLangData.signIn.forgotPassword}</a>
@@ -46,14 +65,16 @@ const SignIn = () => {
                     <input type="checkbox" id="remember" name="remember" />
                     <label htmlFor="remember" className="remember">{currentLangData.signIn.rememberMe}</label>
                 </div>
-                <button type="submit" className="SeConnecter">{currentLangData.signIn.signInButton}</button>
+                <button type="submit" className="SeConnecter" disabled={isLoading}>
+                    {currentLangData.signIn.signInButton}
+                </button>
             </form>
             <p className="Inscrivez">
                 {currentLangData.signIn.noAccount}<br /> 
                 <Link to="/signup"
                     style={{ 
-                        color:"rgb(0, 161, 225)",
-                        textDecoration:"none"
+                        color: "rgb(0, 161, 225)",
+                        textDecoration: "none"
                     }}
                 >
                     {currentLangData.signIn.signUpHere}
