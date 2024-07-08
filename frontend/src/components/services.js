@@ -62,9 +62,9 @@ const Services = () => {
               </Link>
             </p>
             <p className="modal-item">
-              <button onClick={handleClick}style={{ textDecoration: "none" ,  color: "rgb(2, 7,72)" }}>
+              <p onClick={handleClick} style={{ textDecoration: "none" ,  color: "rgb(2, 7,72)" }}>
               <i class="bi bi-box-arrow-right"></i> {currentLangData.services.logout}
-              </button>
+              </p>
             </p>
           </div>
         </div>

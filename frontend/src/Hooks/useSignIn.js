@@ -18,6 +18,8 @@ export const useSignin = () => {
             });
 
             const json = await response.json();
+            console.log('API Response:', json); // Ajoutez ce console.log
+
 
             if (!response.ok) {
                 setIsLoading(false);

@@ -22,10 +22,12 @@
 }
 .username{
     font-size: 20px;
+    margin-top: 10px;
     
 }
-.useremail, .quizzes {
+.useremail {
     margin: 10px 0; 
+    font-size: 13px;
 }
 
 
