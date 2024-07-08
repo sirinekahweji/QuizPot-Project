@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
+const questionRoutes = require('./routes/question');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/user', userRoutes);
+app.use('/api/question', questionRoutes);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
