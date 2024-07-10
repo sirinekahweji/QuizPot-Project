@@ -1,3 +1,141 @@
+const QuestionForm = require('../models/responceform');
+const Question = require('../models/question');
+const { run } = require('../../gemini');
+
+const generateQuestions = async (req, res) => {
+  const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
+  const userId = req.user._id;
+
+  try {
+    // Enregistrer le formulaire dans la base de données
+   // const form = await QuestionForm.create({ userId, topic, difficulty, level, numQuestions, focusAreas, questionTypes: [questionType] });
+    const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these 
+    :
+    
+1. <Question 1>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+
+2. <Question 2>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+
+...
+
+## Answers:
+1. <Answer 1>;
+2. <Answer 2>;
+...`;
+    // Appeler la fonction run() de gemini.js avec le prompt
+    const response = await run(testPrompt);
+
+    // Parsing des questions à partir de la réponse
+    //const questions = parseQuestions(response);
+
+    // Préparation des questions avec l'ID du formulaire pour l'insertion
+    /*const questionsWithFormId = questions.map(question => ({
+      formId: form._id,
+      ...question
+    }));*/
+
+    // Insertion des questions dans la base de données
+    //await Question.insertMany(questionsWithFormId);
+
+    // Réponse à la requête avec succès
+    //res.status(200).json({ message: "Questions added successfully" });
+    data=parseGeminiResponse(response)
+    res.status(200).json({ message: data});
+  } catch (error) {
+    // Gestion des erreurs
+    console.error('Error generating questions:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+function parseGeminiResponse(response) {
+  
+  // Journaliser la réponse reçue pour le debug
+  const [questionsSection, answersSection] = response.split("## Answers:\n\n");
+
+  // Vérifier et journaliser les sections pour le débogage
+  if (!questionsSection || !answersSection) {
+    console.error("Failed to split response into questions and answers sections.");
+    return [];
+  }
+  //console.log("Questions Section:", questionsSection);
+  //
+  //console.log("Answers Section:", answersSection);
+
+
+
+  // Split the input into individual questions
+const qs = questionsSection.split(/\n\n+/);
+// Remove the first two elements from the array
+qs.shift(); // Removes the first element (## JavaScript Intermediate Arrays Quiz)
+//console.log("qs",qs)
+
+// Prepare an array to store parsed questions
+let parsedQuestions = [];
+
+// Loop through each question and parse it into the desired structure
+qs.forEach((question, index) => {
+
+  //console.log("question",question)
+
+    
+    const questionObj = {
+        question: "", // Placeholder for question text
+        choices: [],
+        answer: null,
+        explanation: null
+    };
+
+    // Extract question text and choices
+    const matches = question.match(/^\*\*(\d+)\.\s*(.+?)\*\*\n\s*a\) (.+?)\n\s*b\) (.+?)\n\s*c\) (.+?)$/s);
+    //console.log("matches",matches)
+
+    if (matches && matches.length === 6) {
+        questionObj.question = matches[2].trim();
+
+
+        // Choices extraction
+        questionObj.choices = [matches[3].trim(), matches[4].trim(), matches[5].trim()];
+        parsedQuestions.push(questionObj);
+
+
+    }
+
+    })
+
+
+  
+
+   // Extract and associate answers with questions
+   const answerLines = answersSection.split("\n").filter((line) => line.trim() !== '');
+
+   // Associate answers with questions by index
+   answerLines.forEach((answerText, index) => {
+     const answerMatch = answerText.match(/^\d+\.\s*\*\*([a-c])\)\s*(.*)\*\*/);
+     if (answerMatch && index < parsedQuestions.length) {
+       const [, answerLetter, answerDetail] = answerMatch;
+       parsedQuestions[index].answer = `${answerLetter}) ${answerDetail}`;
+ 
+       // Log each answer for debugging
+       //console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
+     } else {
+       console.error(`Answer format is incorrect or question not found at index ${index}.`);
+     }
+   });
+
+  return parsedQuestions;
+}
+
+module.exports = { generateQuestions };
+
+
+
 
 //sauvgarder base de donerr
 /*
@@ -50,6 +188,8 @@ const generateQuestions = async (req, res) => {
 module.exports = { generateQuestions };
 
 */
+/*  code fonctionnell sans savgarde
+
 const QuestionForm = require('../models/responceform');
 const Question = require('../models/question');
 
@@ -80,6 +220,7 @@ const generateQuestions = async (req, res) => {
 };
 
 module.exports = { generateQuestions };
+*/
 
 
 //fin test
