@@ -2,6 +2,35 @@ const QuestionForm = require('../models/responceform');
 const Question = require('../models/question');
 const { run } = require('../../gemini');
 
+
+const saveQuestions = async (req, res) => {
+  const { questions } = req.body;
+
+console.log(req.body)
+  try {
+      const questionsToSave = questions.map(question => ({
+          userId: req.user._id, // Utilisateur actuel (remplacez par votre logique d'authentification)
+          questionText: question.question,
+          questionType: 'QCM', // Remplacez par le type approprié si nécessaire
+          options: question.choices,
+          correctAnswer: question.answer.split(') ')[1], // Extrait la réponse correcte sans le préfixe "a) "
+          explanation: question.explanation || null // Explication, peut être null si non fournie
+      }));
+
+      // Enregistrer les questions dans la base de données
+      const savedQuestions = await Question.insertMany(questionsToSave);
+
+      // Répondre une seule fois après avoir enregistré toutes les questions
+      res.status(200).json({
+          message: "Questions saved successfully",
+          questions: savedQuestions
+      });
+  } catch (error) {
+      console.error("Error saving questions:", error);
+      res.status(500).json({ error: error.message });
+  }
+};
+
 const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
   const userId = req.user._id;
@@ -135,7 +164,7 @@ qs.forEach((question, index) => {
   return parsedQuestions;
 }
 
-module.exports = { generateQuestions };
+module.exports = { generateQuestions , saveQuestions};
 
 
 

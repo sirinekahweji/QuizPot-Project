@@ -3,10 +3,39 @@ import './Questions.css';
 import { LangContext } from '../context/LangContext';
 import OpenQType from './OpenQType';
 import QCMType from './QCMType';
+import axios from 'axios';
+import { useAuthContext } from '../Hooks/useAuthContext';
+import { QuestionsContext } from '../context/QuestionsContext';
+
 
 const Questions = () => {
     const [selectedType, setSelectedType] = useState('MCQ'); // État pour suivre la sélection
     const { currentLangData } = useContext(LangContext);
+    const { questions } = useContext(QuestionsContext);
+    const { user } = useAuthContext();
+    const [error, setError] = useState(null);
+
+
+
+    const savequestions = async (e) => {
+        e.preventDefault();
+        console.log(questions)
+        try {
+            const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions },{
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` // Include the token in the Authorization header
+              }
+            
+            });
+            console.log('Questions saved successfully:', response.data);
+            return response.data; // Retournez les données si nécessaire
+          } catch (error) {
+            console.error('Error  save questions', error);
+            setError('Failed to save questions. Please try again later.');
+          }
+
+    }
 
     const handleSelection = (type) => {
         setSelectedType(type);
@@ -30,7 +59,7 @@ const Questions = () => {
             </div>
             <div className='btns'> 
                 <button className='btn'><i className="bi bi-download"></i>   {currentLangData.questions.buttons.export} </button>
-                <button className='btn'>{currentLangData.questions.buttons.save} <i class="bi bi-chevron-right"></i></button>
+                <button className='btn' onClick={savequestions}>{currentLangData.questions.buttons.save} <i class="bi bi-chevron-right"></i></button>
             </div>
         </div>
     );
