@@ -9,6 +9,9 @@ const generateQuestions = async (req, res) => {
   try {
     // Enregistrer le formulaire dans la base de données
    // const form = await QuestionForm.create({ userId, topic, difficulty, level, numQuestions, focusAreas, questionTypes: [questionType] });
+
+    // Construire le texte à passer à Gemini
+    //const testPrompt = `create 5 QCM questions on the topic "JavaScript Intermediate Arrays" at Medium level. Focus areas: array methods, manipulation. with each question having 3 choices and only one correct choice. The format should be like these 
     const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these 
     :
     
@@ -64,9 +67,9 @@ function parseGeminiResponse(response) {
     console.error("Failed to split response into questions and answers sections.");
     return [];
   }
-  //console.log("Questions Section:", questionsSection);
+  console.log("Questions Section:", questionsSection);
   //
-  //console.log("Answers Section:", answersSection);
+  console.log("Answers Section:", answersSection);
 
 
 
@@ -74,7 +77,7 @@ function parseGeminiResponse(response) {
 const qs = questionsSection.split(/\n\n+/);
 // Remove the first two elements from the array
 qs.shift(); // Removes the first element (## JavaScript Intermediate Arrays Quiz)
-//console.log("qs",qs)
+console.log("qs",qs)
 
 // Prepare an array to store parsed questions
 let parsedQuestions = [];
@@ -82,7 +85,7 @@ let parsedQuestions = [];
 // Loop through each question and parse it into the desired structure
 qs.forEach((question, index) => {
 
-  //console.log("question",question)
+  console.log("question",question)
 
     
     const questionObj = {
@@ -94,7 +97,7 @@ qs.forEach((question, index) => {
 
     // Extract question text and choices
     const matches = question.match(/^\*\*(\d+)\.\s*(.+?)\*\*\n\s*a\) (.+?)\n\s*b\) (.+?)\n\s*c\) (.+?)$/s);
-    //console.log("matches",matches)
+    console.log("matches",matches)
 
     if (matches && matches.length === 6) {
         questionObj.question = matches[2].trim();
@@ -123,7 +126,7 @@ qs.forEach((question, index) => {
        parsedQuestions[index].answer = `${answerLetter}) ${answerDetail}`;
  
        // Log each answer for debugging
-       //console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
+       console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
      } else {
        console.error(`Answer format is incorrect or question not found at index ${index}.`);
      }
