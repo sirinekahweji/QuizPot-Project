@@ -4,12 +4,15 @@ import { Modal } from 'react-bootstrap';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
 import { useAuthContext } from '../Hooks/useAuthContext';
+import { QuestionsContext } from '../context/QuestionsContext';
+
 
 
 
 const FormModal = ({ show, handleClose }) => {
   const { currentLangData } = useContext(LangContext);
   const { user } = useAuthContext();
+  const { setQuestions } = useContext(QuestionsContext);
 
 
   const [topic, setTopic] = useState('');
@@ -19,7 +22,6 @@ const FormModal = ({ show, handleClose }) => {
   const [level, setLevel] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [questions, setQuestions] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ const FormModal = ({ show, handleClose }) => {
       });
       console.log('Response:', response); // Log the response to inspect what is being returned
       console.log('Response:', response.data); // Log the response to inspect what is being returned
-      setQuestions(response.data);
+      setQuestions(response.data.message);
     } catch (error) {
       console.error('Error generating lesson plan:', error);
       setError('Failed to generate lesson plan. Please try again later.');

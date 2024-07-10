@@ -6,6 +6,8 @@ import NavBar from './components/NavBar';
 import './index.css'; 
 import './'
 import { LangProvider } from './context/LangContext';
+import { QuestionsProvider } from './context/QuestionsContext';
+
 import SignUp from './pages/SignUp';
 import { useAuthContext } from "./Hooks/useAuthContext";
 
@@ -18,6 +20,7 @@ function App() {
 
   return (
     <LangProvider>
+      <QuestionsProvider>
     <div className="App">
       <BrowserRouter>
       <NavBar></NavBar>
@@ -30,6 +33,7 @@ function App() {
       </BrowserRouter>
       
     </div>
+    </QuestionsProvider>
     </LangProvider>
   );
 }
