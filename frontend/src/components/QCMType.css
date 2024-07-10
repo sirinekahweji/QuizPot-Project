@@ -37,6 +37,18 @@
     -ms-overflow-style: none;  
     scrollbar-width: none;
   }
+  .icon-correct {
+    color: green;
+    font-size: 50px;
+}
+
+.icon-incorrect {
+    color: red;
+    font-size: 50px;
+}
+
+
+
 
 
 

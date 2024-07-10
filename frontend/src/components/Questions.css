@@ -11,7 +11,7 @@
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    height: 150px;
+    height: 250px;
     font-weight: bold;
     color: rgb(145, 131, 223); 
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -61,6 +61,62 @@
 .btn i{
     font-size: 15px;
 }
+
+
+
+/*score style*/
+
+  
+.score-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .score {
+    width: 150px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-color: white; /* Ajouter une couleur de fond spécifique ou transparent si nécessaire */
+
+  }
+  
+  .score-bar {
+    position: absolute;
+    width: 130%;
+    height: 140%;
+    border-radius: 50%;
+    top: 0;
+    background-color: transparent; /* Assurer un fond transparent */
+
+  }
+  
+  .score-bar .score-circle {
+    position: absolute;
+    top: 0;
+  }
+  
+  .score-value {
+    text-align: center;
+    color: #131313;
+
+  }
+  
+  .score-name {
+    color: #131313;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  }
+  
+  .score-number {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  
 
 
 
