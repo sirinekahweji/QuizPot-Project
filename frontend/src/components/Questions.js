@@ -13,7 +13,7 @@ const Questions = () => {
     const { currentLangData } = useContext(LangContext);
     const { questions } = useContext(QuestionsContext);
     const { user } = useAuthContext();
-    const [score, setScore] = useState(null);
+    const [score, setScore] = useState(0);
     const [error, setError] = useState(null); 
 
 
@@ -123,7 +123,7 @@ const Questions = () => {
                     <p onClick={() => handleSelection('Open')} className={selectedType === 'Open' ? 'selected' : ''}>
                         <i className={currentLangData.questions.open.icon}></i> {currentLangData.questions.open.text}
                     </p>
-                    {score !== null && (
+                    {(
                         <div className="score-wrap">
                             <div className="score">
                                 <div className="score-bar">
