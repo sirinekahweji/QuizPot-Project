@@ -1,46 +1,47 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './FormModal.css';
 import { Modal } from 'react-bootstrap';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
-
-
-
+import { FormDataContext } from '../context/FormDataContext'; 
 
 const FormModal = ({ show, handleClose }) => {
   const { currentLangData } = useContext(LangContext);
   const { user } = useAuthContext();
   const { setQuestions } = useContext(QuestionsContext);
+  const { formData, setFormData } = useContext(FormDataContext);
 
-
-  const [topic, setTopic] = useState('');
-  const [difficulty, setDifficulty] = useState('');
-  const [numQuestions, setNumQuestions] = useState('');
-  const [focusAreas, setFocusAreas] = useState('');
-  const [level, setLevel] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = {
-      topic,
-      difficulty,
-      level,
-      numQuestions: parseInt(numQuestions),
-      focusAreas
+    setLoading(true);
+    setError(null);
+
+    const submitData = {
+      ...formData,
+      numQuestions: parseInt(formData.numQuestions),
     };
+
     try {
-      const response = await axios.post('http://localhost:5000/api/question/generate',formData, {
+      const response = await axios.post('http://localhost:5000/api/question/generate', submitData, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user.token}` // Include the token in the Authorization header
-        }
+          'Authorization': `Bearer ${user.token}`,
+        },
       });
-      console.log('Response:', response); // Log the response to inspect what is being returned
-      console.log('Response:', response.data); // Log the response to inspect what is being returned
+
+      console.log('Response:', response.data); 
       setQuestions(response.data.message);
     } catch (error) {
       console.error('Error generating lesson plan:', error);
@@ -63,16 +64,18 @@ const FormModal = ({ show, handleClose }) => {
             <label>{currentLangData.formModal.topicLabel}</label>
             <input
               type="text"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
+              name="topic"
+              value={formData.topic}
+              onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
             <label>{currentLangData.formModal.levelLabel}</label>
             <select
-              value={level}
-              onChange={(e) => setLevel(e.target.value)}
+              name="level"
+              value={formData.level}
+              onChange={handleChange}
               required
             >
               <option value="">{currentLangData.formModal.selectLevel}</option>
@@ -85,8 +88,9 @@ const FormModal = ({ show, handleClose }) => {
           <div className="form-group">
             <label>{currentLangData.formModal.difficultyLabel}</label>
             <select
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value)}
+              name="difficulty"
+              value={formData.difficulty}
+              onChange={handleChange}
               required
             >
               <option value="">{currentLangData.formModal.selectDifficulty}</option>
@@ -100,21 +104,23 @@ const FormModal = ({ show, handleClose }) => {
             <label>{currentLangData.formModal.numQuestionsLabel}</label>
             <input
               type="number"
-              value={numQuestions}
-              onChange={(e) => setNumQuestions(e.target.value)}
+              name="numQuestions"
+              value={formData.numQuestions}
+              onChange={handleChange}
               required
             />
           </div>
           <div className="form-group">
             <label>{currentLangData.formModal.focusAreasLabel}</label>
             <textarea
+              name="focusAreas"
               placeholder={currentLangData.formModal.focusAreasPlaceholder}
-              value={focusAreas}
-              onChange={(e) => setFocusAreas(e.target.value)}
+              value={formData.focusAreas}
+              onChange={handleChange}
             />
           </div>
           <div className="button-container">
-            <button type="submit" onClick={handleClose} variant="secondary" className='submitform'>
+            <button type="submit" variant="secondary" className='submitform'>
               {currentLangData.formModal.continueButton}
             </button>
           </div>

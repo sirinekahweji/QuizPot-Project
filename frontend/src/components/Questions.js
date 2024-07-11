@@ -7,15 +7,35 @@ import axios from 'axios';
 import jsPDF from 'jspdf';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
+import { FormDataContext } from '../context/FormDataContext';
 
 const Questions = () => {
     const [selectedType, setSelectedType] = useState('MCQ'); // État pour suivre la sélection
     const { currentLangData } = useContext(LangContext);
     const { questions } = useContext(QuestionsContext);
+    const { formData } = useContext(FormDataContext);
     const { user } = useAuthContext();
     const [score, setScore] = useState(0);
     const [error, setError] = useState(null); 
 
+    const saveformresponses= async (e) => {
+        e.preventDefault();
+        console.log(formData)
+        try {
+            const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions },{
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}` // Include the token in the Authorization header
+              }
+            
+            });
+            console.log('Questions saved successfully:', response.data);
+            return response.data; // Retournez les données si nécessaire
+          } catch (error) {
+            console.error('Error  save questions', error);
+            setError('Failed to save questions. Please try again later.');
+          }
+    }
 
     const generatePDF = (qs) => {
         const doc = new jsPDF();
