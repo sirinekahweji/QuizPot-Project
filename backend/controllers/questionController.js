@@ -3,23 +3,23 @@ const { run } = require('../../gemini');
 
 
 const saveQuestions = async (req, res) => {
-  const { questions } = req.body;
+  const { questions ,formResponseId} = req.body;
 
-console.log(req.body)
+console.log(questions)
+console.log(formResponseId)
   try {
       const questionsToSave = questions.map(question => ({
-          userId: req.user._id, // Utilisateur actuel (remplacez par votre logique d'authentification)
+        formResponseId: formResponseId, 
           questionText: question.question,
-          questionType: 'QCM', // Remplacez par le type approprié si nécessaire
+          questionType: 'QCM',
           options: question.choices,
-          correctAnswer: question.answer.split(') ')[1], // Extrait la réponse correcte sans le préfixe "a) "
-          explanation: question.explanation || null // Explication, peut être null si non fournie
+          correctAnswer: question.answer.split(') ')[1], 
+          explanation: question.explanation || null 
       }));
 
-      // Enregistrer les questions dans la base de données
       const savedQuestions = await Question.insertMany(questionsToSave);
+      console.log("savedQuestions",savedQuestions)
 
-      // Répondre une seule fois après avoir enregistré toutes les questions
       res.status(200).json({
           message: "Questions saved successfully",
           questions: savedQuestions
@@ -32,98 +32,82 @@ console.log(req.body)
 
 const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
-  const userId = req.user._id;
 
   try {
-    // Enregistrer le formulaire dans la base de données
-   // const form = await QuestionForm.create({ userId, topic, difficulty, level, numQuestions, focusAreas, questionTypes: [questionType] });
-
-    // Construire le texte à passer à Gemini
-    //const testPrompt = `create 5 QCM questions on the topic "JavaScript Intermediate Arrays" at Medium level. Focus areas: array methods, manipulation. with each question having 3 choices and only one correct choice. The format should be like these 
-    const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these 
-    :
-    
-1. <Question 1>
+      let data = [];
+      let attemptCount = 0;
+      
+      const generateAndParseQuestions = async () => {
+          const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these :
+          1. <Question 1>
 a) <Choice A>
 b) <Choice B>
 c) <Choice C>
-
 2. <Question 2>
 a) <Choice A>
 b) <Choice B>
 c) <Choice C>
-
 ...
-
 ## Answers:
 1. <Answer 1>;
 2. <Answer 2>;
-...`;
-    // Appeler la fonction run() de gemini.js avec le prompt
-    const response = await run(testPrompt);
+..`;
+          
+          const response = await run(testPrompt);
+          return parseGeminiResponse(response);
+      };
 
-    // Parsing des questions à partir de la réponse
-    //const questions = parseQuestions(response);
+      data = await generateAndParseQuestions();
+      
+      while (data.length === 0 && attemptCount < 3) {
+          data = await generateAndParseQuestions();
+          attemptCount++;
+      }
 
-    // Préparation des questions avec l'ID du formulaire pour l'insertion
-    /*const questionsWithFormId = questions.map(question => ({
-      formId: form._id,
-      ...question
-    }));*/
+      if (data.length === 0) {
+          return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
+      }
 
-    // Insertion des questions dans la base de données
-    //await Question.insertMany(questionsWithFormId);
+      res.status(200).json({ message: data });
 
-    // Réponse à la requête avec succès
-    //res.status(200).json({ message: "Questions added successfully" });
-    data=parseGeminiResponse(response)
-    res.status(200).json({ message: data});
   } catch (error) {
-    // Gestion des erreurs
-    console.error('Error generating questions:', error);
-    res.status(500).json({ error: error.message });
+      console.error('Error generating questions:', error);
+      res.status(500).json({ error: error.message });
   }
 };
 
 function parseGeminiResponse(response) {
   
-  // Journaliser la réponse reçue pour le debug
   const [questionsSection, answersSection] = response.split("## Answers:\n\n");
 
-  // Vérifier et journaliser les sections pour le débogage
   if (!questionsSection || !answersSection) {
     console.error("Failed to split response into questions and answers sections.");
     return [];
   }
   console.log("Questions Section:", questionsSection);
-  //
+  
   console.log("Answers Section:", answersSection);
 
 
 
-  // Split the input into individual questions
 const qs = questionsSection.split(/\n\n+/);
 // Remove the first two elements from the array
-qs.shift(); // Removes the first element (## JavaScript Intermediate Arrays Quiz)
+qs.shift();
 console.log("qs",qs)
 
-// Prepare an array to store parsed questions
 let parsedQuestions = [];
 
-// Loop through each question and parse it into the desired structure
 qs.forEach((question, index) => {
 
   console.log("question",question)
 
     
     const questionObj = {
-        question: "", // Placeholder for question text
+        question: "", 
         choices: [],
         answer: null,
-        explanation: null
     };
 
-    // Extract question text and choices
     const matches = question.match(/^\*\*(\d+)\.\s*(.+?)\*\*\n\s*a\) (.+?)\n\s*b\) (.+?)\n\s*c\) (.+?)$/s);
     console.log("matches",matches)
 
@@ -131,7 +115,6 @@ qs.forEach((question, index) => {
         questionObj.question = matches[2].trim();
 
 
-        // Choices extraction
         questionObj.choices = [matches[3].trim(), matches[4].trim(), matches[5].trim()];
         parsedQuestions.push(questionObj);
 
@@ -143,17 +126,14 @@ qs.forEach((question, index) => {
 
   
 
-   // Extract and associate answers with questions
    const answerLines = answersSection.split("\n").filter((line) => line.trim() !== '');
 
-   // Associate answers with questions by index
    answerLines.forEach((answerText, index) => {
      const answerMatch = answerText.match(/^\d+\.\s*\*\*([a-c])\)\s*(.*)\*\*/);
      if (answerMatch && index < parsedQuestions.length) {
        const [, answerLetter, answerDetail] = answerMatch;
        parsedQuestions[index].answer = `${answerLetter}) ${answerDetail}`;
  
-       // Log each answer for debugging
        console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
      } else {
        console.error(`Answer format is incorrect or question not found at index ${index}.`);

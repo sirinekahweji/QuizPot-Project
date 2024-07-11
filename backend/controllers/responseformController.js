@@ -1,13 +1,13 @@
-const Responseform = require('../models/responseform');
+const ResponseForm = require('../models/responseform');
 const mongoose = require('mongoose');
-const ResponseForm = require('../models/responseFormModel');
 const User = require('../models/userModel'); 
-const mongoose = require('mongoose');
 
 const saveResponseForm = async (req, res) => {
-  const { userId, topic, difficulty, level, numQuestions, focusAreas, questionTypes } = req.body;
-
-  if (!userId || !topic || !difficulty || !level || !numQuestions || !focusAreas || !questionTypes) {
+  const {  topic, difficulty, level, numQuestions, focusAreas ,score} = req.body;
+  const userId = req.user._id;
+ const questionType= 'QCM';
+ console.log(topic, difficulty, level, numQuestions, focusAreas,userId)
+  if (!userId || !topic || !difficulty || !level || !numQuestions || !focusAreas || !questionType|| !score) {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
@@ -29,10 +29,12 @@ const saveResponseForm = async (req, res) => {
       level,
       numQuestions,
       focusAreas,
-      questionTypes
+      questionType,
+      score
     });
 
     const savedResponseForm = await responseForm.save();
+    console.log(savedResponseForm)
 
     res.status(201).json(savedResponseForm);
   } catch (error) {

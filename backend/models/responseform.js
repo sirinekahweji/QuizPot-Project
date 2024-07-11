@@ -23,14 +23,17 @@ const responseFormSchema = new Schema({
     type: Number,
     required: true
   },
+  score: {
+    type: Number,
+    required: true
+  },
   focusAreas: {
     type: String,
     required: true
   },
-  questionTypes: {
-    type: [String],
+  questionType: {
+    type: String,
     required: true,
-    enum: ['QCM', 'Open']
   }
 }, { timestamps: true });
 

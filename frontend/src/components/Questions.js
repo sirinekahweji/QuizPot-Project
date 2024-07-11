@@ -10,30 +10,39 @@ import { QuestionsContext } from '../context/QuestionsContext';
 import { FormDataContext } from '../context/FormDataContext';
 
 const Questions = () => {
-    const [selectedType, setSelectedType] = useState('MCQ'); // État pour suivre la sélection
+    const [selectedType, setSelectedType] = useState('MCQ'); 
     const { currentLangData } = useContext(LangContext);
     const { questions } = useContext(QuestionsContext);
     const { formData } = useContext(FormDataContext);
     const { user } = useAuthContext();
     const [score, setScore] = useState(0);
     const [error, setError] = useState(null); 
+    const [formResponseId, setFormResponseId] = useState(null); 
 
-    const saveformresponses= async (e) => {
-        e.preventDefault();
-        console.log(formData)
+    const saveformresponses= async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions },{
+
+           const newformdata={
+            ...formData,
+            score: Math.round((score / questions.length) * 100)
+        }
+        
+            console.log(formData);
+            const response = await axios.post('http://localhost:5000/api/responseForm/save',newformdata,{
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}` // Include the token in the Authorization header
+                'Authorization': `Bearer ${user.token}` 
               }
             
             });
-            console.log('Questions saved successfully:', response.data);
-            return response.data; // Retournez les données si nécessaire
+            console.log('formData saved successfully:', response.data);
+
+            setFormResponseId(response.data._id);
+            console.log("formResponseId:",response.data._id)
+            return response.data; 
           } catch (error) {
-            console.error('Error  save questions', error);
-            setError('Failed to save questions. Please try again later.');
+            console.error('Error  save formData', error);
+            setError('Failed to save formData. Please try again later.');
           }
     }
 
@@ -64,36 +73,41 @@ const Questions = () => {
             yPos += lineHeight;
     
     
-            // Space between questions
             yPos += lineHeight;
         });
     
-        // Save the PDF
         doc.save('generated_questions.pdf');
     };
 
 
     const handleScoreUpdate = (newScore) => {
-        setScore(newScore); // Mettre à jour le score dans le composant parent
+        setScore(newScore); 
     };
 
-    const savequestions = async (e) => {
-        e.preventDefault();
-        console.log(questions)
+    const savequestions = async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions },{
+
+           if(formResponseId!=null){
+            const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions,formResponseId },{
               headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}` // Include the token in the Authorization header
+                'Authorization': `Bearer ${user.token}` 
               }
             
             });
             console.log('Questions saved successfully:', response.data);
-            return response.data; // Retournez les données si nécessaire
+            return response.data;
+        }
           } catch (error) {
             console.error('Error  save questions', error);
             setError('Failed to save questions. Please try again later.');
           }
+    }
+
+    const handleSave = async (e) => {
+        e.preventDefault();
+        await saveformresponses();
+        await savequestions();
     }
 
     const handleSelection = (type) => {
@@ -113,7 +127,7 @@ const Questions = () => {
                     strokeWidth="25"
                     strokeLinecap="round"
                     strokeDashoffset={-1 * Math.PI * radius}
-                    strokeDasharray={`${dashArray} 10000`} // Utilisation correcte des backticks pour les templates literals
+                    strokeDasharray={`${dashArray} 10000`} 
                     stroke={gradient ? "url(#score-gradient)" : "#e5e5e5"}
                 ></circle>
                 {gradient && (
@@ -162,7 +176,7 @@ const Questions = () => {
             </div>
             <div className='btns'> 
                 <button className='btn' onClick={() => generatePDF(questions)}><i className="bi bi-download"></i>   {currentLangData.questions.buttons.export} </button>
-                <button className='btn' onClick={savequestions}>{currentLangData.questions.buttons.save} <i className="bi bi-chevron-right"></i></button>
+                <button className='btn' onClick={handleSave}>{currentLangData.questions.buttons.save} <i className="bi bi-chevron-right"></i></button>
             </div>
         </div>
     );
