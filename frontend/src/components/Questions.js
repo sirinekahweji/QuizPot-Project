@@ -19,7 +19,6 @@ const Questions = () => {
 
     const generatePDF = (qs) => {
         const doc = new jsPDF();
-    
         let yPos = 10;
         const margin = 10;
         const lineHeight = 7;
