@@ -71,7 +71,6 @@ const Profile = () => {
             <div className='right-div'>
               <p className='nbquestions'>10 questions</p>
               <p className='deleteIcon'><i className="bi bi-trash-fill" onClick={() => deleteFormResponse(formResponse._id)} ></i></p>
-              <button className='btnexport'><i className="bi bi-download" ></i> {currentLangData.profile.exportButton}</button>
             </div>
           </div>
         ))}
