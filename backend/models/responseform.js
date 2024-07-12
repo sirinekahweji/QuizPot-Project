@@ -25,7 +25,7 @@ const responseFormSchema = new Schema({
   },
   score: {
     type: Number,
-    required: true
+    required: false
   },
   focusAreas: {
     type: String,

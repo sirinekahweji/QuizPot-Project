@@ -6,9 +6,10 @@ const saveResponseForm = async (req, res) => {
   const {  topic, difficulty, level, numQuestions, focusAreas ,score} = req.body;
   const userId = req.user._id;
  const questionType= 'QCM';
- console.log(topic, difficulty, level, numQuestions, focusAreas,userId)
-  if (!userId || !topic || !difficulty || !level || !numQuestions || !focusAreas || !questionType|| !score) {
-    return res.status(400).json({ error: 'All fields are required' });
+
+ console.log(topic, difficulty, level, numQuestions, focusAreas,userId,questionType, score)
+  if (!userId || !topic || !difficulty || !level || !numQuestions || !focusAreas || !questionType) {
+    return res.status(400).json({ error: 'All fields are required'});
   }
 
   try {
@@ -21,7 +22,6 @@ const saveResponseForm = async (req, res) => {
     if (!userExists) {
       return res.status(404).json({ error: 'User not found' });
     }
-
     const responseForm = new ResponseForm({
       userId,
       topic,

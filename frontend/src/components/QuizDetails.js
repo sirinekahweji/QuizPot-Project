@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
+
   if (!selectedQuiz) {
     return null;
   }
@@ -13,17 +14,15 @@ const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
         <Modal.Title>{selectedQuiz.topic}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Number of questions: 10</p>
-        <p>{selectedQuiz.level}</p>
+        <p><b>Education Level: </b>{selectedQuiz.level}</p>
+        <p><b>Difficulty Level: </b>{selectedQuiz.difficulty}</p>
+        <p><b>Number of Questions: </b></p>
+        <p><b>Specific Focus Areas: </b></p>
+        <div className='questionsList'>
+
+        </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary">
-          Save changes
-        </Button>
-      </Modal.Footer>
+    
     </Modal>
   );
 };

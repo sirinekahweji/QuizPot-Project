@@ -12,7 +12,6 @@ const FormModal = ({ show, handleClose }) => {
   const { user } = useAuthContext();
   const { setQuestions } = useContext(QuestionsContext);
   const { formData, setFormData } = useContext(FormDataContext);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
