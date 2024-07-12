@@ -40,9 +40,21 @@ const Profile = () => {
       }
     };
     fetchFormResponses();
-  }, [user,formResponses]);
+  }, [user]);
 
-  
+  const deleteFormResponse= async (Id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/responseForm/${Id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+      setFormResponses(prevResponses => prevResponses.filter(response => response._id !== Id));
+    } catch (error) {
+      console.error('Error deleting quiz:', error);
+    }
+  };
   return (
     <div className="ProfilePage">
       <Services />
@@ -58,8 +70,8 @@ const Profile = () => {
             </p>
             <div className='right-div'>
               <p className='nbquestions'>10 questions</p>
-              <p className='deleteIcon'><i className="bi bi-trash-fill"></i></p>
-              <button className='btnexport'><i className="bi bi-download"></i> {currentLangData.profile.exportButton}</button>
+              <p className='deleteIcon'><i className="bi bi-trash-fill" onClick={() => deleteFormResponse(formResponse._id)} ></i></p>
+              <button className='btnexport'><i className="bi bi-download" ></i> {currentLangData.profile.exportButton}</button>
             </div>
           </div>
         ))}
