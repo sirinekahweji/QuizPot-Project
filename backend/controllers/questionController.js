@@ -149,7 +149,9 @@ const getQuestionsByFormResponseId = async (req, res) => {
   const { formResponseId } = req.params;
 
   try {
+    console.log(formResponseId)
     const questions = await Question.find({ formResponseId: formResponseId});
+    console.log(questions)
     if (!questions || questions.length === 0) {
       return res.status(404).json({ message: 'No questions found for the given form response ID' });
     }

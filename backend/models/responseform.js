@@ -29,7 +29,7 @@ const responseFormSchema = new Schema({
   },
   focusAreas: {
     type: String,
-    required: true
+    required: false
   },
   questionType: {
     type: String,
