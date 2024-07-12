@@ -149,8 +149,8 @@ const getQuestionsByFormResponseId = async (req, res) => {
   const { formResponseId } = req.params;
 
   try {
-    const questions = await Question.find({ formResponseId :formResponseId});
-    if (!questions) {
+    const questions = await Question.find({ formResponseId: formResponseId});
+    if (!questions || questions.length === 0) {
       return res.status(404).json({ message: 'No questions found for the given form response ID' });
     }
 
@@ -160,6 +160,7 @@ const getQuestionsByFormResponseId = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 module.exports = { generateQuestions , saveQuestions ,getQuestionsByFormResponseId};
 
