@@ -1,22 +1,31 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-const QuizDetails = ({ show, handleClose, quizTitle }) => {
+const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
+  if (!selectedQuiz) {
+    return null;
+  }
+  console.log(selectedQuiz)
+
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>{quizTitle}</Modal.Title>
+        <Modal.Title>{selectedQuiz.topic}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Details about {quizTitle}</p>
+        <p>Number of questions: 10</p>
+        <p>{selectedQuiz.level}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
+        </Button>
+        <Button variant="primary">
+          Save changes
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default QuizDetails;
+export default QuizDetailsModal;

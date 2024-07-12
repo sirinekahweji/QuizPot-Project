@@ -24,8 +24,8 @@ const Questions = () => {
 
            const newformdata={
             ...formData,
-            score: Math.round((score / questions.length) * 100)
-        }
+    score: Math.round((score / questions.length) * 100)
+           }
         
             console.log(formData);
             const response = await axios.post('http://localhost:5000/api/responseForm/save',newformdata,{

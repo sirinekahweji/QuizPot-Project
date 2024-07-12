@@ -69,6 +69,26 @@ const getResponseForms = async (req, res) => {
     }
   };
 
+  const deleteResponseForm = async (req, res) => {
+    const { id } = req.params;
+    const userId = req.user._id;
+  
+    try {
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'Invalid quiz ID' });
+      }
+  
+      const responseForm = await ResponseForm.findOneAndDelete({ _id: id, userId });
+      if (!responseForm) {
+        return res.status(404).json({ error: 'Quiz not found' });
+      }
+  
+      res.status(200).json({ message: 'Quiz deleted successfully' });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to delete quiz' });
+    }
+  };
+
 module.exports = {
-  saveResponseForm,getResponseForms
+  saveResponseForm,getResponseForms,deleteResponseForm
 };
