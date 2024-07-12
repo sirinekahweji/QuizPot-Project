@@ -63,7 +63,7 @@ const Profile = () => {
       <ProfileBar />
 
       <div className='myquizzes'>
-        {formResponses.map((formResponse, index) => (
+        {formResponses && formResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
             <p className='quizTitle' onClick={() => handleOpenModal(formResponse)}>
               <i className="bi bi-chat-square-fill"></i> {formResponse.topic}
