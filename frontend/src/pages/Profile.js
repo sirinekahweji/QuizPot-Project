@@ -69,7 +69,7 @@ const Profile = () => {
               <i className="bi bi-chat-square-fill"></i> {formResponse.topic}
             </p>
             <div className='right-div'>
-              <p className='nbquestions'>10 questions</p>
+              <p className='nbquestions'>Score : {formResponse.score}</p>
               <p className='deleteIcon'><i className="bi bi-trash-fill" onClick={() => deleteFormResponse(formResponse._id)} ></i></p>
             </div>
           </div>

@@ -5,6 +5,7 @@ import OpenQType from './OpenQType';
 import QCMType from './QCMType';
 import axios from 'axios';
 import jsPDF from 'jspdf';
+import Swal from 'sweetalert2';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { FormDataContext } from '../context/FormDataContext';
@@ -46,38 +47,78 @@ const Questions = () => {
           }
     }
 
-    const generatePDF = (qs) => {
-        const doc = new jsPDF();
-        let yPos = 10;
-        const margin = 10;
-        const lineHeight = 7;
+
+    const generatePDF = (qs, formdata) => {
+      const doc = new jsPDF();
+      let yPos = 10;
+      const margin = 10;
+      const lineHeight = 7;
+      const pageHeight = doc.internal.pageSize.getHeight();
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const maxLineWidth = pageWidth - 2 * margin;
     
-        qs.forEach((q, index) => {
-            // Question
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(12);
-            doc.text(`Question ${index + 1}: ${q.question}`, margin, yPos);
-            yPos += lineHeight;
+      const addPageIfNeeded = () => {
+        if (yPos + lineHeight > pageHeight) {
+          doc.addPage();
+          yPos = 10; // Reset y position for the new page
+        }
+      };
     
-            // Choices
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(10);
-            q.choices.forEach((choice, choiceIndex) => {
-                doc.text(`${String.fromCharCode(97 + choiceIndex)}) ${choice}`, margin + 10, yPos);
-                yPos += lineHeight;
-            });
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(18);
+      doc.setTextColor(255, 0, 0);
+      doc.text(`Topic : ${formdata.topic}`, margin, yPos);
+      yPos += 10;
+      addPageIfNeeded();
     
-            // Answer
-            doc.setFont('helvetica', 'italic');
-            doc.text(`Answer: ${q.answer}`, margin, yPos);
-            yPos += lineHeight;
+      doc.setFontSize(9);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Education Level : ${formdata.level}`, margin + 10, yPos);
+      doc.text(`Difficulty Level : ${formdata.difficulty}`, margin + 70, yPos);
+      doc.text(`Specific Focus Areas: ${formdata.focusAreas}`, margin + 120, yPos);
+      yPos += 10;
+      addPageIfNeeded();
     
-    
-            yPos += lineHeight;
+      qs.forEach((q, index) => {
+        // Question
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        let questionText = doc.splitTextToSize(`Question ${index + 1}: ${q.question}`, maxLineWidth);
+        questionText.forEach(line => {
+          addPageIfNeeded();
+          doc.text(line, margin, yPos);
+          yPos += lineHeight;
         });
     
-        doc.save('generated_questions.pdf');
+        // Choices
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        q.choices.forEach((choice, choiceIndex) => {
+          let choiceText = doc.splitTextToSize(`${String.fromCharCode(97 + choiceIndex)}) ${choice}`, maxLineWidth);
+          choiceText.forEach(line => {
+            addPageIfNeeded();
+            doc.text(line, margin + 10, yPos);
+            yPos += lineHeight;
+          });
+        });
+    
+        // Answer
+        doc.setFont('helvetica', 'italic');
+        let answerText = doc.splitTextToSize(`Answer: ${q.answer}`, maxLineWidth);
+        answerText.forEach(line => {
+          addPageIfNeeded();
+          doc.text(line, margin, yPos);
+          yPos += lineHeight;
+        });
+    
+        yPos += lineHeight;
+        addPageIfNeeded();
+      });
+    
+      doc.save('generated_questions.pdf');
     };
+    
+    
 
 
     const handleScoreUpdate = (newScore) => {
@@ -106,8 +147,26 @@ const Questions = () => {
 
     const handleSave = async (e) => {
         e.preventDefault();
-        await saveformresponses();
-        await savequestions();
+        try {
+            await saveformresponses();
+            await savequestions();
+            Swal.fire({
+                icon: 'success',
+                title: 'Saved',
+                text: 'Your Questions has been saved successfully.',
+                timer: 1500, 
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error saving data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to save Questions. Please try again.',
+                timer: 2000, 
+                showConfirmButton: false
+            });
+        }
     }
 
     const handleSelection = (type) => {
@@ -175,7 +234,7 @@ const Questions = () => {
                 {selectedType === 'Open' && <OpenQType />}
             </div>
             <div className='btns'> 
-                <button className='btn' onClick={() => generatePDF(questions)}><i className="bi bi-download"></i>   {currentLangData.questions.buttons.export} </button>
+                <button className='btn' onClick={() => generatePDF(questions,formData)}><i className="bi bi-download"></i>   {currentLangData.questions.buttons.export} </button>
                 <button className='btn' onClick={handleSave}>{currentLangData.questions.buttons.save} <i className="bi bi-chevron-right"></i></button>
             </div>
         </div>

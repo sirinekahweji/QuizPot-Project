@@ -55,43 +55,78 @@ const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
 
 
 
-  const generatePDF = (qs,formresponse) => {
-    const doc = new jsPDF();
-    let yPos = 10;
-    const margin = 10;
-    const lineHeight = 7;
+
+const generatePDF = (qs, formresponse) => {
+  const doc = new jsPDF();
+  let yPos = 10;
+  const margin = 10;
+  const lineHeight = 7;
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const maxLineWidth = pageWidth - 2 * margin;
+
+  const addPageIfNeeded = () => {
+    if (yPos + lineHeight > pageHeight) {
+      doc.addPage();
+      yPos = 10; // Reset y position for the new page
+    }
+  };
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  doc.setTextColor(255, 0, 0);
+  doc.text(`Topic : ${formresponse.topic}`, margin, yPos);
+  yPos += 10;
+  addPageIfNeeded();
+
+  doc.setFontSize(9);
+  doc.setTextColor(0, 0, 0);
+  doc.text(`Education Level : ${formresponse.level}`, margin + 10, yPos);
+  doc.text(`Difficulty Level : ${formresponse.difficulty}`, margin + 70, yPos);
+  doc.text(`Specific Focus Areas: ${formresponse.focusAreas}`, margin + 120, yPos);
+  yPos += 10;
+  addPageIfNeeded();
+
+  qs.forEach((q, index) => {
+    // Question
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(18);
-    doc.text(`Topic : ${formresponse.topic}`, margin, yPos);
-    yPos += 10;
-
-
-    qs.map((q, index) => {
-        // Question
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(12);
-        doc.text(`Question ${index + 1}: ${q.questionText}`, margin, yPos);
-        yPos += lineHeight;
-
-        // Choices
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-        q.options.map((choice, choiceIndex) => {
-            doc.text(`${String.fromCharCode(97 + choiceIndex)}) ${choice}`, margin + 10, yPos);
-            yPos += lineHeight;
-        });
-
-        // Answer
-        doc.setFont('helvetica', 'italic');
-        doc.text(`Answer: ${q.correctAnswer}`, margin, yPos);
-        yPos += lineHeight;
-
-
-        yPos += lineHeight;
+    doc.setFontSize(12);
+    let questionText = doc.splitTextToSize(`Question ${index + 1}: ${q.questionText}`, maxLineWidth);
+    questionText.forEach(line => {
+      addPageIfNeeded();
+      doc.text(line, margin, yPos);
+      yPos += lineHeight;
     });
 
-    doc.save('questions.pdf');
+    // Choices
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    q.options.forEach((choice, choiceIndex) => {
+      let choiceText = doc.splitTextToSize(`${String.fromCharCode(97 + choiceIndex)}) ${choice}`, maxLineWidth);
+      choiceText.forEach(line => {
+        addPageIfNeeded();
+        doc.text(line, margin + 10, yPos);
+        yPos += lineHeight;
+      });
+    });
+
+    // Answer
+    doc.setFont('helvetica', 'italic');
+    let answerText = doc.splitTextToSize(`Answer: ${q.correctAnswer}`, maxLineWidth);
+    answerText.forEach(line => {
+      addPageIfNeeded();
+      doc.text(line, margin, yPos);
+      yPos += lineHeight;
+    });
+
+    yPos += lineHeight;
+    addPageIfNeeded();
+  });
+
+  doc.save('questions.pdf');
 };
+
+
 
 
   return (
@@ -102,7 +137,7 @@ const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
       <Modal.Body>
         <p><b>Education Level: </b>{selectedQuiz.level}</p>
         <p><b>Difficulty Level: </b>{selectedQuiz.difficulty}</p>
-        {selectedQuiz.focusAreas && <p><b>Specific Focus Areas:</b>{selectedQuiz.focusAreas}</p>}
+        {selectedQuiz.focusAreas && <p><b>Specific Focus Areas:  </b>{selectedQuiz.focusAreas}</p>}
         <div className='questionsList'>
           <p><b>Questions</b></p>
           {questions && questions.map((question, index) => (

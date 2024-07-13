@@ -15,6 +15,7 @@ const FormModal = ({ show, handleClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -43,8 +44,17 @@ const FormModal = ({ show, handleClose }) => {
       console.log('Response:', response.data); 
       setQuestions(response.data.message);
     } catch (error) {
-      console.error('Error generating lesson plan:', error);
-      setError('Failed to generate lesson plan. Please try again later.');
+    
+      console.error('Error generating questions:', error);
+      setError('Failed to generate questions. Please try again later.');
+      alert('Failed to generate questions. Please try again later.');
+      setFormData({
+        topic: '',
+        level: '',
+        difficulty: '',
+        numQuestions: '',
+        focusAreas: '',
+      });
     } finally {
       setLoading(false);
     }
@@ -119,7 +129,7 @@ const FormModal = ({ show, handleClose }) => {
             />
           </div>
           <div className="button-container">
-            <button type="submit" variant="secondary" className='submitform'>
+            <button type="submit" variant="secondary" className='submitform' >
               {currentLangData.formModal.continueButton}
             </button>
           </div>
