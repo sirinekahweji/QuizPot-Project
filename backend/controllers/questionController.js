@@ -76,6 +76,56 @@ c) <Choice C>
   }
 };
 
+
+const generateQuestionsfromText = async (req, res) => {
+  const { text } = req.body;
+
+
+  console.log(text)
+  try {
+      let data = [];
+      let attemptCount = 0;
+      
+      const generateAndParseQuestions = async () => {
+          const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these :
+          1. <Question 1>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+2. <Question 2>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+...
+## Answers:
+1. <Answer 1>;
+2. <Answer 2>;
+..`;
+          
+          const response = await run(testPrompt);
+          return parseGeminiResponse(response);
+      };
+
+      data = await generateAndParseQuestions();
+      
+      while (data.length === 0 && attemptCount < 3) {
+          data = await generateAndParseQuestions();
+          attemptCount++;
+      }
+
+      if (data.length === 0) {
+          return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
+      }
+        console.log(data)
+      res.status(200).json({ message: data });
+
+  } catch (error) {
+      console.error('Error generating questions:', error);
+      res.status(500).json({ error: error.message });
+  }
+};
+
+
 function parseGeminiResponse(response) {
   
   const [questionsSection, answersSection] = response.split("## Answers:\n\n");
@@ -164,5 +214,5 @@ const getQuestionsByFormResponseId = async (req, res) => {
 };
 
 
-module.exports = { generateQuestions , saveQuestions ,getQuestionsByFormResponseId};
+module.exports = { generateQuestions , saveQuestions ,getQuestionsByFormResponseId,generateQuestionsfromText};
 
