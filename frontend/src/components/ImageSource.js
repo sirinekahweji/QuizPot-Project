@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './ImageSource.css';
 import { LangContext } from '../context/LangContext';
 import Tesseract from 'tesseract.js';
@@ -7,43 +7,42 @@ const ImageSource = () => {
     const { currentLangData } = useContext(LangContext);
     const [recognizedText, setRecognizedText] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
-    const [error, setError] = useState(null); // État pour stocker les erreurs
-    const [progress, setProgress] = useState(0); // État pour la progression
-    const [statusMessage, setStatusMessage] = useState(''); // État pour stocker le message de statut
+    const [progress, setProgress] = useState(0);
+    const [status, setStatus] = useState('');
 
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-        TextRecognition(file);
+        setRecognizedText('');
     };
 
-    const TextRecognition = async (file) => {
-        try {
-            if (file) {
-                const { data } = await Tesseract.recognize(
-                    file,
-                    'eng', // Langue pour la reconnaissance (à ajuster selon vos besoins)
-                    { 
-                        logger: m => {
-                            console.log(m); // Logger pour afficher les détails du processus
-                            setProgress(m.progress); // Mettre à jour l'état de la progression
-                            setStatusMessage(m.status); // Mettre à jour l'état du message de statut
+    useEffect(() => {
+        const recognizeText = async () => {
+            if (selectedImage) {
+                try {
+                    const result = await Tesseract.recognize(
+                        selectedImage,
+                        'eng',
+                        {
+                            logger: m => {
+                                console.log(m);
+                                setStatus(m.status);
+                                setProgress(m.progress);
+                            },
                         }
-                    }
-                );
-                setRecognizedText(data.text);
-                setError(null); // Réinitialiser l'erreur en cas de succès
-                setProgress(1); // Mettre à jour la progression à 100% après le succès
-                setStatusMessage('Reconnaissance terminée'); // Mise à jour du message de statut
-                console.log('Texte reconnu :', data.text);
+                    );
+                    setRecognizedText(result.data.text);
+                    setStatus('completed');
+                    setProgress(1);
+                    console.log(result.data.text);
+                } catch (error) {
+                    console.log(error);
+                    setStatus('error');
+                }
             }
-        } catch (err) {
-            setError('Erreur lors de la reconnaissance du texte. Veuillez réessayer.'); // Définir un message d'erreur
-            console.error('Erreur lors de la reconnaissance du texte :', err);
-            setProgress(0); // Réinitialiser la progression en cas d'erreur
-            setStatusMessage('Erreur lors de la reconnaissance'); // Mise à jour du message de statut
-        }
-    };
+        };
+        recognizeText();
+    }, [selectedImage]);
 
     return (
         <div className="imagesource">
@@ -61,9 +60,21 @@ const ImageSource = () => {
                 />
                 <p>{currentLangData.imageSource.supportedFormats}</p>
             </div>
-         
+            {selectedImage && <img src={URL.createObjectURL(selectedImage)} alt="Selected" />}
+            {status && (
+                <div className="status">
+                    <p>Status: {status}</p>
+                    <progress value={progress} max="1"></progress>
+                </div>
+            )}
+            {recognizedText && (
+                <div className="recognized-text">
+                    <h6>Recognized Text:</h6>
+                    <textarea value={recognizedText} readOnly rows={10} style={{ width: '100%' }} />
+                </div>
+            )}
         </div>
     );
-}
+};
 
 export default ImageSource;
