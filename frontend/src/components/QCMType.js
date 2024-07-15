@@ -8,64 +8,56 @@ import { BiCheckCircle, BiXCircle } from 'react-icons/bi';
 import { FormDataContext } from '../context/FormDataContext'; 
 import { useAuthContext } from '../Hooks/useAuthContext';
 
-
-
-
 const QCMType = ({ handleScoreUpdate }) => {
-
-
     const { currentLangData } = useContext(LangContext);
-    const { questions , setQuestions} = useContext(QuestionsContext);
+    const { questions, setQuestions } = useContext(QuestionsContext);
     const [selectedChoices, setSelectedChoices] = useState({});
     const { user } = useAuthContext();
     const { formData, setFormData } = useContext(FormDataContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-     
-
+    
     const sanitizeString = (str) => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
     };
-  
-      const handleSubmit = async (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-      
+
         const submitData = {
-          ...formData,
-          numQuestions: parseInt(formData.numQuestions),
+            ...formData,
+            numQuestions: parseInt(formData.numQuestions),
         };
-      
+
         try {
-            console.log("submitData",submitData)
-          const response = await axios.post('http://localhost:5000/api/question/generatemore', submitData, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${user.token}`,
-            },
-          });
-          const newQuestions = response.data.message; // Assurez-vous que votre API renvoie les nouvelles questions dans cette propriété
-          console.log('new questions:',newQuestions ); 
+            console.log("submitData", submitData)
+            const response = await axios.post('http://localhost:5000/api/question/generatemore', submitData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`,
+                },
+            });
+            const newQuestions = response.data.message; // Assurez-vous que votre API renvoie les nouvelles questions dans cette propriété
+            console.log('new questions:', newQuestions); 
 
-          setQuestions(prevQuestions => [...prevQuestions, ...newQuestions]);
+            setQuestions(prevQuestions => [...prevQuestions, ...newQuestions]);
 
-        
-          console.log('Questions:',questions ); 
+            console.log('Questions:', questions); 
         } catch (error) {
-
-          console.error('Error generating new questions:', error);
-
+            console.error('Error generating new questions:', error);
         } finally {
-          setLoading(false);
+            setLoading(false);
         }
-      };
+    };
 
-
-    const handleChoiceSelect = (questionIndex, choiceIndex, isCorrect) => {
+    const handleChoiceSelect = (questionIndex, choiceIndex, choiceLetter, correctAnswerLetter) => {
         if (selectedChoices[questionIndex]) {
             return;
         }
+
+        const isCorrect = correctAnswerLetter.toLowerCase() === choiceLetter.toLowerCase();
 
         setSelectedChoices(prevState => ({
             ...prevState,
@@ -91,14 +83,13 @@ const QCMType = ({ handleScoreUpdate }) => {
                     </div>
                     <div className='responcesdiv'>
                         {question.choices.map((choice, choiceIndex) => {
-                            const correctAnswer = sanitizeString(question.answer.split(') ')[1]); 
-                            const isCorrect = correctAnswer === sanitizeString(choice);
-                            ;
+                            const choiceLetter = String.fromCharCode(65 + choiceIndex).toLowerCase(); // Convert index to letter (A, B, C, ...)
+                            const correctAnswerLetter = question.answer.charAt(0).toLowerCase();
                             const isSelected = selectedChoices[questionIndex] && selectedChoices[questionIndex].choiceIndex === choiceIndex;
                             const icon = isSelected ? (selectedChoices[questionIndex].isCorrect ? <BiCheckCircle className="icon-correct" /> : <BiXCircle className="icon-incorrect" />) : null;
 
                             return (
-                                <div className="choicediv" key={choiceIndex} onClick={() => handleChoiceSelect(questionIndex, choiceIndex, isCorrect)}>
+                                <div className="choicediv" key={choiceIndex} onClick={() => handleChoiceSelect(questionIndex, choiceIndex, choiceLetter, correctAnswerLetter)}>
                                     <div className="choice-wrapper">
                                         <FormCheckInput className="checkbox" checked={isSelected} readOnly />
                                     </div>
@@ -111,8 +102,8 @@ const QCMType = ({ handleScoreUpdate }) => {
                     <hr />
                 </div>
             ))}
-           
-            <button className="more" onClick={handleSubmit} ><i className="bi bi-arrow-clockwise" ></i>{currentLangData.openQType.generateMore}</button>
+
+            <button className="more" onClick={handleSubmit}><i className="bi bi-arrow-clockwise"></i>{currentLangData.openQType.generateMore}</button>
         </div>
     );
 };

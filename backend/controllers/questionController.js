@@ -38,7 +38,7 @@ const generateQuestions = async (req, res) => {
       let attemptCount = 0;
       
       const generateAndParseQuestions = async () => {
-          const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these :
+          const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
           1. <Question 1>
 a) <Choice A>
 b) <Choice B>
@@ -85,7 +85,7 @@ const generateMoreQuestions = async (req, res) => {
       let attemptCount = 0;
       
       const generateAndParseQuestions = async () => {
-          const testPrompt = `create another ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these :
+          const testPrompt = `create another ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
           1. <Question 1>
 a) <Choice A>
 b) <Choice B>

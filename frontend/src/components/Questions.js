@@ -149,7 +149,10 @@ const Questions = () => {
         e.preventDefault();
         try {
             await saveformresponses();
+            console.log("saveformresponses done ")
             await savequestions();
+            console.log("savequestions done ")
+
             Swal.fire({
                 icon: 'success',
                 title: 'Saved',
