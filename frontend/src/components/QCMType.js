@@ -1,14 +1,61 @@
 import React, { useContext, useState } from 'react';
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 import './QCMType.css';
+import axios from 'axios';
 import { LangContext } from '../context/LangContext';
 import { QuestionsContext } from '../context/QuestionsContext';
-import { BiCheckCircle, BiXCircle } from 'react-icons/bi'; // Import icons
+import { BiCheckCircle, BiXCircle } from 'react-icons/bi'; 
+import { FormDataContext } from '../context/FormDataContext'; 
+import { useAuthContext } from '../Hooks/useAuthContext';
+
+
+
 
 const QCMType = ({ handleScoreUpdate }) => {
+
     const { currentLangData } = useContext(LangContext);
-    const { questions } = useContext(QuestionsContext);
+    const { questions , setQuestions} = useContext(QuestionsContext);
     const [selectedChoices, setSelectedChoices] = useState({});
+    const { user } = useAuthContext();
+    const { formData, setFormData } = useContext(FormDataContext);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+  
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+      
+        const submitData = {
+          ...formData,
+          numQuestions: parseInt(formData.numQuestions),
+        };
+      
+        try {
+            console.log("submitData",submitData)
+          const response = await axios.post('http://localhost:5000/api/question/generatemore', submitData, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`,
+            },
+          });
+          const newQuestions = response.data.message; // Assurez-vous que votre API renvoie les nouvelles questions dans cette propriété
+          console.log('new questions:',newQuestions ); 
+
+          setQuestions(prevQuestions => [...prevQuestions, ...newQuestions]);
+
+        
+          console.log('Questions:',questions ); 
+        } catch (error) {
+
+          console.error('Error generating new questions:', error);
+
+        } finally {
+          setLoading(false);
+        }
+      };
+
 
     const handleChoiceSelect = (questionIndex, choiceIndex, isCorrect) => {
         if (selectedChoices[questionIndex]) {
@@ -24,7 +71,7 @@ const QCMType = ({ handleScoreUpdate }) => {
         }));
 
         if (isCorrect) {
-            handleScoreUpdate(prevScore => prevScore + 1); // Mettre à jour le score dans le composant parent
+            handleScoreUpdate(prevScore => prevScore + 1); 
         }
     };
 
@@ -59,7 +106,7 @@ const QCMType = ({ handleScoreUpdate }) => {
                 </div>
             ))}
            
-            <button className="more"><i className="bi bi-arrow-clockwise"></i> {currentLangData.openQType.generateMore}</button>
+            <button className="more" onClick={handleSubmit} ><i className="bi bi-arrow-clockwise" ></i>{currentLangData.openQType.generateMore}</button>
         </div>
     );
 };

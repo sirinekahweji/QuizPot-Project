@@ -75,19 +75,15 @@ c) <Choice C>
       res.status(500).json({ error: error.message });
   }
 };
+const generateMoreQuestions = async (req, res) => {
+  const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
 
-
-const generateQuestionsfromText = async (req, res) => {
-  const { text } = req.body;
-
-
-  console.log(text)
   try {
       let data = [];
       let attemptCount = 0;
       
       const generateAndParseQuestions = async () => {
-          const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these :
+          const testPrompt = `create another ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these :
           1. <Question 1>
 a) <Choice A>
 b) <Choice B>
@@ -118,6 +114,61 @@ c) <Choice C>
       }
         console.log(data)
       res.status(200).json({ message: data });
+
+  } catch (error) {
+      console.error('Error generating questions:', error);
+      res.status(500).json({ error: error.message });
+  }
+};
+
+
+const generateQuestionsfromText = async (req, res) => {
+  const { text } = req.body;
+
+
+  console.log(text)
+  try {
+      let data = [];
+      let attemptCount = 0;
+      
+      const generateAndParseQuestions = async () => {
+          const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these :
+          1. <Question 1>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+2. <Question 2>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+...
+## Answers:
+1. a) <Correct Answer 1>;
+2. b) <Correct Answer 2>;
+..`;
+          
+          const response = await run(testPrompt);
+          return parseGeminiResponse(response);
+      };
+
+      data = await generateAndParseQuestions();
+      
+      while (data.length === 0 && attemptCount < 3) {
+          data = await generateAndParseQuestions();
+          attemptCount++;
+      }
+
+      if (data.length === 0) {
+          return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
+      }
+      console.log(data)
+       // Validate the generated questions
+    const validatedData = validateQuestions(data);
+    if (!validatedData) {
+      return res.status(400).json({ error: 'Generated questions have missing or null fields' });
+    }
+
+    res.status(200).json({ message: validatedData });
 
   } catch (error) {
       console.error('Error generating questions:', error);
@@ -194,6 +245,20 @@ qs.forEach((question, index) => {
 }
 
 
+function validateQuestions(questions) {
+  for (const question of questions) {
+    if (!question.question || question.choices.length !== 3 || !question.answer) {
+      return false;
+    }
+    for (const choice of question.choices) {
+      if (!choice) {
+        return false;
+      }
+    }
+  }
+  return questions;
+}
+
 
 const getQuestionsByFormResponseId = async (req, res) => {
   const { formResponseId } = req.params;
@@ -214,5 +279,5 @@ const getQuestionsByFormResponseId = async (req, res) => {
 };
 
 
-module.exports = { generateQuestions , saveQuestions ,getQuestionsByFormResponseId,generateQuestionsfromText};
+module.exports = { generateQuestions , saveQuestions ,getQuestionsByFormResponseId,generateQuestionsfromText,generateMoreQuestions};
 

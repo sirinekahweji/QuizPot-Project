@@ -48,13 +48,13 @@ const FormModal = ({ show, handleClose }) => {
       console.error('Error generating questions:', error);
       setError('Failed to generate questions. Please try again later.');
       alert('Failed to generate questions. Please try again later.');
-      setFormData({
+      /*setFormData({
         topic: '',
         level: '',
         difficulty: '',
         numQuestions: '',
         focusAreas: '',
-      });
+      });*/
     } finally {
       setLoading(false);
     }
