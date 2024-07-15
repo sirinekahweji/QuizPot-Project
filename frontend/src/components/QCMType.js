@@ -13,6 +13,7 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 
 const QCMType = ({ handleScoreUpdate }) => {
 
+
     const { currentLangData } = useContext(LangContext);
     const { questions , setQuestions} = useContext(QuestionsContext);
     const [selectedChoices, setSelectedChoices] = useState({});
@@ -20,7 +21,11 @@ const QCMType = ({ handleScoreUpdate }) => {
     const { formData, setFormData } = useContext(FormDataContext);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+     
 
+    const sanitizeString = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
+    };
   
       const handleSubmit = async (e) => {
         e.preventDefault();
@@ -86,8 +91,9 @@ const QCMType = ({ handleScoreUpdate }) => {
                     </div>
                     <div className='responcesdiv'>
                         {question.choices.map((choice, choiceIndex) => {
-                            const correctAnswer = question.answer.split(') ')[1]; 
-                            const isCorrect = correctAnswer === choice;
+                            const correctAnswer = sanitizeString(question.answer.split(') ')[1]); 
+                            const isCorrect = correctAnswer === sanitizeString(choice);
+                            ;
                             const isSelected = selectedChoices[questionIndex] && selectedChoices[questionIndex].choiceIndex === choiceIndex;
                             const icon = isSelected ? (selectedChoices[questionIndex].isCorrect ? <BiCheckCircle className="icon-correct" /> : <BiXCircle className="icon-incorrect" />) : null;
 

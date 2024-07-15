@@ -59,7 +59,7 @@ c) <Choice C>
 
       data = await generateAndParseQuestions();
       
-      while (data.length === 0 && attemptCount < 3) {
+      while (data.length === 0 && attemptCount < 4) {
           data = await generateAndParseQuestions();
           attemptCount++;
       }
@@ -67,9 +67,11 @@ c) <Choice C>
       if (data.length === 0) {
           return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
       }
-        console.log(data)
+      console.log(data)
       res.status(200).json({ message: data });
 
+      // Validate the generated questions
+  
   } catch (error) {
       console.error('Error generating questions:', error);
       res.status(500).json({ error: error.message });
@@ -112,8 +114,10 @@ c) <Choice C>
       if (data.length === 0) {
           return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
       }
-        console.log(data)
+      console.log(data)
       res.status(200).json({ message: data });
+
+   
 
   } catch (error) {
       console.error('Error generating questions:', error);
@@ -125,14 +129,13 @@ c) <Choice C>
 const generateQuestionsfromText = async (req, res) => {
   const { text } = req.body;
 
-
-  console.log(text)
+  console.log(text);
   try {
-      let data = [];
-      let attemptCount = 0;
-      
-      const generateAndParseQuestions = async () => {
-          const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these :
+    let data = [];
+    let attemptCount = 0;
+
+    const generateAndParseQuestions = async () => {
+      const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer:
           1. <Question 1>
 a) <Choice A>
 b) <Choice B>
@@ -143,103 +146,99 @@ b) <Choice B>
 c) <Choice C>
 ...
 ## Answers:
-1. a) <Correct Answer 1>;
-2. b) <Correct Answer 2>;
+1. <Answer 1>;
+2. <Answer 2>;
 ..`;
-          
-          const response = await run(testPrompt);
-          return parseGeminiResponse(response);
-      };
 
+      const response = await run(testPrompt);
+      return parseGeminiResponse(response);
+    };
+
+    data = await generateAndParseQuestions();
+
+    while (data.length === 0 && attemptCount < 4) {
       data = await generateAndParseQuestions();
-      
-      while (data.length === 0 && attemptCount < 3) {
-          data = await generateAndParseQuestions();
-          attemptCount++;
-      }
-
-      if (data.length === 0) {
-          return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
-      }
-      console.log(data)
-       // Validate the generated questions
-    const validatedData = validateQuestions(data);
-    if (!validatedData) {
-      return res.status(400).json({ error: 'Generated questions have missing or null fields' });
+      attemptCount++;
     }
 
-    res.status(200).json({ message: validatedData });
+    if (data.length === 0) {
+      return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
+    }
+    console.log(data);
+
+  
+
+    res.status(200).json({ message: data });
 
   } catch (error) {
-      console.error('Error generating questions:', error);
-      res.status(500).json({ error: error.message });
+    console.error('Error generating questions:', error);
+    res.status(500).json({ error: error.message });
   }
 };
 
-
 function parseGeminiResponse(response) {
-  
-  const [questionsSection, answersSection] = response.split("## Answers:\n\n");
+  const [questionsSection, answersSection] = response.split("## Answers:");
 
-  if (!questionsSection || !answersSection) {
-    console.error("Failed to split response into questions and answers sections.");
+  if (!questionsSection) {
+    console.error("Failed to split response into questions sections.");
     return [];
   }
+  if (!answersSection) {
+    console.error("Failed to split response into answers sections.");
+    return [];
+  }
+
   console.log("Questions Section:", questionsSection);
-  
   console.log("Answers Section:", answersSection);
 
+  const qs = questionsSection.split(/\n\n+/);
+  // Remove the first element from the array
+  qs.shift();
+  console.log("qs", qs);
 
+  let parsedQuestions = [];
 
-const qs = questionsSection.split(/\n\n+/);
-// Remove the first two elements from the array
-qs.shift();
-console.log("qs",qs)
+  qs.forEach((question, index) => {
+    console.log("question", question);
 
-let parsedQuestions = [];
-
-qs.forEach((question, index) => {
-
-  console.log("question",question)
-
-    
     const questionObj = {
-        question: "", 
-        choices: [],
-        answer: null,
+      question: "",
+      choices: [],
+      answer: null,
     };
 
-    const matches = question.match(/^\*\*(\d+)\.\s*(.+?)\*\*\n\s*a\) (.+?)\n\s*b\) (.+?)\n\s*c\) (.+?)$/s);
-    console.log("matches",matches)
+    const matches = question.match(/^\d+\.\s*(.+?)\n\s*a\)\s*(.+?)\n\s*b\)\s*(.+?)\n\s*c\)\s*(.+?)$/s);
+    console.log("matches", matches);
 
-    if (matches && matches.length === 6) {
-        questionObj.question = matches[2].trim();
-
-
-        questionObj.choices = [matches[3].trim(), matches[4].trim(), matches[5].trim()];
-        parsedQuestions.push(questionObj);
-
-
+    if (matches && matches.length === 5) {
+      questionObj.question = matches[1].trim();
+      questionObj.choices = [matches[2].trim(), matches[3].trim(), matches[4].trim()];
+      parsedQuestions.push(questionObj);
     }
+  });
 
-    })
+  const answerLines = answersSection.split("\n").filter((line) => line.trim() !== '');
+  console.log("answerLines",answerLines);
+  answerLines.forEach((answerText, index) => {
+    const text=answerText.replace(/\*/g, '')
+    const answerMatch = text.match(/^\d+\.\s*([a-c])\)\s*(.*)\s*$/);
+    console.log("answerText",answerText);
+    console.log("answerMatch",answerMatch);
 
+    if (answerMatch && index < parsedQuestions.length) {
+      console.log("answerMatch2",answerMatch);
 
+      const [, answerLetter, answerDetail] = answerMatch;
+      console.log("answerLetter",answerLetter);
+      console.log("answerDetail",answerDetail);
+
+      parsedQuestions[index].answer = `${answerLetter}) ${answerDetail.trim()}`;
   
-
-   const answerLines = answersSection.split("\n").filter((line) => line.trim() !== '');
-
-   answerLines.forEach((answerText, index) => {
-     const answerMatch = answerText.match(/^\d+\.\s*\*\*([a-c])\)\s*(.*)\*\*/);
-     if (answerMatch && index < parsedQuestions.length) {
-       const [, answerLetter, answerDetail] = answerMatch;
-       parsedQuestions[index].answer = `${answerLetter}) ${answerDetail}`;
- 
-       console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
-     } else {
-       console.error(`Answer format is incorrect or question not found at index ${index}.`);
-     }
-   });
+      console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
+    } else {
+      console.error(`Answer format is incorrect or question not found at index ${index}.`);
+    }
+  });
 
   return parsedQuestions;
 }
