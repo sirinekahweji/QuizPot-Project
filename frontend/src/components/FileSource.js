@@ -1,8 +1,6 @@
 import React, { useContext,useState } from 'react';
 import './FileSource.css';
 import { LangContext } from '../context/LangContext';
-import {getDocument} from 'pdfjs-dist';
-import mammoth from 'mammoth';
 import pdfToText from 'react-pdftotext'
 import PizZip from "pizzip";
 import { DOMParser } from "@xmldom/xmldom";
@@ -52,12 +50,6 @@ const FileSource = () => {
         return paragraphs;
       }
     
-
-    const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
-    };
-
-   
     async function generate(event) {
         try {
           const text = await extractText(event);
@@ -120,8 +112,6 @@ const FileSource = () => {
                 return extractTextFromDocx(file);
             case 'text/plain':
                 return extractTextFromTxt(file);
-            case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-                return extractTextFromPptx(file);
             default:
                 return Promise.reject(new Error('Unsupported file type'));
         }
@@ -141,34 +131,6 @@ const FileSource = () => {
     
         reader.readAsText(file);
     }
-
-    //extract text from pptx
-
-    const extractTextFromPptx = (file) => {
-
-        try {
-            const reader = new FileReader();
-            reader.onload = async (event) => {
-                const arrayBuffer = event.target.result;
-                const zip = new PizZip(arrayBuffer);
-                const content = zip.files["ppt/slides/slide1.xml"].asText(); // Exemple de chemin, ajustez selon la structure de votre fichier .pptx
-                const xmlDoc = new DOMParser().parseFromString(content, "text/xml");
-                const textElements = xmlDoc.getElementsByTagName("a:t");
-                const texts = [];
-
-                for (let i = 0; i < textElements.length; i++) {
-                    texts.push(textElements[i].textContent);
-                }
-
-                console.log('Textes extraits :', texts);
-            };
-            reader.readAsArrayBuffer(file);
-        } catch (error) {
-            console.error('Erreur lors de l\'extraction du texte depuis le PPTX :', error);
-        }
-    };
-  
-    
 
     return (
         <div className="filesource">

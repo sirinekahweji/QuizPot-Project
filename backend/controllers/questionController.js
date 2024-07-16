@@ -1,5 +1,8 @@
 const Question = require('../models/question');
 const { run } = require('../../gemini');
+const { runImage } = require('../../geminiImage');
+const fs = require('fs');
+const path = require('path');
 
 
 const saveQuestions = async (req, res) => {
@@ -77,6 +80,46 @@ c) <Choice C>
       res.status(500).json({ error: error.message });
   }
 };
+
+const generateFromImage = async (req, res) => {
+  const image = req.file;
+  if (!image) {
+    console.log("No file uploaded");
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+  
+
+  try {
+    const promptText =` create 6 questions from the content of the image .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer:
+          1. <Question 1>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+2. <Question 2>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+...
+## Answers:
+1. <Answer 1>;
+2. <Answer 2>;
+..`;
+console.log("avant generate run")
+console.log("image",image)
+console.log("image.path",image.path)
+
+    const response = await runImage(image.path, promptText);
+    const questions = parseGeminiResponse(response);
+    console.log("apres generate run")
+
+
+    res.status(200).json({ message: questions });
+  } catch (error) {
+    console.error('Error generating questions from images:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const generateMoreQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
 
@@ -278,5 +321,5 @@ const getQuestionsByFormResponseId = async (req, res) => {
 };
 
 
-module.exports = { generateQuestions , saveQuestions ,getQuestionsByFormResponseId,generateQuestionsfromText,generateMoreQuestions};
+module.exports = {generateFromImage, generateQuestions , saveQuestions ,getQuestionsByFormResponseId,generateQuestionsfromText,generateMoreQuestions};
 

@@ -1,48 +1,37 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './ImageSource.css';
 import { LangContext } from '../context/LangContext';
-import Tesseract from 'tesseract.js';
+import axios from 'axios';
+import { useAuthContext } from '../Hooks/useAuthContext';
+import { QuestionsContext } from '../context/QuestionsContext';
 
 const ImageSource = () => {
     const { currentLangData } = useContext(LangContext);
-    const [recognizedText, setRecognizedText] = useState('');
+    const { user } = useAuthContext();
+    const { setQuestions } = useContext(QuestionsContext);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [progress, setProgress] = useState(0);
     const [status, setStatus] = useState('');
 
-    const handleFileUpload = (event) => {
-        const file = event.target.files[0];
-        setSelectedImage(file);
-        setRecognizedText('');
-    };
-
-    useEffect(() => {
-        const recognizeText = async () => {
-            if (selectedImage) {
-                try {
-                    const result = await Tesseract.recognize(
-                        selectedImage,
-                        'eng',
-                        {
-                            logger: m => {
-                                console.log(m);
-                                setStatus(m.status);
-                                setProgress(m.progress);
-                            },
-                        }
-                    );
-                    setRecognizedText(result.data.text);
-                    setStatus('completed');
-                    setProgress(1);
-                    console.log(result.data.text);
-                } catch (error) {
-                    console.log(error);
-                    setStatus('error');
-                }
-            }
-        };
-        recognizeText();
-    }, [selectedImage]);
+    async function generate(event) {
+        try {
+            const file = event.target.files[0];
+            const formData = new FormData();
+            formData.append('image', file);
+            console.log("dans generate")
+            const response = await axios.post('http://localhost:5000/api/question/generateFromImage', formData , {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Authorization': `Bearer ${user.token}`,
+            },
+          });
+      
+          console.log('Response:', response.data);
+          setQuestions(response.data.message);
+        } catch (error) {
+          console.error('Error generating questions:', error);
+        }
+      }
+    
 
     return (
         <div className="imagesource">
@@ -56,23 +45,11 @@ const ImageSource = () => {
                     id="fileInput"
                     type="file"
                     style={{ display: 'none' }}
-                    onChange={handleFileUpload}
+                    onChange={generate}
                 />
                 <p>{currentLangData.imageSource.supportedFormats}</p>
             </div>
-            {selectedImage && <img src={URL.createObjectURL(selectedImage)} alt="Selected" />}
-            {status && (
-                <div className="status">
-                    <p>Status: {status}</p>
-                    <progress value={progress} max="1"></progress>
-                </div>
-            )}
-            {recognizedText && (
-                <div className="recognized-text">
-                    <h6>Recognized Text:</h6>
-                    <textarea value={recognizedText} readOnly rows={10} style={{ width: '100%' }} />
-                </div>
-            )}
+         
         </div>
     );
 };
