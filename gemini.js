@@ -6,9 +6,7 @@ const genAI = new GoogleGenerativeAI('AIzaSyByCX2MbBweVqrm8Fjw63ZmzLHJVQZ6IPo');
 async function run(test) {
   // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
-
-  //const prompt = "Write a story about a magic backpack."
-
+  
   const result = await model.generateContent(test);
   const response = await result.response;
   const text = response.text();

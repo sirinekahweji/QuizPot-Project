@@ -20,7 +20,6 @@ async function runImage(path,mimeType,promptText) {
   // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-  const prompt = "What's the content of image?";
 
  console.log("path",path);
  console.log("mimeType",mimeType);
