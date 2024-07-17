@@ -40,7 +40,7 @@ const Questions = () => {
 
             setFormResponseId(response.data._id);
             console.log("formResponseId:",response.data._id)
-            return response.data; 
+            return response.data._id; 
           } catch (error) {
             console.error('Error  save formData', error);
             setError('Failed to save formData. Please try again later.');
@@ -127,7 +127,7 @@ const Questions = () => {
 
     const savequestions = async () => {
         try {
-
+       console.log("form id dans sabe questions",formResponseId)
            if(formResponseId!=null){
             const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions,formResponseId },{
               headers: {
@@ -139,6 +139,11 @@ const Questions = () => {
             console.log('Questions saved successfully:', response.data);
             return response.data;
         }
+        else{
+          console.log("Error : form id is null")
+
+        }
+      
           } catch (error) {
             console.error('Error  save questions', error);
             setError('Failed to save questions. Please try again later.');
@@ -146,31 +151,87 @@ const Questions = () => {
     }
 
     const handleSave = async (e) => {
-        e.preventDefault();
-        try {
-            await saveformresponses();
-            console.log("saveformresponses done ")
-            await savequestions();
-            console.log("savequestions done ")
+      e.preventDefault();
+      let idform=0;
+      try {
+           //saveformresponses();
+          //console.log("saveformresponses done ");
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Saved',
-                text: 'Your Questions has been saved successfully.',
-                timer: 1500, 
-                showConfirmButton: false
-            });
-        } catch (error) {
-            console.error('Error saving data:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to save Questions. Please try again.',
-                timer: 2000, 
-                showConfirmButton: false
-            });
-        }
-    }
+          try {
+
+            const newformdata={
+             ...formData,
+             score: Math.round((score / questions.length) * 100)
+            }
+         
+             console.log(newformdata);
+             const response = await axios.post('http://localhost:5000/api/responseForm/save',newformdata,{
+               headers: {
+                 'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${user.token}` 
+               }
+             
+             });
+             console.log('formData saved successfully:', response.data);
+ 
+             setFormResponseId(response.data._id);
+             console.log("formResponseId:",response.data._id)
+             //return response.data._id; 
+             idform=response.data._id;
+             console.log("idform:",idform)
+
+           } catch (error) {
+             console.error('Error  save formData', error);
+             setError('Failed to save formData. Please try again later.');
+           }
+
+
+        
+           //savequestions();
+          //console.log("savequestions done ");
+          try {
+            console.log("form id dans sabe questions",formResponseId)
+            console.log("form id dans sabe questionsvariable",idform)
+                if(idform!=0){
+                 const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions,idform },{
+                   headers: {
+                     'Content-Type': 'application/json',
+                     'Authorization': `Bearer ${user.token}` 
+                   }
+                 
+                 });
+                 console.log('Questions saved successfully:', response.data);
+                 return response.data;
+             }
+             else{
+               console.log("Error : form id is null")
+     
+             }
+           
+               } catch (error) {
+                 console.error('Error  save questions', error);
+                 setError('Failed to save questions. Please try again later.');
+               }
+  
+          Swal.fire({
+              icon: 'success',
+              title: 'Saved',
+              text: 'Your Questions has been saved successfully.',
+              timer: 1500,
+              showConfirmButton: false
+          });
+      } catch (error) {
+          console.error('Error saving data:', error);
+          Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Failed to save Questions. Please try again.',
+              timer: 2000,
+              showConfirmButton: false
+          });
+      }
+  };
+  
 
     const handleSelection = (type) => {
         setSelectedType(type);

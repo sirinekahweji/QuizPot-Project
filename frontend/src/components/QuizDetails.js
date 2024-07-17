@@ -14,7 +14,7 @@ const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
 
 
   useEffect(() => {
-    if (show && selectedQuiz && questions===null) {
+    if (show && selectedQuiz ) {
       fetchQuestions();
     }
   }, [show, selectedQuiz]); 

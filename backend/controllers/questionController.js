@@ -6,13 +6,13 @@ const path = require('path');
 
 
 const saveQuestions = async (req, res) => {
-  const { questions ,formResponseId} = req.body;
+  const { questions ,idform} = req.body;
 
 console.log(questions)
-console.log(formResponseId)
+console.log(idform)
   try {
       const questionsToSave = questions.map(question => ({
-        formResponseId: formResponseId, 
+        formResponseId: idform, 
           questionText: question.question,
           questionType: 'QCM',
           options: question.choices,

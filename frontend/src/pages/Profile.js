@@ -4,6 +4,7 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 import ProfileBar from '../components/ProfileBar';
 import Search from '../components/SearchComponent';
 import Services from '../components/services';
+import Swal from 'sweetalert2';
 import QuizDetailsModal from '../components/QuizDetails';
 import './Profile.css';
 import axios from 'axios';
@@ -51,8 +52,22 @@ const Profile = () => {
         }
       });
       setFormResponses(prevResponses => prevResponses.filter(response => response._id !== Id));
+      Swal.fire({
+        icon: 'success',
+        title: 'Deleted',
+        text: 'Your Questions has been deleted successfully.',
+        timer: 1500, 
+        showConfirmButton: false
+    });
     } catch (error) {
       console.error('Error deleting quiz:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to delete Questions. Please try again.',
+        timer: 2000, 
+        showConfirmButton: false
+    });
     }
   };
   return (
