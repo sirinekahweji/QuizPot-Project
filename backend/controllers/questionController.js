@@ -37,10 +37,7 @@ const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
 
   try {
-      let data = [];
-      let attemptCount = 0;
       
-      const generateAndParseQuestions = async () => {
           const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
           1. <Question 1>
 a) <Choice A>
@@ -56,24 +53,20 @@ c) <Choice C>
 2. <Answer 2>;
 ..`;
           
+          
+        let questions = [];
+
+        while (questions.length === 0) {
           const response = await run(testPrompt);
-          return parseGeminiResponse(response);
-      };
-
-      data = await generateAndParseQuestions();
-      
-      while (data.length === 0 && attemptCount < 4) {
-          data = await generateAndParseQuestions();
-          attemptCount++;
-      }
-
-      if (data.length === 0) {
-          return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
-      }
-      console.log(data)
-      res.status(200).json({ message: data });
-
-      // Validate the generated questions
+          questions= parseGeminiResponse(response);
+              
+          if (questions.length > 0) {
+            break;
+          }
+          console.log("Questions were not generated. Retrying...");
+        }
+    
+        res.status(200).json({ message: questions });
   
   } catch (error) {
       console.error('Error generating questions:', error);
@@ -87,31 +80,41 @@ const generateFromImage = async (req, res) => {
     console.log("No file uploaded");
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  
 
   try {
-    const promptText =` create 6 questions from the content of the image .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer:
-          1. <Question 1>
-a) <Choice A>
-b) <Choice B>
-c) <Choice C>
-2. <Question 2>
-a) <Choice A>
-b) <Choice B>
-c) <Choice C>
-...
-## Answers:
-1. <Answer 1>;
-2. <Answer 2>;
-..`;
-console.log("avant generate run")
-console.log("image",image)
-console.log("image.path",image.path)
+    const imagePath = req.file.path; 
+    const mimeType = req.file.mimetype; 
+    const promptText = `create 6 questions from the content of the image .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre et le text de correct answer et sans des etoiles avant et apres la correct answer:
+      1. <Question 1>
+      a) <Choice A>
+      b) <Choice B>
+      c) <Choice C>
+      2. <Question 2>
+      a) <Choice A>
+      b) <Choice B>
+      c) <Choice C>
+      ...
+      ## Answers:
+      1. <Answer 1>;
+      2. <Answer 2>;
+      ..`;
 
-    const response = await runImage(image.path, promptText);
-    const questions = parseGeminiResponse(response);
-    console.log("apres generate run")
+    let questions = [];
 
+    // Regenerate questions until the length is greater than 0
+    while (questions.length === 0) {
+      console.log("image.path", imagePath);
+      console.log("image.mimeType", mimeType);
+      const response = await runImage(imagePath, mimeType, promptText);
+      console.log("response", response);
+
+      questions = parseGeminiResponse(response);
+
+      if (questions.length > 0) {
+        break;
+      }
+      console.log("Questions were not generated. Retrying...");
+    }
 
     res.status(200).json({ message: questions });
   } catch (error) {
@@ -120,14 +123,12 @@ console.log("image.path",image.path)
   }
 };
 
+
 const generateMoreQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
 
   try {
-      let data = [];
-      let attemptCount = 0;
       
-      const generateAndParseQuestions = async () => {
           const testPrompt = `create another ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
           1. <Question 1>
 a) <Choice A>
@@ -142,23 +143,19 @@ c) <Choice C>
 1. <Answer 1>;
 2. <Answer 2>;
 ..`;
-          
-          const response = await run(testPrompt);
-          return parseGeminiResponse(response);
-      };
+          let questions = [];
 
-      data = await generateAndParseQuestions();
+          while (questions.length === 0) {
+            const response = await run(testPrompt);
+            questions= parseGeminiResponse(response);
+                
+            if (questions.length > 0) {
+              break;
+            }
+            console.log("Questions were not generated. Retrying...");
+          }
       
-      while (data.length === 0 && attemptCount < 3) {
-          data = await generateAndParseQuestions();
-          attemptCount++;
-      }
-
-      if (data.length === 0) {
-          return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
-      }
-      console.log(data)
-      res.status(200).json({ message: data });
+          res.status(200).json({ message: questions });
 
    
 
@@ -174,10 +171,8 @@ const generateQuestionsfromText = async (req, res) => {
 
   console.log(text);
   try {
-    let data = [];
-    let attemptCount = 0;
+ 
 
-    const generateAndParseQuestions = async () => {
       const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer:
           1. <Question 1>
 a) <Choice A>
@@ -193,25 +188,19 @@ c) <Choice C>
 2. <Answer 2>;
 ..`;
 
-      const response = await run(testPrompt);
-      return parseGeminiResponse(response);
-    };
+       let questions = [];
 
-    data = await generateAndParseQuestions();
-
-    while (data.length === 0 && attemptCount < 4) {
-      data = await generateAndParseQuestions();
-      attemptCount++;
-    }
-
-    if (data.length === 0) {
-      return res.status(404).json({ error: 'Failed to generate questions after multiple attempts' });
-    }
-    console.log(data);
-
+      while (questions.length === 0) {
+        const response = await run(testPrompt);
+        questions= parseGeminiResponse(response);
+            
+        if (questions.length > 0) {
+          break;
+        }
+        console.log("Questions were not generated. Retrying...");
+      }
   
-
-    res.status(200).json({ message: data });
+      res.status(200).json({ message: questions });
 
   } catch (error) {
     console.error('Error generating questions:', error);
