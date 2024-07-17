@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import './ImageSource.css';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 
@@ -27,8 +28,22 @@ const ImageSource = () => {
       
           console.log('Response:', response.data);
           setQuestions(response.data.message);
+          Swal.fire({
+            icon: 'success',
+            title: 'Generated',
+            text: 'Your Questions has been generated successfully.',
+            timer: 1500,
+            showConfirmButton: false
+        });
         } catch (error) {
           console.error('Error generating questions:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to generate Questions. Please try again.',
+            timer: 2000,
+            showConfirmButton: false
+        });
         }
       }
     
@@ -44,6 +59,7 @@ const ImageSource = () => {
                 <input
                     id="fileInput"
                     type="file"
+                    accept=".jpg,.jpeg,.png,.webp,.heic,.heif"
                     style={{ display: 'none' }}
                     onChange={generate}
                 />

@@ -65,7 +65,18 @@ c) <Choice C>
           }
           console.log("Questions were not generated. Retrying...");
         }
-    
+
+        for (const question of questions) {
+          if (!question.question || question.choices.length !== 3 || !question.answer) {
+            res.status(500).json({message:"Error generating questions"});
+          }
+          for (const choice of question.choices) {
+            if (!choice) {
+              res.status(500).json({message:"Error generating questions"});
+            }
+          }
+        }
+       
         res.status(200).json({ message: questions });
   
   } catch (error) {
@@ -84,7 +95,7 @@ const generateFromImage = async (req, res) => {
   try {
     const imagePath = req.file.path; 
     const mimeType = req.file.mimetype; 
-    const promptText = `create 6 questions from the content of the image .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre et le text de correct answer et sans des etoiles avant et apres la correct answer:
+    const promptText = `create 5 questions from the content of the image .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre et le text de correct answer et sans des etoiles avant et apres la correct answer:
       1. <Question 1>
       a) <Choice A>
       b) <Choice B>
@@ -116,6 +127,17 @@ const generateFromImage = async (req, res) => {
       console.log("Questions were not generated. Retrying...");
     }
 
+  
+    for (const question of questions) {
+      if (!question.question || question.choices.length !== 3 || !question.answer) {
+        res.status(500).json({message:"Error generating questions"});
+      }
+      for (const choice of question.choices) {
+        if (!choice) {
+          res.status(500).json({message:"Error generating questions"});
+        }
+      }
+    }
     res.status(200).json({ message: questions });
   } catch (error) {
     console.error('Error generating questions from images:', error);
@@ -155,6 +177,16 @@ c) <Choice C>
             console.log("Questions were not generated. Retrying...");
           }
       
+          for (const question of questions) {
+            if (!question.question || question.choices.length !== 3 || !question.answer) {
+              res.status(500).json({message:"Error generating questions"});
+            }
+            for (const choice of question.choices) {
+              if (!choice) {
+                res.status(500).json({message:"Error generating questions"});
+              }
+            }
+          }
           res.status(200).json({ message: questions });
 
    
@@ -200,6 +232,16 @@ c) <Choice C>
         console.log("Questions were not generated. Retrying...");
       }
   
+      for (const question of questions) {
+        if (!question.question || question.choices.length !== 3 || !question.answer) {
+          res.status(500).json({message:"Error generating questions"});
+        }
+        for (const choice of question.choices) {
+          if (!choice) {
+            res.status(500).json({message:"Error generating questions"});
+          }
+        }
+      }
       res.status(200).json({ message: questions });
 
   } catch (error) {

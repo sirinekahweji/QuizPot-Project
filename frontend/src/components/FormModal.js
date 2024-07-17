@@ -3,6 +3,8 @@ import './FormModal.css';
 import { Modal } from 'react-bootstrap';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { FormDataContext } from '../context/FormDataContext'; 
@@ -43,11 +45,25 @@ const FormModal = ({ show, handleClose }) => {
 
       console.log('Response:', response.data); 
       setQuestions(response.data.message);
+      
+      Swal.fire({
+        icon: 'success',
+        title: 'Generated',
+        text: 'Your Questions has been generated successfully.',
+        timer: 1500,
+        showConfirmButton: false
+    });
     } catch (error) {
     
       console.error('Error generating questions:', error);
       setError('Failed to generate questions. Please try again later.');
-      alert('Failed to generate questions. Please try again later.');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to generate Questions. Please try again.',
+        timer: 2000,
+        showConfirmButton: false
+    });
       /*setFormData({
         topic: '',
         level: '',

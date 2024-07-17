@@ -3,6 +3,7 @@ import './FileSource.css';
 import { LangContext } from '../context/LangContext';
 import pdfToText from 'react-pdftotext';
 import PizZip from 'pizzip';
+import Swal from 'sweetalert2';
 import { DOMParser } from '@xmldom/xmldom';
 import axios from 'axios';
 import { useAuthContext } from '../Hooks/useAuthContext';
@@ -58,12 +59,27 @@ const FileSource = () => {
             'Authorization': `Bearer ${user.token}`,
           },
         }
+       
       );
 
       console.log('Response:', response.data);
       setQuestions(response.data.message);
+      Swal.fire({
+        icon: 'success',
+        title: 'Generated',
+        text: 'Your Questions has been generated successfully.',
+        timer: 1500,
+        showConfirmButton: false
+    });
     } catch (error) {
       console.error('Error generating questions:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Failed to generate Questions. Please try again.',
+        timer: 2000,
+        showConfirmButton: false
+    });
     }
   }
 
