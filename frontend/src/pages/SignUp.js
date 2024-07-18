@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LangContext } from '../context/LangContext';
 import './SignUp.css';
-import image from '../assets/signup.png';
+import videoBg from '../assets/videos/bg1.mp4';
 import { useSignup } from '../Hooks/useSignUp';
 
 const SignUp = () => {
@@ -29,8 +29,10 @@ const SignUp = () => {
 
     return (
         <div className="signup">
+        
             <h1 className='titlesignup'>{currentLangData.signUpPage.title}</h1>
             <div className="contentsignup">
+         
                 <form onSubmit={handleSubmit}>
                     <div className="FormSignUp">
                         <label htmlFor="fullname" className="confirmpassword">{currentLangData.signUpPage.fullNameLabel}</label>
@@ -67,12 +69,15 @@ const SignUp = () => {
                     <button disabled={isLoading} className='btn-signup'>{currentLangData.signUpPage.signUpButton}</button>
                     {error && <div className="error">{error}</div>}
                 </form>
-                <img src={image} alt="Signup" className="signup-img" />
+                <video autoPlay loop muted className="video-background">
+                    <source src={videoBg} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>  
             </div>
             <div className='footer'>
                 <Link to="/" style={{
                     backgroundColor: "white",
-                    color: "#f34079",
+                    color: "rgb(236, 155, 5)",
                     fontWeight: "bold",
                     marginTop: "40px",
                     cursor: "pointer",

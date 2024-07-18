@@ -1,16 +1,16 @@
 @import url('https://fonts.google.com/specimen/Oswald?preview.text=Discover%20the%20power%20of%20AI');
 
 .signin-container {
-    margin-top: -5%;
+    margin-top: -3%;
     display: flex;
     align-items: center;
+    margin-right: 2%;
 }
 
 .home {
     position: relative;
     width: 100%;
     top: -50px;
-    overflow: hidden;
 }
 
 .video-background {
@@ -32,7 +32,7 @@
 
 .title {
     text-align: left;
-    color: rgb(250, 250, 249);
+    color: white;
     font-family: 'Oswald';
     font-weight: bold;
     padding-left: 2%;

@@ -39,10 +39,6 @@ const PageGarde = () => {
                 <div className="signin-container">
                    <SignIn />
                  </div>
-               {/*<div className='buttons'>
-                <button className='signin-btn'>Sign In</button>
-                <button className='signup-btn'>Sign Up </button>
-                </div>*/}
             </div>
         </div>
     );
