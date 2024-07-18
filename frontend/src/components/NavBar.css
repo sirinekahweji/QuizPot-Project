@@ -1,14 +1,14 @@
 .navbar {
-    margin-top: -15px;
+    margin-top: -50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color:#f34079; 
+    color:#0a0a0a; 
 
 }
 
 .logo {
-    height: 70px;
+    height: 150px;
     width: 150px;
     margin-left: 2%;
 }
@@ -17,7 +17,6 @@
     padding-right: 2%;
     font-weight: bold;
     font-size: larger;
-    margin-top: 1%;
     cursor: pointer;
     position: relative;
 }
@@ -27,7 +26,7 @@
 }
 
 .language-text.hovered {
-    color:#f34079; 
+    color:#f4b917; 
 }
 
 .dropdown-menu {
@@ -57,7 +56,7 @@
 }
 
 .dropdown-item.selected {
-    color: rgb(236, 9, 198);
+    color:#f4b917; 
 
 }
 

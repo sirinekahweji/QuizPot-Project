@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import logo from '../assets/logo.png';
+import logo from '../assets/technixbot.png';
 import './NavBar.css';
 import { LangContext } from '../context/LangContext';
 import { Link  , useLocation} from 'react-router-dom';

@@ -1,35 +1,36 @@
-
 @import url('https://fonts.google.com/specimen/Oswald?preview.text=Discover%20the%20power%20of%20AI');
 
-.home{
-    background-color: rgba(199, 243, 245, 0.217);
-  
-
+.home {
+    position: relative;
+    width: 100%;
+    top: -50px;
+    overflow: hidden;
 }
-.pageGarde{
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.pageGarde {
     display: flex;
     justify-content: space-between;
     padding-left: 20px;
-    padding-top: 2%;
+    position: relative;
+    z-index: 1;
 }
-.title{
+
+.title {
     text-align: left;
-    color: rgb(171, 206, 74);
+    color: rgb(250, 250, 249);
     font-family: 'Oswald';
     font-weight: bold;
     padding-left: 2%;
-}
-.description{
-    color:#f34079; 
-    font-family: 'Microsoft YaHei UI';
-    font-weight: bold;
-    padding-left: 2%;
-
-}
-.pagegardeimg{
-    margin-top: -10%;
-    width:85%;
-    height: auto;
+    padding-bottom: 2%;
 }
 
 
@@ -38,15 +39,139 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 60%;
+    width: 100%;
+    padding-top: 50px;
+}
+
+/* Animation */
+.wordCarousel {
+    font-size: 24px;
+    font-weight: 100;
+    color: #eee;
+    div {
+        overflow: hidden;
+        position: relative;
+        float: right;
+        height: 65px;
+        padding-top: 10px;
+        margin-top: -10px;
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            position: relative;
+        }
+        li {
+            font-family: 'Microsoft YaHei UI';
+            color: #c4bdc0; 
+            font-weight: bold;
+            height: 45px;
+            margin-bottom: 45px;
+            display: block;
+        }
+    }
+}
+.description {
+    padding-left: 2%;
 }
 
 
-.signin-container {
-    margin-top: -12%;
+
+.flip2 { animation: flip2 12s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+.flip3 { animation: flip3 16s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+.flip4 { animation: flip4 20s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+.flip5 { animation: flip5 24s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+
+@keyframes flip2 {
+    0% { margin-top: -180px; }
+    5% { margin-top: -90px;  }
+    50% { margin-top: -90px; }
+    55% { margin-top: 0px; }
+    99.99% { margin-top: 0px; }
+    100% { margin-top: -180px; }
+}
+
+@keyframes flip3 {
+    0% { margin-top: -270px; }
+    5% { margin-top: -180px; }
+    33% { margin-top: -180px; }
+    38% { margin-top: -90px; }
+    66% { margin-top: -90px; }
+    71% { margin-top: 0px; }
+    99.99% { margin-top: 0px; }
+    100% { margin-top: -270px; }
+}
+
+@keyframes flip4 {
+    0% { margin-top: -360px; }
+    5% { margin-top: -270px; }
+    25% { margin-top: -270px; }
+    30% { margin-top: -180px; }
+    50% { margin-top: -180px; }
+    55% { margin-top: -90px; }
+    75% { margin-top: -90px; }
+    80% { margin-top: 0px; }
+    99.99% { margin-top: 0px; }
+    100% { margin-top: -360px; }
+}
+
+@keyframes flip5 {
+    0% { margin-top: -450px; }
+    5% { margin-top: -360px; }
+    20% { margin-top: -360px; }
+    25% { margin-top: -270px; }
+    40% { margin-top: -270px; }
+    45% { margin-top: -180px; }
+    60% { margin-top: -180px; }
+    65% { margin-top: -90px; }
+    80% { margin-top: -90px; }
+    85% { margin-top: 0px; }
+    99.99% { margin-top: 0px; }
+    100% { margin-top: -450px; }
+}
+/* style buttons sign in / signup */
+.signup-btn:hover{
+    color: rgb(236, 155, 5);
+    background-color:  rgb(254, 252, 252);
+}
+.signin-btn:hover{
+    color: rgb(236, 155, 5);
+    background-color: rgb(242, 239, 239);
+}
+ .signup-btn{
+    border-radius: 25px;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Britannic';
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    border: none;
+}
+.signin-btn {
+    border-radius: 25px;
+    color: rgb(254, 252, 252);
+    background-color: rgb(236, 155, 5);
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Britannic';
+    padding: 10px;
+    width: 150px;
+    height: 50px;
+    border: none;
+}
+.signup-btn{
+    margin-left: 20px;
+}
+
+.buttons {
+   
+    margin-top: 30%; 
+    margin-right: 36%;
     display: flex;
-    align-items: center;
+    height: 100px;
 }
-
 
 
