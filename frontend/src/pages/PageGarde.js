@@ -14,6 +14,7 @@ const PageGarde = () => {
         'Create Quizzes Instantly'
     ];
 
+       
     return (  
         <div className="home">            
             <div className='pageGarde'>
@@ -22,7 +23,7 @@ const PageGarde = () => {
                     Your browser does not support the video tag.
                 </video>                   
                 <div className="left-container">
-                    <h1 className='title'>{currentLangData.title}</h1>
+                    <h1 className='title'> {currentLangData.title}</h1>
                     <h3 className='description'>
                         <div className="wordCarousel">
                             <div>
@@ -35,13 +36,13 @@ const PageGarde = () => {
                         </div>
                     </h3>
                 </div>
-                
-                <div className='buttons'>
+                <div className="signin-container">
+                   <SignIn />
+                 </div>
+               {/*<div className='buttons'>
                 <button className='signin-btn'>Sign In</button>
                 <button className='signup-btn'>Sign Up </button>
-                </div>
-            
-         
+                </div>*/}
             </div>
         </div>
     );

@@ -9,20 +9,27 @@
     font-weight: bold;
     text-align: center;
     padding: 12px;
+    color: white;
   }
   .FormField label {
     margin-bottom: 5px; 
     width: fit-content;
     user-select: none;
+    font-weight: bold;
+
   }
   .FormField input{
     padding: 8px;
      padding-bottom: 18px;  
      padding-top: 18px; 
+     color: white;
+     border: none;
+
+
   }
 .remember{
     font-size: 10px;
-    color:rgb(49, 49, 49);
+    color: white;
   }
 .Remember .remember {
     margin-left: 5px; 
@@ -37,17 +44,21 @@
    margin-top: 5px;
    margin-bottom: 5px;
     font-size: 12px;
+    font-weight: bold;
 }
 .MotDePasseOublie a
 {
  
-    color: rgb(0, 161, 225);
     text-decoration: none;
     font-weight: bold;
 
   }
   .FormField{
     margin-bottom: 15px;
+    color: white;
+    border: none;
+
+
   }
   .email,.MotPasse {
     display: block; 
@@ -58,21 +69,23 @@
     margin-top: 10px;
     font-size:11px;
     font-weight: bold;
+    color: white;
+
   }
   #usermail,#password{
     border-radius: 4px;
-    border: none;
-    background-color:rgb(230,230,230);
+    background-color:rgb(241, 239, 239);
     height: 25px;
     width:275px;
+    border: none;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 16px;
+    color: rgb(36, 36, 36);
+
   }
-  #username:focus,#password:focus{
-    border-color: blue;
-  }
+ 
   .SeConnecter{
-    background-color:#abce4a; ;
+    background-color: rgb(236, 155, 5);
     color: white;
     border-radius: 10px;
     border: none;
@@ -87,17 +100,18 @@
  
 
   .email,.MotPasse{
-    color:rgb(106,106,106);
+    color: white;
     font-size: 13px;
   }
   .SignIn{
+    color: white;
     display: flex;
-    background-color: white;
-    padding: 12px;
+    background-color: transparent;
+    padding: 10px;
     border-radius: 25px;
     display: flex;
     align-items: center; 
-    width:350px;
+    width:300px;
     flex-direction: column; 
     margin-right:100px;
     margin-top:100px;
@@ -114,7 +128,8 @@
       background: none;
       border: none;
       cursor: pointer;
-  }
+      color: rgb(36, 36, 36);
+    }
   .PasswordToggleBtn i{
     font-size: 20px;
 
@@ -139,7 +154,7 @@
   }
   .remember{
     font-size: 7px;
-    color:rgb(49, 49, 49);
+    color: white;
   }
  
   .FormField{

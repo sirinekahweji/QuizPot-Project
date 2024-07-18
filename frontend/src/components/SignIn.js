@@ -80,10 +80,7 @@ const SignIn = () => {
                     </p>
                     {resetMessage && <div className="reset-message">{resetMessage}</div>}
                 </div>
-                <div className="Remember">
-                    <input type="checkbox" id="remember" name="remember" />
-                    <label htmlFor="remember" className="remember">{currentLangData.signIn.rememberMe}</label>
-                </div>
+               
                 <button type="submit" className="SeConnecter" disabled={isLoading}>
                     {currentLangData.signIn.signInButton}
                 </button>
@@ -92,7 +89,7 @@ const SignIn = () => {
                 {currentLangData.signIn.noAccount}<br /> 
                 <Link to="/signup"
                     style={{ 
-                        color: "rgb(0, 161, 225)",
+                        color: "orange",
                         textDecoration: "none"
                     }}
                 >
