@@ -80,7 +80,7 @@ const forgotPassword =async (req, res) => {
       });
       
       var mailOptions = {
-        from: process.env.USER,
+        from: 'QuizBot@gmail.com',
         to: user.email,
         subject: 'Password Reset',
         text: `Your new password is ${newPassword}`,
@@ -89,6 +89,7 @@ const forgotPassword =async (req, res) => {
 
   
       console.log("mailOptions",mailOptions)
+      
       console.log("avant sand mail")
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
