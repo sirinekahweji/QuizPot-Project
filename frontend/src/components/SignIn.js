@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { LangContext } from '../context/LangContext';
 import { Link } from "react-router-dom";
 import './SignIn.css';
+import axios from 'axios';
 import { useSignin } from '../Hooks/useSignIn';
 
 const SignIn = () => {
@@ -9,11 +10,26 @@ const SignIn = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [resetMessage, setResetMessage] = useState('');
     const { signin, error, isLoading } = useSignin();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         await signin(email, password);
+    }
+
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/api/user/forgot-password', { email });
+            setResetMessage(response.data.message);
+        } catch (error) {
+            if (error.response && error.response.data) {
+                setResetMessage(error.response.data.message);
+            } else {
+                setResetMessage('Something went wrong. Please try again later.');
+            }
+        }
     }
 
     const togglePasswordVisibility = () => {
@@ -59,7 +75,10 @@ const SignIn = () => {
                     {error && <div className="error-message">{error}</div>}
                 </div>
                 <div className="MotDePasseOublie">
-                    <a href="">{currentLangData.signIn.forgotPassword}</a>
+                    <p  onClick={handleForgotPassword}>
+                        {currentLangData.signIn.forgotPassword}
+                    </p>
+                    {resetMessage && <div className="reset-message">{resetMessage}</div>}
                 </div>
                 <div className="Remember">
                     <input type="checkbox" id="remember" name="remember" />
