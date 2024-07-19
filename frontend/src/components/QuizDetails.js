@@ -6,8 +6,6 @@ import jsPDF from 'jspdf';
 import './QuizDetails.css';
 
 
-
-
 const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
   const { user } = useAuthContext();
   const [questions, setquestions] = useState(null);
@@ -130,14 +128,14 @@ const generatePDF = (qs, formresponse) => {
 
 
   return (
-    <Modal show={show} onHide={handleClose} >
+    <Modal show={show} onHide={handleClose} ClassName="custom-modal" >
       <Modal.Header closeButton>
-        <Modal.Title>{selectedQuiz.topic}</Modal.Title>
+        <Modal.Title ><p className='topic' >{selectedQuiz.topic}</p></Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p><b>Education Level: </b>{selectedQuiz.level}</p>
-        <p><b>Difficulty Level: </b>{selectedQuiz.difficulty}</p>
-        {selectedQuiz.focusAreas && <p><b>Specific Focus Areas:  </b>{selectedQuiz.focusAreas}</p>}
+        <p className='details'><b>Education Level: </b>{selectedQuiz.level}</p>
+        <p className='details' ><b>Difficulty Level: </b>{selectedQuiz.difficulty}</p>
+        {selectedQuiz.focusAreas && <p className='details' ><b>Specific Focus Areas:  </b>{selectedQuiz.focusAreas}</p>}
         <div className='questionsList'>
           <p><b>Questions</b></p>
           {questions && questions.map((question, index) => (
@@ -157,7 +155,7 @@ const generatePDF = (qs, formresponse) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-      <button className='btnexport' onClick={() => generatePDF(questions, selectedQuiz)}><i className="bi bi-download" ></i> Export</button>
+      <button className='export-btn' onClick={() => generatePDF(questions, selectedQuiz)}><i className="bi bi-download" ></i> Export</button>
       </Modal.Footer>
     
     </Modal>

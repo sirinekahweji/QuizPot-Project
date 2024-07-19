@@ -1,3 +1,19 @@
-.custom-modal .modal-dialog {
-    width: 1000px;
-  }
+.export-btn{
+  border-radius: 25px;
+  background-color: rgb(236, 155, 5);
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  font-family: 'Britannic';
+  cursor: pointer;
+}
+.topic{
+  color:rgb(236, 155, 5) ;
+}
+.custom-modal{
+  width: 150%;
+}
+.details b{
+  color:rgb(133, 89, 6) ;
+
+}
