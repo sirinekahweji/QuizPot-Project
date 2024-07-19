@@ -2,7 +2,7 @@ import './Myquizzes.css';
 import React, { useContext, useState, useEffect } from 'react';
 import { LangContext } from '../context/LangContext';
 import { useAuthContext } from '../Hooks/useAuthContext';
-import Search from '../components/SearchComponent';
+import SearchGlow from '../components/Glowserch';
 import Swal from 'sweetalert2';
 import QuizDetailsModal from '../components/QuizDetails';
 import axios from 'axios';
@@ -73,7 +73,7 @@ const Myquizzes = () => {
     return (  
         <div className="myquizzesComponent">
              <p className='titleQuizz'>{currentLangData.profile.myQuizzesTitle}</p>
-      <Search />
+      <SearchGlow />
       <div className='myquizzes'>
         {formResponses && formResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
