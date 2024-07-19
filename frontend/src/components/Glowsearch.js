@@ -1,5 +1,5 @@
 
-import './Glowserch.css';
+import './Glowsearch.css';
 const Glowserch = () => {
     return ( 
         <section class="webdesigntuts-workshop">

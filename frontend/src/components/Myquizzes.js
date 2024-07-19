@@ -2,7 +2,7 @@ import './Myquizzes.css';
 import React, { useContext, useState, useEffect } from 'react';
 import { LangContext } from '../context/LangContext';
 import { useAuthContext } from '../Hooks/useAuthContext';
-import SearchGlow from '../components/Glowserch';
+import SearchGlow from './Glowsearch';
 import Swal from 'sweetalert2';
 import QuizDetailsModal from '../components/QuizDetails';
 import axios from 'axios';
@@ -73,12 +73,12 @@ const Myquizzes = () => {
     return (  
         <div className="myquizzesComponent">
              <p className='titleQuizz'>{currentLangData.profile.myQuizzesTitle}</p>
-      <SearchGlow />
+           <SearchGlow />
       <div className='myquizzes'>
         {formResponses && formResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
             <p className='quizTitle' onClick={() => handleOpenModal(formResponse)}>
-              <i className="bi bi-chat-square-fill"></i> {formResponse.topic}
+              <i className="bi bi-chat-heart-fill"></i> {formResponse.topic}
             </p>
             <div className='right-div'>
               <p className='nbquestions'>Score : {formResponse.score}</p>

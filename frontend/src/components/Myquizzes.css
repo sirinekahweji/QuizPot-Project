@@ -6,15 +6,19 @@
     margin-left: 30%;
     padding-top: 2%;
 }
+.myquizzesComponent{
+    margin-top: -3%;
+
+}
 
 .myquizzes{
     background-color: white;
     margin-left: 30%;
-    margin-top: -6%;
+    margin-top: 1%;
     padding: 20px;
     width: 60%;
     overflow-y: auto;
-    max-height: 300px; 
+    max-height: 350px; 
 }
 .myquizzes::-webkit-scrollbar {
     width: 0px;

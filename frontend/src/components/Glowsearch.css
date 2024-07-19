@@ -2,11 +2,9 @@
 
 .webdesigntuts-workshop {
 	background:transparent;
-	height: 100%;
-	position: absolute;
 	text-align: center;
 	width: 160%;
-    margin-top: -20%;
+    margin-top: -15%;
 }
 
 .webdesigntuts-workshop form {
@@ -24,12 +22,17 @@
 }
 
 .webdesigntuts-workshop input {
-	background: #222;	
-	background: linear-gradient(#333, #222);	
-	border: 1px solid #444;
+
+	animation: glow 800ms ease-out infinite alternate;
+	background: #222922;
+	background: linear-gradient(#333933, #222922);
+	box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+	color: #efe;
+	outline: none;
+
+
+	border: 1px solid  #393;
 	border-radius: 5px 0 0 5px;
-	box-shadow: 0 2px 0 #000;
-	color: #888;
 	display: block;
 	float: left;
 	font-family: 'Cabin', helvetica, arial, sans-serif;
