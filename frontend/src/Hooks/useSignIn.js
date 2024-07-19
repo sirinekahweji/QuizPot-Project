@@ -3,13 +3,13 @@ import { useAuthContext } from './useAuthContext';
 import axios from 'axios';
 
 export const useSignin = () => {
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { dispatch } = useAuthContext(); 
 
     const signin = async (email, password) => {
         setIsLoading(true);
-        setError(null);
+        setError('');
 
         try {
             const response = await axios.post('http://localhost:5000/api/user/', {
@@ -20,11 +20,9 @@ export const useSignin = () => {
             const json = response.data;
             console.log('API Response:', json); // Ajoutez ce console.log
 
-            // Axios throws an error for status codes outside of the 2xx range
-            // so we don't need to manually check `response.ok`
-            // Checking for presence of an error message in the response data
             if (response.status !== 200 || json.error) {
                 setIsLoading(false);
+                console.log("json",json.error)
                 setError(json.error);
             } else {
                 // save the user to local storage
@@ -35,7 +33,7 @@ export const useSignin = () => {
             }
         } catch (err) {
             setIsLoading(false);
-            setError('Failed to sign in');
+            setError(err.response.data.error);
         }
     };
 

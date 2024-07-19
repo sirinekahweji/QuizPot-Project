@@ -3,6 +3,11 @@
     font-size: 12px;
     margin-top: 5px;
     width: 100%;
+    font-weight: bold;
+    background-color: rgb(253, 236, 236);
+    padding: 4px;
+    border-radius: 5px;
+    margin-top: 5px;
   }
   .TitleSignIn{
     font-size: 25px;

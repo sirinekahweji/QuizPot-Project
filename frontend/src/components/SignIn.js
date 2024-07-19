@@ -23,12 +23,8 @@ const SignIn = () => {
         try {
             const response = await axios.post('http://localhost:5000/api/user/forgot-password', { email });
             setResetMessage(response.data.message);
-        } catch (error) {
-            if (error.response && error.response.data) {
-                setResetMessage(error.response.data.message);
-            } else {
-                setResetMessage('Something went wrong. Please try again later.');
-            }
+        } catch (err) {
+            setResetMessage(err);
         }
     }
 
@@ -72,7 +68,7 @@ const SignIn = () => {
                             <i className={passwordVisible ? "bi bi-eye-fill" : "bi bi-eye-slash-fill"}></i>
                         </button>
                     </div>
-                    {error && <div className="error-message">{error}</div>}
+                    {error && <div className="error-message"><i class="bi bi-exclamation-circle-fill"></i>  {error}</div>}
                 </div>
                 <div className="MotDePasseOublie">
                     <p  onClick={handleForgotPassword}>

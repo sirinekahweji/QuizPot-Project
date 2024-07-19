@@ -58,17 +58,17 @@ userSchema.statics.signin = async function (email,password){
             throw Error('All fields must be filled')
         }
     if(!validator.isEmail(email)){
-        throw Error('Email is not valid')
+        throw Error('Invalid Email')
     }
 
     const user = await this.findOne({email});
     if( !user)
         {
-           throw Error('Incorrect Email');
+           throw Error('Email not exist');
         }
     const match = await bcrypt.compare(password,user.password)
     if(!match){
-        throw Error('Incorrect Password')
+        throw Error('Incorrect password')
     }
     return user;
 

@@ -24,6 +24,8 @@ const loginUser = async (req, res) => {
         //console.log('Login Response:', response); 
         res.status(200).json(response);
     } catch (error) {
+     
+        console.log(error.message);
         res.status(400).json({ error: error.message });
     }
 }
@@ -39,7 +41,6 @@ const signupUser = async (req, res) => {
         const token = createToken(user._id);
 
         const response = { name, email, token };
-        //console.log('Signup Response:', response); 
         res.status(200).json(response);
     } catch (error) {
         res.status(400).json({ error: error.message });
