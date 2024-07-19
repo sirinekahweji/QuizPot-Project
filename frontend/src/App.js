@@ -1,6 +1,7 @@
 import{BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
 import PageGarde from './pages/PageGarde';
 import Home from './pages/Home';
+import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import './index.css'; 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/signup" element={!user ? <SignUp/> : <Navigate to='/quizbot'/> } />
             <Route path="/quizbot" element={user ? <Home/> :<Navigate to='/'/> } />
             <Route path="/profile" element={user ? <Profile/> :<Navigate to='/'/> } />
+            <Route path="/ResetPassword" element={!user ? <ResetPassword/> :<Navigate to='/quizbot'/> } />
          </Routes>
       </BrowserRouter>
       

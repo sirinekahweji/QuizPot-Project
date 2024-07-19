@@ -2,12 +2,11 @@ import React, { useContext } from 'react';
 import logo from '../assets/technixbot.png';
 import './NavBar.css';
 import { LangContext } from '../context/LangContext';
-import { Link  , useLocation} from 'react-router-dom';
+import { Link  } from 'react-router-dom';
 
 
 const NavBar = () => {
     const { language, changeLanguage, currentLangData } = useContext(LangContext);
-    const location = useLocation();
 
 
     const handleLanguageChange = (lang) => {
@@ -17,9 +16,7 @@ const NavBar = () => {
     return (
         <nav className="navbar">
             <img src={logo} alt="QuizBot Logo" className="logo" />
-            {(location.pathname !== '/' && location.pathname !== '/signup' && location.pathname!=='/quizbot') && (
-            <Link to='/quizbot'style={{ textDecoration: "none" , color: "#f34079" , fontWeight:"bold" , marginLeft:"70%",marginTop:"10px"}}><i class="bi bi-house-heart-fill"></i>  {currentLangData.navbar.home}</Link>
-            )}
+        
             <div className="ml-auto language">
                 <span className="language-text">
                     {currentLangData.navbar[language.toLowerCase()]} <i className="bi bi-chevron-down"></i>

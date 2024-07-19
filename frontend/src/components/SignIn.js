@@ -5,6 +5,7 @@ import './SignIn.css';
 import axios from 'axios';
 import { useSignin } from '../Hooks/useSignIn';
 
+
 const SignIn = () => {
     const { currentLangData } = useContext(LangContext); 
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -12,6 +13,7 @@ const SignIn = () => {
     const [password, setPassword] = useState('');
     const [resetMessage, setResetMessage] = useState('');
     const { signin, error, isLoading } = useSignin();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -71,7 +73,7 @@ const SignIn = () => {
                     {error && <div className="error-message"><i class="bi bi-exclamation-circle-fill"></i>  {error}</div>}
                 </div>
                 <div className="MotDePasseOublie">
-                    <p  onClick={handleForgotPassword}>
+                <p onClick={handleForgotPassword }>
                         {currentLangData.signIn.forgotPassword}
                     </p>
                     {resetMessage && <div className="reset-message">{resetMessage}</div>}
@@ -92,6 +94,7 @@ const SignIn = () => {
                     {currentLangData.signIn.signUpHere}
                 </Link>
             </p>
+         
         </div>
     );
 }

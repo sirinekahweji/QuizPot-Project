@@ -32,16 +32,7 @@
 
 
   }
-.remember{
-    font-size: 10px;
-    color: white;
-  }
-.Remember .remember {
-    margin-left: 5px; 
-  }
-.Remember {
-    display: flex; 
-  }
+
 
 .MotDePasseOublie 
 {
@@ -50,7 +41,13 @@
    margin-bottom: 5px;
     font-size: 12px;
     font-weight: bold;
+    cursor: pointer;
 }
+.MotDePasseOublie :hover{
+  cursor: pointer;
+
+}
+
 .MotDePasseOublie a
 {
  
@@ -75,6 +72,7 @@
     font-size:11px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
 
   }
   #usermail,#password{
@@ -100,6 +98,7 @@
     margin: 0 auto;
     width: 275px;
     margin-top: 10px;
+    cursor: pointer;
   }
 
  
@@ -157,14 +156,8 @@
     margin-right:10px;
   
   }
-  .remember{
-    font-size: 7px;
-    color: white;
-  }
- 
   .FormField{
     margin-bottom: 10px;
-  
   }
   .email,.MotPasse {
     display: block; 
