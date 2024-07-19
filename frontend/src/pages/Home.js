@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import './Home.css';
 import Form from '../components/Form';
+import Quizzes from '../components/Myquizzes';
 import Questions from '../components/QCMType';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
@@ -77,7 +78,10 @@ const Home = () => {
             >
                 <i className={currentLangData.questions.open.icon}></i> Questions
             </p>
-            <p className=''>
+            <p 
+             className={`myquizzesContent ${selectedContent === 'myquizzes' ? 'selected' : ''}`}
+             onClick={() => handleContentSelect('myquizzes')}
+            >
                 <i className="bi bi-chat-heart-fill"></i> My Quizzes
             </p>
                 <div className="score-wrap">
@@ -101,6 +105,7 @@ const Home = () => {
 
             {selectedContent === 'form' && <Form />}
             {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate} />}
+            {selectedContent === 'myquizzes' && <Quizzes  />}
         </div>
     );
 }

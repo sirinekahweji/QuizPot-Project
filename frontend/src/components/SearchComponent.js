@@ -8,7 +8,7 @@ const SearchComponent = () => {
     const [inputVisible, setInputVisible] = useState(false);
     const [counter, setCounter] = useState(0);
     const bubblesRef = useRef([]);
-    const colors =['#1CAF60','#4C83F0' ,'#EEB80B','#f34079','#1CAF60','#4C83F0' ,'#EEB80B','#f34079']
+    const colors =['#1CAF60','#4C83F0' ,'#EEB80B','purple','#1CAF60','#4C83F0' ,'#EEB80B','#f34079']
 
     const bubbling = useCallback(() => {
         if (counter < bubblesRef.current.length) {
@@ -59,7 +59,7 @@ const SearchComponent = () => {
                                 }}
                             /> 
                             : 
-                            <p className="S" style={{ color: '#4C83F0' }}>{searchLetters[0]}</p>
+                            <p className="S" style={{ color: 'red' }}>{searchLetters[0]}</p>
                         }
                     </div>
                     {searchLetters.slice(1).map((letter, index) => (

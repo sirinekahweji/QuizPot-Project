@@ -21,7 +21,8 @@
 }
 
 .formcontent.selected,
-.questionsContent.selected {
+.questionsContent.selected,
+.myquizzesContent.selected {
     color: black; 
 }
 

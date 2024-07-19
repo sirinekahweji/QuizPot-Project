@@ -1,0 +1,114 @@
+.titleQuizz{
+    text-align: left;
+    color:black;
+    font-family: 'Oswald';
+    font-weight: bold;
+    margin-left: 30%;
+    padding-top: 2%;
+}
+
+.myquizzes{
+    background-color: white;
+    margin-left: 30%;
+    margin-top: -6%;
+    padding: 20px;
+    width: 60%;
+    overflow-y: auto;
+    max-height: 300px; 
+}
+.myquizzes::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+.myquizzes {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+  }
+
+.myquiz {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+
+}
+.right-div{
+    display: flex;
+    justify-content: space-between;
+    column-gap: 20px;
+
+}
+
+.btnexport{
+    border-radius: 25px;
+    background-image: linear-gradient(135deg, #f34079 30%, #fda270);
+    color: white;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 65%;
+
+}
+.btnexport:hover{
+    background-image: linear-gradient(135deg,  rgb(25, 144,175) 40%, #96f1cd);
+
+}
+.nbquestions{
+    color:rgb(116, 115, 115);
+}
+.deleteIcon{
+    color:red;
+    font-size: 20px;
+    cursor: pointer;
+}
+.deleteIcon:hover , .favIcon i:hover{
+    color:red;
+}
+.quizTitle i{
+    color: rgb(5, 5, 5);
+    font-size: 20px;
+    margin-right: 10px;
+
+}
+.quizTitle{
+    color:rgb(70, 70, 70);
+    cursor: pointer;
+}
+
+.btnexport i{
+    font-size: 15px;
+    font-weight: bold;
+}
+.favIcon i{
+    color: rgb(25, 144,175);
+    font-size: 20px;
+    cursor: pointer;
+
+}
+.add-quiz {
+    position: fixed;
+    bottom: 30px; 
+    right: 25px; 
+    border-radius: 25px;
+    background-color: white;
+    font-weight: bold;
+    border: none;
+    color: rgb(254, 254, 254); 
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-image: linear-gradient(135deg, rgb(25, 144, 175) 40%, #96f1cd);
+    z-index: 1000; 
+}
+
+
+.add-quiz i{
+    font-size: 15px;
+
+}
+.add-quiz:hover{
+    background-image: linear-gradient(135deg,  #fda270 30%,  #c72e5e);
+
+}

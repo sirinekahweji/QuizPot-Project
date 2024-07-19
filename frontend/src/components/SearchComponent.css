@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700,800,900');
 
 
-
-
-
 .search-container p {
     font-family: 'Nunito';
     font-weight: 800;
@@ -18,7 +15,6 @@
 #searchBox {
     position: absolute;
     text-align: center;
-    top: 20%;
 }
 
 #searchInput {
@@ -27,7 +23,7 @@
 
 .search-container {
     position: relative;
-    width: 100%;
+    width: 170%;
     display: flex;
     justify-content: center;
 }
