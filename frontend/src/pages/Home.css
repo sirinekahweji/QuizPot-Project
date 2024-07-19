@@ -19,10 +19,12 @@
   color: rgb(253, 166, 3);
 
 }
-.formcontent{
-  color: black;
 
+.formcontent.selected,
+.questionsContent.selected {
+    color: black; 
 }
+
 
 .content{
     background-color: white;
@@ -34,7 +36,7 @@
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
     position:fixed;
-    margin-left: 10%;
+    margin-left: 9%;
     margin-top: 1%;
 }
 .titleContent{
@@ -80,7 +82,8 @@
   
   .score-value {
     text-align: center;
-    color: #fcfafa;
+    color: black;
+
 
   }
   
@@ -93,4 +96,6 @@
   .score-number {
     font-size: 18px;
     font-weight: 500;
+    color: black;
+
   }

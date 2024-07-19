@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 import './QCMType.css';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { LangContext } from '../context/LangContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { BiCheckCircle, BiXCircle } from 'react-icons/bi'; 
@@ -15,6 +16,8 @@ const QCMType = ({ handleScoreUpdate }) => {
     const { user } = useAuthContext();
     const { formData, setFormData } = useContext(FormDataContext);
     const [loading, setLoading] = useState(false);
+    const [score, setScore] = useState(0);
+
     const [error, setError] = useState(null);
     
     const sanitizeString = (str) => {
@@ -69,12 +72,95 @@ const QCMType = ({ handleScoreUpdate }) => {
 
         if (isCorrect) {
             handleScoreUpdate(prevScore => prevScore + 1); 
+            setScore(score + 1)
+
         }
     };
 
+    const handleSave = async (e) => {
+        e.preventDefault();
+        let idform=0;
+        try {
+             //saveformresponses();
+            //console.log("saveformresponses done ");
+  
+            try {
+  
+              const newformdata={
+               ...formData,
+               score: Math.round((score / questions.length) * 100)
+              }
+           
+               console.log(newformdata);
+               const response = await axios.post('http://localhost:5000/api/responseForm/save',newformdata,{
+                 headers: {
+                   'Content-Type': 'application/json',
+                   'Authorization': `Bearer ${user.token}` 
+                 }
+               
+               });
+               console.log('formData saved successfully:', response.data);
+   
+               console.log("formResponseId:",response.data._id)
+               //return response.data._id; 
+               idform=response.data._id;
+               console.log("idform:",idform)
+  
+             } catch (error) {
+               console.error('Error  save formData', error);
+               setError('Failed to save formData. Please try again later.');
+             }
+  
+  
+          
+             //savequestions();
+            //console.log("savequestions done ");
+            try {
+              console.log("form id dans sabe questionsvariable",idform)
+                  if(idform!==0){
+                   const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions,idform },{
+                     headers: {
+                       'Content-Type': 'application/json',
+                       'Authorization': `Bearer ${user.token}` 
+                     }
+                   
+                   });
+                   console.log('Questions saved successfully:', response.data);
+                   //return response.data;
+               }
+               else{
+                 console.log("Error : form id is null")
+       
+               }
+             
+                 } catch (error) {
+                   console.error('Error  save questions', error);
+                   setError('Failed to save questions. Please try again later.');
+                 }
+    
+            Swal.fire({
+                icon: 'success',
+                title: 'Saved',
+                text: 'Your Questions has been saved successfully.',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error saving data:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to save Questions. Please try again.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+    };
+    
+
     return (
         <div className='listQuestionsQCM'>
-            <p className='titleList'><i className="bi bi-list-check"></i> {currentLangData.mcqType.text}</p>
+            <p className='titleList'><i className="bi bi-chat-square-fill"></i> Questions</p>
 
             {questions && questions.map((question, questionIndex) => (
                 <div className='quizexemple' key={questionIndex}>
@@ -91,7 +177,7 @@ const QCMType = ({ handleScoreUpdate }) => {
                             return (
                                 <div className="choicediv" key={choiceIndex} onClick={() => handleChoiceSelect(questionIndex, choiceIndex, choiceLetter, correctAnswerLetter)}>
                                     <div className="choice-wrapper">
-                                        <FormCheckInput className="checkbox" checked={isSelected} readOnly />
+                                    <FormCheckInput className='checkbox' checked={isSelected} readOnly />
                                     </div>
                                     <p className='choice-content'>{choice}</p>
                                     {icon}
@@ -104,7 +190,8 @@ const QCMType = ({ handleScoreUpdate }) => {
             ))}
 
             <button className="more" onClick={handleSubmit}><i className="bi bi-arrow-clockwise"></i>{currentLangData.openQType.generateMore}</button>
-        </div>
+            <button className='save' onClick={handleSave}>{currentLangData.questions.buttons.save} <i className="bi bi-chevron-right"></i></button>
+            </div>
     );
 };
 
