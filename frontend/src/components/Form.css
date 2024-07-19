@@ -1,0 +1,68 @@
+.formComponent{
+    border-radius: 25px;
+    width:120%;
+    overflow-y: auto;
+    max-height: 350px; 
+
+
+}
+
+.formComponent::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  .formComponent {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+  }
+
+  
+  .quizbot-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-left: 2%;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px;
+    border: 1px solid #cdcdcc;
+    border-radius: 4px;
+  }
+  
+  .form-group textarea {
+    resize: vertical;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .submitform {
+    padding: 10px;
+    background-color:rgb(249, 164, 5)  ;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 150px;
+  }
+  .submitform:hover {
+    background-color:rgb(241, 159, 6)  ;
+  }
+  

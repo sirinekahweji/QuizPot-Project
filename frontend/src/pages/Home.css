@@ -6,6 +6,23 @@
     width: 100%;
     position: fixed;
 }
+.welcome , .welcomeText{
+  padding-left: 6%;
+  font-weight: bold;
+}
+.welcome{
+  padding-top: 2%;
+  color: rgb(236, 155, 5);
+
+}
+.logout-btn{
+  color: rgb(253, 166, 3);
+
+}
+.formcontent{
+  color: black;
+
+}
 
 .content{
     background-color: white;
@@ -13,20 +30,25 @@
     padding: 20px;
     height: 350px;
     font-weight: bold;
-    color: rgb(7, 7, 7); 
+    color: rgb(146, 146, 146); 
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
     position:fixed;
-    margin-left: 80%;
+    margin-left: 10%;
+    margin-top: 1%;
+}
+.titleContent{
+  text-align: center;
+  color: rgb(236, 155, 5);
 }
 
-*score style*/
 
-  
+/*score style*/
 .score-wrap {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    color: rgb(231, 199, 249);
   }
   
   .score {
@@ -37,7 +59,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    background-color: white; /* Ajouter une couleur de fond spécifique ou transparent si nécessaire */
+    background-color: white; 
 
   }
   
@@ -47,7 +69,7 @@
     height: 140%;
     border-radius: 50%;
     top: 0;
-    background-color: transparent; /* Assurer un fond transparent */
+    background-color: transparent; 
 
   }
   

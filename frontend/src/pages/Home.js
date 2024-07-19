@@ -1,9 +1,13 @@
 import React, { useContext , useState } from 'react';
 import './Home.css';
+import Form from '../components/Form';
+
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { FormDataContext } from '../context/FormDataContext';
 import { LangContext } from '../context/LangContext';
+import { useLogout } from "../Hooks/useLogout";
+
 
 
 
@@ -15,6 +19,11 @@ const Home = () => {
     const { questions } = useContext(QuestionsContext);
     const { formData } = useContext(FormDataContext);
     const { currentLangData } = useContext(LangContext);
+    const logout = useLogout(); 
+
+    const handleClick = () => {
+        logout();
+    };
 
 
     const progressBar = (widthPerc, gradient = false) => {
@@ -36,9 +45,9 @@ const Home = () => {
                 {gradient && (
                     <defs>
                         <linearGradient id="score-gradient">
-                            <stop offset="0%" stopColor="red" />
-                            <stop offset="25%" stopColor="orange" />
-                            <stop offset="100%" stopColor="green" />
+                            <stop offset="0%" stopColor="orange" />
+                            <stop offset="25%" stopColor="green" />
+                            <stop offset="100%" stopColor="purple" />
                         </linearGradient>
                     </defs>
                 )}
@@ -49,20 +58,21 @@ const Home = () => {
 
     return (  
         <div className="homePage">
-            <h1>Welcome, {user.name}</h1>
-            <h4>Fill out the form and get your quizzes</h4>
+            <h2 className='welcome'>Welcome, {user.name}</h2>
+            <p className='welcomeText'>Fill  the form and get your quizzes</p>
 
             <div className='content'>
                     <p className='titleContent'>Content</p>
-                    <p >
+                    <p className='formcontent'>
                         <i className={currentLangData.questions.mcq.icon}></i> Form
                     </p>
-                    <p >
+                    <p className='questionsContent'>
                         <i className={currentLangData.questions.open.icon}></i> Questions
                     </p>
-                    <p >
-                        <i className={currentLangData.questions.open.icon}></i> Questions
+                    <p className=''>
+                    <i class="bi bi-chat-heart-fill"></i>   My Quizzes 
                     </p>
+
                     {(
                         <div className="score-wrap">
                             <div className="score">
@@ -77,7 +87,11 @@ const Home = () => {
                             </div>
                         </div>
                     )}
+                <p onClick={handleClick} className='logout-btn'><i className="bi bi-box-arrow-right"></i> {currentLangData.logout}</p>
                 </div>
+
+                <Form/>
+
             </div>
     );
 }
