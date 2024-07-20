@@ -9,6 +9,7 @@ export const FormDataProvider = ({ children }) => {
     numQuestions: '',
     focusAreas: '',
     level: '',
+    score:0
   });
 
   return (

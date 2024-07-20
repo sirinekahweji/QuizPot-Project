@@ -3,6 +3,7 @@ import './Home.css';
 import Form from '../components/Form';
 import Quizzes from '../components/Myquizzes';
 import Questions from '../components/QCMType';
+import Sources from '../components/services';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { FormDataContext } from '../context/FormDataContext';
@@ -61,6 +62,7 @@ const Home = () => {
 
     return (
         <div className="homePage">
+            <Sources></Sources>
             <h2 className='welcome'>Welcome, {user.name}</h2>
             <p className='welcomeText'>Fill the form and get your quizzes</p>
 
