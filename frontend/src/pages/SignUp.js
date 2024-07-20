@@ -12,7 +12,8 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [passwordConf, setPasswordConf] = useState('');
     const { signup, error, isLoading } = useSignup();
-    const [passwordVisible, setPasswordVisible] = useState(false); 
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [passwordConfVisible, setPasswordConfVisible] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,12 +28,14 @@ const SignUp = () => {
         setPasswordVisible(!passwordVisible);
     };
 
+    const togglePasswordConfVisibility = () => {
+        setPasswordConfVisible(!passwordConfVisible);
+    };
+
     return (
         <div className="signup">
-        
             <h1 className='titlesignup'>{currentLangData.signUpPage.title}</h1>
             <div className="contentsignup">
-         
                 <form onSubmit={handleSubmit}>
                     <div className="FormSignUp">
                         <label htmlFor="fullname" className="confirmpassword">{currentLangData.signUpPage.fullNameLabel}</label>
@@ -64,9 +67,25 @@ const SignUp = () => {
                     </div>
                     <div className="FormSignUp">
                         <label htmlFor="passwordconfirm" className="confirmpassword">{currentLangData.signUpPage.confirmPasswordLabel}</label>
-                        <input type="password" id="passwordconfirm" placeholder="" onChange={(e) => setPasswordConf(e.target.value)} value={passwordConf} required />
+                        <div className="PasswordContainer">
+                            <input 
+                                type={passwordConfVisible ? "text" : "password"} 
+                                id="passwordconfirm" 
+                                placeholder="" 
+                                onChange={(e) => setPasswordConf(e.target.value)} 
+                                value={passwordConf} 
+                                required 
+                            />
+                            <button 
+                                type="button" 
+                                className="PasswordToggleBtn" 
+                                onClick={togglePasswordConfVisibility}
+                            >
+                                <i className={passwordConfVisible ? "bi bi-eye-fill" : "bi bi-eye-slash-fill"}></i>
+                            </button>
+                        </div>
                     </div>
-                    {error && <div className="error"><i class="bi bi-exclamation-circle-fill"></i>  {error}</div>}
+                    {error && <div className="error"><i className="bi bi-exclamation-circle-fill"></i>  {error}</div>}
 
                     <button disabled={isLoading} className='btn-signup'>{currentLangData.signUpPage.signUpButton}</button>
                 </form>
