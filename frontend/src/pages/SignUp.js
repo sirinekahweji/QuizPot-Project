@@ -66,8 +66,9 @@ const SignUp = () => {
                         <label htmlFor="passwordconfirm" className="confirmpassword">{currentLangData.signUpPage.confirmPasswordLabel}</label>
                         <input type="password" id="passwordconfirm" placeholder="" onChange={(e) => setPasswordConf(e.target.value)} value={passwordConf} required />
                     </div>
+                    {error && <div className="error"><i class="bi bi-exclamation-circle-fill"></i>  {error}</div>}
+
                     <button disabled={isLoading} className='btn-signup'>{currentLangData.signUpPage.signUpButton}</button>
-                    {error && <div className="error">{error}</div>}
                 </form>
                 <video autoPlay loop muted className="background">
                     <source src={videoBg} type="video/mp4" />

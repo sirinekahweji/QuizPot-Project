@@ -34,7 +34,7 @@ export const useSignup = () => {
             }
         } catch (err) {
             setIsLoading(false);
-            setError('Failed to signup');
+            setError(err.response.data.error);
         }
     };
 
