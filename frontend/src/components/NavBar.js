@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import logo from '../assets/technixbot.png';
 import './NavBar.css';
 import { LangContext } from '../context/LangContext';
-import { Link  } from 'react-router-dom';
 
 
 const NavBar = () => {

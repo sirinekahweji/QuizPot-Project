@@ -11,7 +11,6 @@ const SignIn = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [resetMessage, setResetMessage] = useState('');
     const { signin, error, isLoading } = useSignin();
 
 
@@ -20,15 +19,7 @@ const SignIn = () => {
         await signin(email, password);
     }
 
-    const handleForgotPassword = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:5000/api/user/forgot-password', { email });
-            setResetMessage(response.data.message);
-        } catch (err) {
-            setResetMessage(err);
-        }
-    }
+   
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -73,10 +64,12 @@ const SignIn = () => {
                     {error && <div className="error-message"><i class="bi bi-exclamation-circle-fill"></i>  {error}</div>}
                 </div>
                 <div className="MotDePasseOublie">
-                <p onClick={handleForgotPassword }>
-                        {currentLangData.signIn.forgotPassword}
-                    </p>
-                    {resetMessage && <div className="reset-message">{resetMessage}</div>}
+                    <Link to="/ResetPassword"
+                    style={{ 
+                        color: "white",
+                        textDecoration: "none"
+                    }}
+                >{currentLangData.signIn.forgotPassword}</Link>
                 </div>
                
                 <button type="submit" className="SeConnecter" disabled={isLoading}>

@@ -5,12 +5,12 @@
 }
 
 
-.video-background {
+.background {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 113%;
     object-fit: cover;
     z-index: -1;
 }

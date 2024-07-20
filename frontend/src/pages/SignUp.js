@@ -69,7 +69,7 @@ const SignUp = () => {
                     <button disabled={isLoading} className='btn-signup'>{currentLangData.signUpPage.signUpButton}</button>
                     {error && <div className="error">{error}</div>}
                 </form>
-                <video autoPlay loop muted className="video-background">
+                <video autoPlay loop muted className="background">
                     <source src={videoBg} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>  
