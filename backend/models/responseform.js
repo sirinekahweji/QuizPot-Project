@@ -25,11 +25,11 @@ const responseFormSchema = new Schema({
   },
   score: {
     type: Number,
-    required: false
+    required: true
   },
   focusAreas: {
     type: String,
-    required: false
+    required: true
   },
   questionType: {
     type: String,

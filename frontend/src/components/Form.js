@@ -13,138 +13,146 @@ const Form = () => {
     const { user } = useAuthContext();
     const { setQuestions } = useContext(QuestionsContext);
     const { formData, setFormData } = useContext(FormDataContext);
+    const [file, setFile] = useState(null);  // New state for file input
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
     const handleChange = (e) => {
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-        });
-      };
-    
-      const handleSubmit = async (e) => {
+        if (e.target.name === 'file') {
+            setFile(e.target.files[0]);
+        } else {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value,
+            });
+        }
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-    
-        const submitData = {
-          ...formData,
-          numQuestions: parseInt(formData.numQuestions),
-        };
-    
-        try {
-          const response = await axios.post('http://localhost:5000/api/question/generate', submitData, {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${user.token}`,
-            },
-          });
-    
-          console.log('Response:', response.data); 
-          setQuestions(response.data.message);
-          
-          Swal.fire({
-            icon: 'success',
-            title: 'Generated',
-            text: 'Your Questions has been generated successfully.',
-            timer: 1500,
-            showConfirmButton: false
-        });
-        } catch (error) {
-        
-          console.error('Error generating questions:', error);
-          setError('Failed to generate questions. Please try again later.');
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Failed to generate Questions. Please try again.',
-            timer: 2000,
-            showConfirmButton: false
-        });
-          /*setFormData({
-            topic: '',
-            level: '',
-            difficulty: '',
-            numQuestions: '',
-            focusAreas: '',
-          });*/
-        } finally {
-          setLoading(false);
-        }
-      };
 
+        const formDataToSend = new FormData();
+        formDataToSend.append('file', file);  // Add file to formData
+        formDataToSend.append('topic', formData.topic);
+        formDataToSend.append('level', formData.level);
+        formDataToSend.append('difficulty', formData.difficulty);
+        formDataToSend.append('numQuestions', parseInt(formData.numQuestions));
+        formDataToSend.append('focusAreas', formData.focusAreas);
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/question/generate', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${user.token}`,
+                },
+            });
+
+            console.log('Response:', response.data);
+            setQuestions(response.data.message);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Generated',
+                text: 'Your Questions has been generated successfully.',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error generating questions:', error);
+            setError('Failed to generate questions. Please try again later.');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to generate Questions. Please try again.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return ( 
         <div className="formComponent">
             <form onSubmit={handleSubmit} className="quizbot-form">
-          <div className="form-group">
-            <label>{currentLangData.formModal.topicLabel}</label>
-            <input
-              type="text"
-              name="topic"
-              value={formData.topic}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>{currentLangData.formModal.levelLabel}</label>
-            <select
-              name="level"
-              value={formData.level}
-              onChange={handleChange}
-              required
-            >
-              <option value="">{currentLangData.formModal.selectLevel}</option>
-              <option value="University">{currentLangData.formModal.university}</option>
-              <option value="Elementary School">{currentLangData.formModal.elementary}</option>
-              <option value="Middle School">{currentLangData.formModal.middle}</option>
-              <option value="High School">{currentLangData.formModal.high}</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>{currentLangData.formModal.difficultyLabel}</label>
-            <select
-              name="difficulty"
-              value={formData.difficulty}
-              onChange={handleChange}
-              required
-            >
-              <option value="">{currentLangData.formModal.selectDifficulty}</option>
-              <option value="Easy">{currentLangData.formModal.easy}</option>
-              <option value="Average">{currentLangData.formModal.average}</option>
-              <option value="Above Average">{currentLangData.formModal.aboveAverage}</option>
-              <option value="Difficult">{currentLangData.formModal.difficult}</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>{currentLangData.formModal.numQuestionsLabel}</label>
-            <input
-              type="number"
-              name="numQuestions"
-              value={formData.numQuestions}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>{currentLangData.formModal.focusAreasLabel}</label>
-            <textarea
-              name="focusAreas"
-              placeholder={currentLangData.formModal.focusAreasPlaceholder}
-              value={formData.focusAreas}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="button-container">
-            <button type="submit" variant="secondary" className='submitform' >
-              {currentLangData.formModal.continueButton}
-            </button>
-          </div>
-        </form>
-
+                <div className="form-group">
+                    <label>{currentLangData.formModal.topicLabel}</label>
+                    <input
+                        type="text"
+                        name="topic"
+                        value={formData.topic}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>{currentLangData.formModal.levelLabel}</label>
+                    <select
+                        name="level"
+                        value={formData.level}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">{currentLangData.formModal.selectLevel}</option>
+                        <option value="University">{currentLangData.formModal.university}</option>
+                        <option value="Elementary School">{currentLangData.formModal.elementary}</option>
+                        <option value="Middle School">{currentLangData.formModal.middle}</option>
+                        <option value="High School">{currentLangData.formModal.high}</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>{currentLangData.formModal.difficultyLabel}</label>
+                    <select
+                        name="difficulty"
+                        value={formData.difficulty}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">{currentLangData.formModal.selectDifficulty}</option>
+                        <option value="Easy">{currentLangData.formModal.easy}</option>
+                        <option value="Average">{currentLangData.formModal.average}</option>
+                        <option value="Above Average">{currentLangData.formModal.aboveAverage}</option>
+                        <option value="Difficult">{currentLangData.formModal.difficult}</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label>{currentLangData.formModal.numQuestionsLabel}</label>
+                    <input
+                        type="number"
+                        name="numQuestions"
+                        value={formData.numQuestions}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>{currentLangData.formModal.focusAreasLabel}</label>
+                    <textarea
+                        name="focusAreas"
+                        placeholder={currentLangData.formModal.focusAreasPlaceholder}
+                        value={formData.focusAreas}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Upload File:</label>
+                    <input
+                        type="file"
+                        name="file"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="button-container">
+                    <button type="submit" variant="secondary" className='submitform'>
+                        {currentLangData.formModal.continueButton}
+                    </button>
+                </div>
+            </form>
         </div>
-     );
+    );
 }
- 
+
 export default Form;

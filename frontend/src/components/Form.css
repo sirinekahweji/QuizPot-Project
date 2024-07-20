@@ -1,10 +1,9 @@
 .formComponent{
     border-radius: 25px;
     width:120%;
+    padding:10px;
     overflow-y: auto;
     max-height: 350px; 
-
-
 }
 
 .formComponent::-webkit-scrollbar {
