@@ -6,6 +6,8 @@ import SearchGlow from './Glowsearch';
 import Swal from 'sweetalert2';
 import QuizDetailsModal from '../components/QuizDetails';
 import axios from 'axios';
+import myquizzesIcon from '../assets/myquizzes.png';
+
 
 const Myquizzes = () => {
 
@@ -72,7 +74,10 @@ const Myquizzes = () => {
 
     return (  
         <div className="myquizzesComponent">
-             <p className='titleQuizz'>{currentLangData.profile.myQuizzesTitle}</p>
+             <p className='titleQuizz'>
+             <img src={myquizzesIcon} className='quizzesIcon' alt='myquizzesIcon' />
+
+              { currentLangData.profile.myQuizzesTitle}</p>
            <SearchGlow />
       <div className='myquizzes'>
         {formResponses && formResponses.map((formResponse, index) => (

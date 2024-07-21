@@ -3,10 +3,7 @@ import React, { useContext, useState } from 'react';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import pdfToText from 'react-pdftotext';
-import PizZip from 'pizzip';
-import { DOMParser } from '@xmldom/xmldom';
-
+import formIcon from '../assets/form.png';
 
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
@@ -40,14 +37,12 @@ const Form = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setError(null);
 
 
         const numQuestions = parseInt(formData.numQuestions);
 
         if (isNaN(numQuestions) || numQuestions <= 0) {
-            setLoading(false);
             setError('The number of questions must be a positive number.');
             return;
         }
@@ -71,6 +66,8 @@ const Form = () => {
         formDataToSend.append('focusAreas', formData.focusAreas);
 
         console.log(formDataToSend)
+        setLoading(true);
+
     
         try {
             const response = await axios.post('http://localhost:5000/api/question/generate', formDataToSend, {
@@ -82,6 +79,8 @@ const Form = () => {
 
             console.log('Response:', response.data);
             setQuestions(response.data.message);
+            setLoading(false);
+
 
             Swal.fire({
                 icon: 'success',
@@ -108,6 +107,9 @@ const Form = () => {
     return ( 
         <div className="formComponent">
             <form onSubmit={handleSubmit} className="quizbot-form">
+            <div className='formtitle'>
+            <img src={formIcon} className='IconForm' alt='formIcon' />
+            Form</div>
                 <div className="form-group">
                     <label>{currentLangData.formModal.topicLabel}</label>
                     <input

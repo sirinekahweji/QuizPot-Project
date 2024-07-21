@@ -24,14 +24,14 @@
 .webdesigntuts-workshop input {
 
 	animation: glow 800ms ease-out infinite alternate;
-	background: #222922;
+	background: #292922;
 	background: linear-gradient(#333933, #222922);
-	box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+	box-shadow: 0 0 5px rgba(255, 247, 0, 0.2), inset 0 0 5px rgba(255, 217, 0, 0.1), 0 2px 0 #000;
 	color: #efe;
 	outline: none;
 
 
-	border: 1px solid  #393;
+	border: 1px solid  rgb(192, 161, 39);
 	border-radius: 5px 0 0 5px;
 	display: block;
 	float: left;
@@ -61,8 +61,8 @@
 	animation: glow 800ms ease-out infinite alternate;
 	background: #222922;
 	background: linear-gradient(#333933, #222922);
-	border-color: #393;
-	box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+	border-color: rgb(153, 122, 51);
+	box-shadow: 0 0 5px rgba(255, 217, 0, 0.2), inset 0 0 5px rgba(255, 234, 0, 0.1), 0 2px 0 #000;
 	color: #efe;
 	outline: none;
 }
@@ -102,7 +102,7 @@
 .webdesigntuts-workshop button:focus {
 	background: #292929;
 	background: linear-gradient(#393939, #292929);
-	color: #5f5;
+	color: rgb(255, 201, 85);
 	outline: none;
 }
 
@@ -115,11 +115,11 @@
 
 @keyframes glow {
     0% {
-		border-color: #393;
-		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+		border-color: rgb(153, 116, 51);
+		box-shadow: 0 0 5px rgba(255, 153, 0, 0.2), inset 0 0 5px rgba(255, 183, 0, 0.1), 0 2px 0 #000;
     }	
     100% {
-		border-color: #6f6;
-		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+		border-color: rgb(255, 212, 102);
+		box-shadow: 0 0 20px rgba(255, 191, 0, 0.6), inset 0 0 10px rgba(255, 174, 0, 0.4), 0 2px 0 #000;
     }
 }

@@ -9,7 +9,7 @@ const PageGarde = () => {
     const descriptions = [
         'Transform Learning Into An Easy Adventure With Our QuizBot',
         'Track Your Progress And Improve With Each Attempt',
-        'Auto-evaluate With Quiz Scores',
+        'Auto-evaluate With Quizzes Scores',
         'Select A Topic And Take A Test',
         'Create Quizzes Instantly'
     ];

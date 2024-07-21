@@ -8,6 +8,8 @@ import { QuestionsContext } from '../context/QuestionsContext';
 import { BiCheckCircle, BiXCircle } from 'react-icons/bi'; 
 import { FormDataContext } from '../context/FormDataContext'; 
 import { useAuthContext } from '../Hooks/useAuthContext';
+import questionsIcon from '../assets/questions.png';
+
 
 const QCMType = ({ handleScoreUpdate }) => {
     const { currentLangData } = useContext(LangContext);
@@ -160,7 +162,9 @@ const QCMType = ({ handleScoreUpdate }) => {
 
     return (
         <div className='listQuestionsQCM'>
-            <p className='titleList'><i className="bi bi-chat-square-fill"></i> Questions</p>
+            <p className='titleList'>
+            <img src={questionsIcon} className='QuestionsIcon' alt='questionsIcon' />
+            Questions</p>
 
             {questions && questions.map((question, questionIndex) => (
                 <div className='quizexemple' key={questionIndex}>

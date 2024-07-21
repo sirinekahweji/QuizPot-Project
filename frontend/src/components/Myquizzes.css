@@ -2,14 +2,20 @@
     text-align: left;
     color:black;
     font-weight: bold;
-    margin-left: 32%;
+    margin-left: 30%;
     padding-top: 2%;
     font-size: 20px;
+    margin-top: 4%;
   
 }
 .myquizzesComponent{
     margin-top: -4%;
 
+}
+.quizzesIcon{
+    width: 30px;
+    height: 30px;
+    margin-right: 1%;
 }
 
 .myquizzes{

@@ -6,37 +6,49 @@ const path = require('path');
 
 const multer = require('multer');
 const pdfParse = require('pdf-parse');
+const PDFParser = require("pdf2json");
+
 const { Document, Packer } = require('docx');
 const { DOMParser } = require('xmldom');
 const PizZip = require('pizzip');
 
 
-function extractTextFromPdf(buffer) {
-  return pdfParse(buffer).then(data => data.text);
-}
 
-function extractTextFromDocx(buffer) {
+
+
+
+async function extractTextFromDocx(buffer) {
   return new Promise((resolve, reject) => {
+    try {
       const zip = new PizZip(buffer);
-      const xml = new DOMParser().parseFromString(zip.files['word/document.xml'].asText(), 'text/xml');
-      const paragraphsXml = xml.getElementsByTagName('w:p');
+      const xml = zip.files['word/document.xml']?.asText();
+
+      if (!xml) {
+        return reject(new Error("Unable to find 'word/document.xml' in the DOCX file"));
+      }
+
+      const doc = new DOMParser().parseFromString(xml, 'text/xml');
+      const paragraphsXml = doc.getElementsByTagName('w:p');
       const paragraphs = [];
 
       for (let i = 0; i < paragraphsXml.length; i++) {
-          let fullText = '';
-          const textsXml = paragraphsXml[i].getElementsByTagName('w:t');
-          for (let j = 0; j < textsXml.length; j++) {
-              const textXml = textsXml[j];
-              if (textXml.childNodes.length > 0) {
-                  fullText += textXml.childNodes[0].nodeValue;
-              }
+        let fullText = '';
+        const textsXml = paragraphsXml[i].getElementsByTagName('w:t');
+        for (let j = 0; j < textsXml.length; j++) {
+          const textXml = textsXml[j];
+          if (textXml.childNodes.length > 0) {
+            fullText += textXml.childNodes[0].nodeValue;
           }
-          if (fullText) {
-              paragraphs.push(fullText);
-          }
+        }
+        if (fullText) {
+          paragraphs.push(fullText);
+        }
       }
 
       resolve(paragraphs.join('\n'));
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
@@ -131,7 +143,9 @@ else
   let questions = null;
   switch (fileExtension) {
     case 'pdf':
-      text = await extractTextFromPdf(file.buffer);
+      //text = await GetTextFromPDF(file.path);
+      text = await getPDFText(file.data);
+
       console.log(text);
       return await generateQuestionsfromText(req,res);
     case 'doc':
