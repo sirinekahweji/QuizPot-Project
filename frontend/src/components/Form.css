@@ -5,6 +5,18 @@
     overflow-y: auto;
     max-height: 350px; 
 }
+.IconForm{
+  width: 30px;
+  height: 30px;
+  margin-right: 1%;
+}
+.formtitle{
+  font-weight: bold;
+  font-size: 20px;
+  text-align: left;
+  margin-top: -2%;
+  margin-left: -10%;
+}
 
 .formComponent::-webkit-scrollbar {
     width: 0px;

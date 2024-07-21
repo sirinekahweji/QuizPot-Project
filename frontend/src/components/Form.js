@@ -3,11 +3,17 @@ import React, { useContext, useState } from 'react';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import formIcon from '../assets/form.png';
+import LoadingSpinner from './loading';
+
 
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { FormDataContext } from '../context/FormDataContext'; 
+const MySwal = withReactContent(Swal);
+
 
 const Form = () => {
     const { currentLangData } = useContext(LangContext);
@@ -38,6 +44,8 @@ const Form = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);
+        setLoading(true);
+
 
 
         const numQuestions = parseInt(formData.numQuestions);
@@ -66,8 +74,15 @@ const Form = () => {
         formDataToSend.append('focusAreas', formData.focusAreas);
 
         console.log(formDataToSend)
-        setLoading(true);
 
+        MySwal.fire({
+            title: 'Generating...',
+            text: 'Please wait while we generate questions',
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading();
+            }
+          });
     
         try {
             const response = await axios.post('http://localhost:5000/api/question/generate', formDataToSend, {

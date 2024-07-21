@@ -3,6 +3,7 @@ import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 import './QCMType.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { LangContext } from '../context/LangContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { BiCheckCircle, BiXCircle } from 'react-icons/bi'; 
@@ -21,6 +22,8 @@ const QCMType = ({ handleScoreUpdate }) => {
     const [score, setScore] = useState(0);
 
     const [error, setError] = useState(null);
+    const MySwal = withReactContent(Swal);
+
     
     const sanitizeString = (str) => {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
@@ -35,6 +38,14 @@ const QCMType = ({ handleScoreUpdate }) => {
             ...formData,
             numQuestions: parseInt(formData.numQuestions),
         };
+        MySwal.fire({
+            title: 'Generating...',
+            text: 'Please wait while we generate questions',
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading();
+            }
+          });
 
         try {
             console.log("submitData", submitData)
@@ -48,10 +59,26 @@ const QCMType = ({ handleScoreUpdate }) => {
             console.log('new questions:', newQuestions); 
 
             setQuestions(prevQuestions => [...prevQuestions, ...newQuestions]);
+            setLoading(false);
+
 
             console.log('Questions:', questions); 
+            Swal.fire({
+                icon: 'success',
+                title: 'Generated',
+                text: 'Your Questions has been generated successfully.',
+                timer: 1500,
+                showConfirmButton: false
+            });
         } catch (error) {
             console.error('Error generating new questions:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Failed to generate Questions. Please try again.',
+                timer: 2000,
+                showConfirmButton: false
+            });
         } finally {
             setLoading(false);
         }
