@@ -4,6 +4,42 @@ const { runImage } = require('../../geminiImage');
 const fs = require('fs');
 const path = require('path');
 
+const multer = require('multer');
+const pdfParse = require('pdf-parse');
+const { Document, Packer } = require('docx');
+const { DOMParser } = require('xmldom');
+const PizZip = require('pizzip');
+
+
+function extractTextFromPdf(buffer) {
+  return pdfParse(buffer).then(data => data.text);
+}
+
+function extractTextFromDocx(buffer) {
+  return new Promise((resolve, reject) => {
+      const zip = new PizZip(buffer);
+      const xml = new DOMParser().parseFromString(zip.files['word/document.xml'].asText(), 'text/xml');
+      const paragraphsXml = xml.getElementsByTagName('w:p');
+      const paragraphs = [];
+
+      for (let i = 0; i < paragraphsXml.length; i++) {
+          let fullText = '';
+          const textsXml = paragraphsXml[i].getElementsByTagName('w:t');
+          for (let j = 0; j < textsXml.length; j++) {
+              const textXml = textsXml[j];
+              if (textXml.childNodes.length > 0) {
+                  fullText += textXml.childNodes[0].nodeValue;
+              }
+          }
+          if (fullText) {
+              paragraphs.push(fullText);
+          }
+      }
+
+      resolve(paragraphs.join('\n'));
+  });
+}
+
 
 const saveQuestions = async (req, res) => {
   const { questions ,idform} = req.body;
@@ -91,20 +127,29 @@ else
 {
   const fileName = file.originalname;
   const fileExtension = fileName.split('.').pop().toLowerCase();
+  let text='';
+  let questions = null;
   switch (fileExtension) {
     case 'pdf':
-        break;
+      text = await extractTextFromPdf(file.buffer);
+      console.log(text);
+      return await generateQuestionsfromText(req,res);
     case 'doc':
-        break;
+    case 'docx':
+      text = await extractTextFromDocx(file.buffer);
+      console.log(text);
+      return await generateQuestionsfromText(req,res);
     case 'txt':
-        break;
+      text = file.buffer.toString('utf8');
+      console.log(text);
+      return await generateQuestionsfromText(req,res);
     case 'jpg':
     case 'jpeg':
     case 'png':
     case 'webp':
     case 'heic':
     case 'heif':
-        break;
+      return await generateFromImage(req, res);
     default:
         break;
 }
@@ -115,16 +160,19 @@ else
 };
 
 const generateFromImage = async (req, res) => {
-  const image = req.file;
+  const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
+  const file = req.file; 
+
+  const image = file;
   if (!image) {
     console.log("No file uploaded");
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
   try {
-    const imagePath = req.file.path; 
-    const mimeType = req.file.mimetype; 
-    const promptText = `create 5 questions from the content of the image .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre et le text de correct answer et sans des etoiles avant et apres la correct answer:
+    const imagePath = file.path; 
+    const mimeType = file.mimetype; 
+    const promptText = `create  ${numQuestions} QCM questions from the content of the image on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre et le text de correct answer et sans des etoiles avant et apres la correct answer:
       1. <Question 1>
       a) <Choice A>
       b) <Choice B>

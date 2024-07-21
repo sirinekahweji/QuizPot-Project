@@ -176,9 +176,9 @@ const Form = () => {
                     <input
                         type="file"
                         name="file"
-                        accept=".pdf, .doc, .txt , .jpg,.jpeg,.png,.webp,.heic,.heif"
+                        accept=".pdf, .doc, .docx , .txt , .jpg,.jpeg,.png,.webp,.heic,.heif"
                         value={formData.file}
-                        onChange={handleChange}
+                        onChange={handleChange} 
                     />
                 </div>
 
