@@ -34,11 +34,14 @@ console.log(idform)
 };
 
 const generateQuestions = async (req, res) => {
-  const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
+  const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
+  const file = req.file; 
+  console.log(topic, difficulty, level, numQuestions, focusAreas)
+  if(file==null){
 
   try {
       
-          const testPrompt = `create ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
+          const testPrompt = `create ${numQuestions} QCM questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
           1. <Question 1>
 a) <Choice A>
 b) <Choice B>
@@ -83,6 +86,32 @@ c) <Choice C>
       console.error('Error generating questions:', error);
       res.status(500).json({ error: error.message });
   }
+}
+else
+{
+  const fileName = file.originalname;
+  const fileExtension = fileName.split('.').pop().toLowerCase();
+  switch (fileExtension) {
+    case 'pdf':
+        break;
+    case 'doc':
+        break;
+    case 'txt':
+        break;
+    case 'jpg':
+    case 'jpeg':
+    case 'png':
+    case 'webp':
+    case 'heic':
+    case 'heif':
+        break;
+    default:
+        break;
+}
+
+
+
+}
 };
 
 const generateFromImage = async (req, res) => {

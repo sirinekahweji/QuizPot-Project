@@ -3,6 +3,10 @@ import React, { useContext, useState } from 'react';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import pdfToText from 'react-pdftotext';
+import PizZip from 'pizzip';
+import { DOMParser } from '@xmldom/xmldom';
+
 
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
@@ -13,9 +17,15 @@ const Form = () => {
     const { user } = useAuthContext();
     const { setQuestions } = useContext(QuestionsContext);
     const { formData, setFormData } = useContext(FormDataContext);
-    const [file, setFile] = useState(null);  // New state for file input
+    const [file, setFile] = useState(null);  
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [paragraphs, setParagraphs] = useState([]);
+    const [text, setText] = useState(null);
+
+  
+
+
 
     const handleChange = (e) => {
         if (e.target.name === 'file') {
@@ -33,19 +43,40 @@ const Form = () => {
         setLoading(true);
         setError(null);
 
+
+        const numQuestions = parseInt(formData.numQuestions);
+
+        if (isNaN(numQuestions) || numQuestions <= 0) {
+            setLoading(false);
+            setError('The number of questions must be a positive number.');
+            return;
+        }
+
+        const submitData = {
+          ...formData,
+          numQuestions: parseInt(formData.numQuestions),
+        };
+        console.log(submitData)
+
         const formDataToSend = new FormData();
-        formDataToSend.append('file', file);  // Add file to formData
+
+        if (file !== null) {
+            formDataToSend.append('file', file);
+        }
+
         formDataToSend.append('topic', formData.topic);
         formDataToSend.append('level', formData.level);
         formDataToSend.append('difficulty', formData.difficulty);
         formDataToSend.append('numQuestions', parseInt(formData.numQuestions));
         formDataToSend.append('focusAreas', formData.focusAreas);
 
+        console.log(formDataToSend)
+    
         try {
             const response = await axios.post('http://localhost:5000/api/question/generate', formDataToSend, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': `Bearer ${user.token}`,
+                  'Content-Type': 'multipart/form-data',
+                  'Authorization': `Bearer ${user.token}`,
                 },
             });
 
@@ -127,6 +158,8 @@ const Form = () => {
                         required
                     />
                 </div>
+                {error && <div className="error-message"><i className="bi bi-exclamation-circle-fill"></i>  {error}</div>}
+
                 <div className="form-group">
                     <label>{currentLangData.formModal.focusAreasLabel}</label>
                     <textarea
@@ -137,14 +170,18 @@ const Form = () => {
                         required
                     />
                 </div>
+
                 <div className="form-group">
                     <label>Upload File:</label>
                     <input
                         type="file"
                         name="file"
+                        accept=".pdf, .doc, .txt , .jpg,.jpeg,.png,.webp,.heic,.heif"
+                        value={formData.file}
                         onChange={handleChange}
                     />
                 </div>
+
                 <div className="button-container">
                     <button type="submit" variant="secondary" className='submitform'>
                         {currentLangData.formModal.continueButton}
