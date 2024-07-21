@@ -31,9 +31,9 @@ const responseFormSchema = new Schema({
     type: String,
     required: true
   },
-  questionType: {
+  file: {
     type: String,
-    required: true,
+    required: false,
   }
 }, { timestamps: true });
 
