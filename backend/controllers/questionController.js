@@ -8,11 +8,11 @@ const fs = require('fs');
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
 
-const extractTextFromFile = (filePath) => {
+  const extractTextFromFile = async (filePath) => {
+
   try {
       const data = fs.readFileSync(filePath, 'utf8');
       console.log('Text Content: ', data);
-      // You can return the text or process it further here
       return data;
   } catch (error) {
       console.error('Error reading text file: ', error);
@@ -46,8 +46,8 @@ const extractTextFromDOCX = async (filePath) => {
 const saveQuestions = async (req, res) => {
   const { questions ,idform} = req.body;
 
-console.log(questions)
-console.log(idform)
+   //console.log(questions)
+   //console.log(idform)
   try {
       const questionsToSave = questions.map(question => ({
         formResponseId: idform, 
@@ -133,16 +133,16 @@ else
   switch (fileExtension) {
     case 'pdf':
       text = await extractTextFromPDF(file.path);
-      console.log(text);
+      console.log("text",text);
       return await generateQuestionsfromText(req,res,text);
     case 'doc':
     case 'docx':
-      text = await extractTextFromDOCX(file.buffer);
-      console.log(text);
+      text = await extractTextFromDOCX(file.path);
+      console.log("text",text);
       return await generateQuestionsfromText(req,res,text);
     case 'txt':
-      text = file.buffer.toString('utf8');
-      console.log(text);
+      text = await extractTextFromFile(file.path)
+      console.log("text",text);
       return await generateQuestionsfromText(req,res,text);
     case 'jpg':
     case 'jpeg':
@@ -342,18 +342,18 @@ function parseGeminiResponse(response) {
     return [];
   }
 
-  console.log("Questions Section:", questionsSection);
-  console.log("Answers Section:", answersSection);
+  //console.log("Questions Section:", questionsSection);
+  //console.log("Answers Section:", answersSection);
 
   const qs = questionsSection.split(/\n\n+/);
   // Remove the first element from the array
   qs.shift();
-  console.log("qs", qs);
+  //console.log("qs", qs);
 
   let parsedQuestions = [];
 
   qs.forEach((question, index) => {
-    console.log("question", question);
+    //console.log("question", question);
 
     const questionObj = {
       question: "",
@@ -362,7 +362,7 @@ function parseGeminiResponse(response) {
     };
 
     const matches = question.match(/^\d+\.\s*(.+?)\n\s*a\)\s*(.+?)\n\s*b\)\s*(.+?)\n\s*c\)\s*(.+?)$/s);
-    console.log("matches", matches);
+    //console.log("matches", matches);
 
     if (matches && matches.length === 5) {
       questionObj.question = matches[1].trim();
@@ -372,25 +372,25 @@ function parseGeminiResponse(response) {
   });
 
   const answerLines = answersSection.split("\n").filter((line) => line.trim() !== '');
-  console.log("answerLines",answerLines);
+  //console.log("answerLines",answerLines);
   answerLines.forEach((answerText, index) => {
     const text=answerText.replace(/\*/g, '')
     const answerMatch = text.match(/^\d+\.\s*([a-c])\)\s*(.*)\s*$/);
-    console.log("answerText",answerText);
-    console.log("answerMatch",answerMatch);
+    //console.log("answerText",answerText);
+    //console.log("answerMatch",answerMatch);
 
     if (answerMatch && index < parsedQuestions.length) {
-      console.log("answerMatch2",answerMatch);
+     // console.log("answerMatch2",answerMatch);
 
       const [, answerLetter, answerDetail] = answerMatch;
-      console.log("answerLetter",answerLetter);
-      console.log("answerDetail",answerDetail);
+      //console.log("answerLetter",answerLetter);
+      //console.log("answerDetail",answerDetail);
 
       parsedQuestions[index].answer = `${answerLetter}) ${answerDetail.trim()}`;
   
-      console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
+      //console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
     } else {
-      console.error(`Answer format is incorrect or question not found at index ${index}.`);
+     // console.error(`Answer format is incorrect or question not found at index ${index}.`);
     }
   });
 
