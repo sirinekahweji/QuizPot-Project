@@ -16,7 +16,9 @@ const Myquizzes = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuthContext();
 
-  const handleOpenModal = (formResponse) => {
+  const handleOpenModal = (formResponse , index) => {
+    console.log("formResponse",formResponse);
+    console.log("index",index);
     setSelectedQuiz(formResponse);
     setShowModal(true);
   };
@@ -36,6 +38,7 @@ const Myquizzes = () => {
           }
         });
         setFormResponses(response.data);
+        console.log("setFormResponses",response.data)
       } catch (error) {
         console.error('Error fetching form responses:', error);
       }
@@ -105,7 +108,7 @@ const Myquizzes = () => {
       <div className='myquizzes'>
         {filteredResponses && filteredResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
-            <p className='quizTitle' onClick={() => handleOpenModal(formResponse)}>
+            <p className='quizTitle' onClick={() => handleOpenModal(formResponse,index)}>
               <i className="bi bi-chat-heart-fill"></i> {formResponse.topic}
             </p>
             <div className='right-div'>

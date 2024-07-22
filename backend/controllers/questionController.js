@@ -1,56 +1,26 @@
 const Question = require('../models/question');
 const { run } = require('../../gemini');
 const { runImage } = require('../../geminiImage');
+const multer = require('multer');
+
 const fs = require('fs');
 const path = require('path');
+const upload = multer({ dest: 'uploads/' });
 
-const multer = require('multer');
-const pdfParse = require('pdf-parse');
-const PDFParser = require("pdf2json");
-
-const { Document, Packer } = require('docx');
-const { DOMParser } = require('xmldom');
-const PizZip = require('pizzip');
+const pdf = require('pdf-parse');
 
 
+const extractTextFromPDF = async (filePath) => {
+  try {
+      const dataBuffer = fs.readFileSync(filePath);
+      const data = await pdf(dataBuffer);
 
-
-
-
-async function extractTextFromDocx(buffer) {
-  return new Promise((resolve, reject) => {
-    try {
-      const zip = new PizZip(buffer);
-      const xml = zip.files['word/document.xml']?.asText();
-
-      if (!xml) {
-        return reject(new Error("Unable to find 'word/document.xml' in the DOCX file"));
-      }
-
-      const doc = new DOMParser().parseFromString(xml, 'text/xml');
-      const paragraphsXml = doc.getElementsByTagName('w:p');
-      const paragraphs = [];
-
-      for (let i = 0; i < paragraphsXml.length; i++) {
-        let fullText = '';
-        const textsXml = paragraphsXml[i].getElementsByTagName('w:t');
-        for (let j = 0; j < textsXml.length; j++) {
-          const textXml = textsXml[j];
-          if (textXml.childNodes.length > 0) {
-            fullText += textXml.childNodes[0].nodeValue;
-          }
-        }
-        if (fullText) {
-          paragraphs.push(fullText);
-        }
-      }
-
-      resolve(paragraphs.join('\n'));
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
+      console.log('Text Content: ', data.text);
+      return data.text;
+  } catch (error) {
+      console.error('Error extracting text from PDF: ', error);
+  }
+};
 
 
 const saveQuestions = async (req, res) => {
@@ -83,7 +53,7 @@ console.log(idform)
 const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
   const file = req.file; 
-  console.log(topic, difficulty, level, numQuestions, focusAreas)
+  //console.log(topic, difficulty, level, numQuestions, focusAreas)
   if(file==null){
 
   try {
@@ -142,20 +112,18 @@ else
   let questions = null;
   switch (fileExtension) {
     case 'pdf':
-      //text = await GetTextFromPDF(file.path);
-      text = await getPDFText(file.data);
-
+      text = await extractTextFromPDF(file.path);
       console.log(text);
-      return await generateQuestionsfromText(req,res);
+      return await generateQuestionsfromText(req,res,text);
     case 'doc':
     case 'docx':
       text = await extractTextFromDocx(file.buffer);
       console.log(text);
-      return await generateQuestionsfromText(req,res);
+      return await generateQuestionsfromText(req,res,text);
     case 'txt':
       text = file.buffer.toString('utf8');
       console.log(text);
-      return await generateQuestionsfromText(req,res);
+      return await generateQuestionsfromText(req,res,text);
     case 'jpg':
     case 'jpeg':
     case 'png':
@@ -288,15 +256,17 @@ c) <Choice C>
 };
 
 
-const generateQuestionsfromText = async (req, res) => {
-  const { text } = req.body;
+const generateQuestionsfromText = async (req, res ,text) => {
+  const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
+  console.log(topic, difficulty, level, numQuestions, focusAreas)
 
-  console.log(text);
+  //console.log(text);
   try {
  
 
-      const testPrompt = `create 6 questions from this content "${text}" .with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer:
-          1. <Question 1>
+    const testPrompt = `create  ${numQuestions} QCM  questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas} on se baser a cette content ${text}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
+  
+      1. <Question 1>
 a) <Choice A>
 b) <Choice B>
 c) <Choice C>

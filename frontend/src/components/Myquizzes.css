@@ -25,7 +25,7 @@
     padding: 20px;
     width: 60%;
     overflow-y: auto;
-    max-height: 350px; 
+    max-height: 300px; 
 }
 .myquizzes::-webkit-scrollbar {
     width: 0px;
