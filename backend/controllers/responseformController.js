@@ -5,8 +5,10 @@ const User = require('../models/userModel');
 const saveResponseForm = async (req, res) => {
   const {  topic, difficulty, level, numQuestions, focusAreas ,score} = req.body;
   const userId = req.user._id;
+  const file = req.file; 
+ 
 
- console.log(topic, difficulty, level, numQuestions, focusAreas,userId,questionType, score)
+ console.log(topic, difficulty, level, numQuestions, focusAreas,userId, score)
   if (!userId || !topic || !difficulty || !level || !numQuestions || !focusAreas ) {
     return res.status(400).json({ error: 'All fields are required'});
   }
@@ -28,8 +30,8 @@ const saveResponseForm = async (req, res) => {
       level,
       numQuestions,
       focusAreas,
-      questionType,
-      score
+      score,
+      file
     });
 
     const savedResponseForm = await responseForm.save();

@@ -33,8 +33,9 @@ const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
   const fetchQuestions = async () => {
     try {
       if (selectedQuiz) {
-        console.log(selectedQuiz);
-        console.log(selectedQuiz._id);
+        console.log("selectedQuiz",selectedQuiz);
+
+        console.log("id form",selectedQuiz._id);
         const response = await axios.get(`http://localhost:5000/api/question/${selectedQuiz._id}`, {
           headers: {
             'Content-Type': 'application/json',
@@ -43,6 +44,8 @@ const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
         });
         
         const data = response.data;
+        console.log("data return details",data);
+
         setquestions(data.questions);
         console.log("data",data);
       }

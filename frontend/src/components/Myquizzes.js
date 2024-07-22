@@ -18,6 +18,7 @@ const Myquizzes = () => {
   const { user } = useAuthContext();
 
   const handleOpenModal = (formResponse) => {
+    console.log("formResponse",formResponse);
     setSelectedQuiz(formResponse);
     setShowModal(true);
   };

@@ -11,11 +11,6 @@ const questionSchema = new Schema({
     type: String,
     required: true
   },
-  questionType: {
-    type: String,
-    required: true,
-    enum: ['QCM', 'Open']
-  },
   options: {
     type: [String],
     required: function() { return this.questionType === 'QCM'; }

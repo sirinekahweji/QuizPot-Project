@@ -62,7 +62,6 @@ console.log(idform)
       const questionsToSave = questions.map(question => ({
         formResponseId: idform, 
           questionText: question.question,
-          questionType: 'QCM',
           options: question.choices,
           correctAnswer: question.answer.split(') ')[1], 
           explanation: question.explanation || null 
