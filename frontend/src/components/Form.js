@@ -4,9 +4,7 @@ import { LangContext } from '../context/LangContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
 import formIcon from '../assets/form.png';
-import LoadingSpinner from './loading';
 
 
 import { useAuthContext } from '../Hooks/useAuthContext';

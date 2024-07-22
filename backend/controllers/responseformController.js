@@ -1,6 +1,8 @@
 const ResponseForm = require('../models/responseform');
 const mongoose = require('mongoose');
 const User = require('../models/userModel'); 
+const Question = require('../models/question');
+
 
 const saveResponseForm = async (req, res) => {
   const {  topic, difficulty, level, numQuestions, focusAreas ,score} = req.body;
@@ -80,11 +82,16 @@ const getResponseForms = async (req, res) => {
       }
   
       const responseForm = await ResponseForm.findOneAndDelete({ _id: id, userId });
+      console.log("responseForm deleted" ,responseForm);
+
       if (!responseForm) {
         return res.status(404).json({ error: 'Quiz not found' });
       }
   
-      res.status(200).json({ message: 'Quiz deleted successfully' });
+      const questions = await Question.deleteMany({ formResponseId: id });
+      console.log("questions deleted" ,questions);
+  
+      res.status(200).json({ message: 'Quiz and associated questions deleted successfully' });
     } catch (error) {
       res.status(500).json({ error: 'Failed to delete quiz' });
     }

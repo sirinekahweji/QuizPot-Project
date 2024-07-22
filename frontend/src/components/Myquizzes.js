@@ -2,23 +2,21 @@ import './Myquizzes.css';
 import React, { useContext, useState, useEffect } from 'react';
 import { LangContext } from '../context/LangContext';
 import { useAuthContext } from '../Hooks/useAuthContext';
-import SearchGlow from './Glowsearch';
+import Glowsearch from './Glowsearch';
 import Swal from 'sweetalert2';
 import QuizDetailsModal from '../components/QuizDetails';
 import axios from 'axios';
 import myquizzesIcon from '../assets/myquizzes.png';
 
-
 const Myquizzes = () => {
-
-    const { currentLangData } = useContext(LangContext);
+  const { currentLangData } = useContext(LangContext);
   const [showModal, setShowModal] = useState(false);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [formResponses, setFormResponses] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuthContext();
 
   const handleOpenModal = (formResponse) => {
-    console.log("formResponse",formResponse);
     setSelectedQuiz(formResponse);
     setShowModal(true);
   };
@@ -45,7 +43,7 @@ const Myquizzes = () => {
     fetchFormResponses();
   }, [user]);
 
-  const deleteFormResponse= async (Id) => {
+  const deleteFormResponse = async (Id) => {
     try {
       await axios.delete(`http://localhost:5000/api/responseForm/${Id}`, {
         headers: {
@@ -58,30 +56,34 @@ const Myquizzes = () => {
         icon: 'success',
         title: 'Deleted',
         text: 'Your Questions has been deleted successfully.',
-        timer: 1500, 
+        timer: 1500,
         showConfirmButton: false
-    });
+      });
     } catch (error) {
       console.error('Error deleting quiz:', error);
       Swal.fire({
         icon: 'error',
         title: 'Error',
         text: 'Failed to delete Questions. Please try again.',
-        timer: 2000, 
+        timer: 2000,
         showConfirmButton: false
-    });
+      });
     }
   };
 
-    return (  
-        <div className="myquizzesComponent">
-             <p className='titleQuizz'>
-             <img src={myquizzesIcon} className='quizzesIcon' alt='myquizzesIcon' />
+  const filteredResponses = formResponses.filter(response => 
+    response.topic.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-              { currentLangData.profile.myQuizzesTitle}</p>
-           <SearchGlow />
+  return (
+    <div className="myquizzesComponent">
+      <p className='titleQuizz'>
+        <img src={myquizzesIcon} className='quizzesIcon' alt='myquizzesIcon' />
+        {currentLangData.profile.myQuizzesTitle}
+      </p>
+      <Glowsearch setSearchQuery={setSearchQuery} />
       <div className='myquizzes'>
-        {formResponses && formResponses.map((formResponse, index) => (
+        {filteredResponses && filteredResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
             <p className='quizTitle' onClick={() => handleOpenModal(formResponse)}>
               <i className="bi bi-chat-heart-fill"></i> {formResponse.topic}
@@ -95,8 +97,7 @@ const Myquizzes = () => {
       </div>
       <QuizDetailsModal show={showModal} handleClose={handleCloseModal} selectedQuiz={selectedQuiz} />
     </div>
+  );
+};
 
-    );
-}
- 
 export default Myquizzes;
