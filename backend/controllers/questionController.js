@@ -2,13 +2,22 @@ const Question = require('../models/question');
 const { run } = require('../../gemini');
 const { runImage } = require('../../geminiImage');
 const multer = require('multer');
-
+const mammoth = require('mammoth');
+const pdf = require('pdf-parse');
 const fs = require('fs');
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
 
-const pdf = require('pdf-parse');
-
+const extractTextFromFile = (filePath) => {
+  try {
+      const data = fs.readFileSync(filePath, 'utf8');
+      console.log('Text Content: ', data);
+      // You can return the text or process it further here
+      return data;
+  } catch (error) {
+      console.error('Error reading text file: ', error);
+  }
+};
 
 const extractTextFromPDF = async (filePath) => {
   try {
@@ -19,6 +28,17 @@ const extractTextFromPDF = async (filePath) => {
       return data.text;
   } catch (error) {
       console.error('Error extracting text from PDF: ', error);
+  }
+};
+
+
+const extractTextFromDOCX = async (filePath) => {
+  try {
+      const result = await mammoth.extractRawText({ path: filePath });
+      console.log('Text Content: ', result.value);
+      return result.value;
+  } catch (error) {
+      console.error('Error extracting text from DOCX: ', error);
   }
 };
 
@@ -117,7 +137,7 @@ else
       return await generateQuestionsfromText(req,res,text);
     case 'doc':
     case 'docx':
-      text = await extractTextFromDocx(file.buffer);
+      text = await extractTextFromDOCX(file.buffer);
       console.log(text);
       return await generateQuestionsfromText(req,res,text);
     case 'txt':
