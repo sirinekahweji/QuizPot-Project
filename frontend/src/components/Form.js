@@ -13,7 +13,7 @@ import { FormDataContext } from '../context/FormDataContext';
 const MySwal = withReactContent(Swal);
 
 
-const Form = () => {
+const Form = ({ handleScoreUpdate ,onContentSelect}) => {
     const { currentLangData } = useContext(LangContext);
     const { user } = useAuthContext();
     const { setQuestions } = useContext(QuestionsContext);
@@ -44,6 +44,7 @@ const Form = () => {
         setError(null);
         setLoading(true);
 
+        handleScoreUpdate(0); 
 
 
         const numQuestions = parseInt(formData.numQuestions);
@@ -102,9 +103,9 @@ const Form = () => {
                 timer: 1500,
                 showConfirmButton: false
             });
+            onContentSelect('questions'); 
         } catch (error) {
             console.error('Error generating questions:', error);
-            setError('Failed to generate questions. Please try again later.');
             Swal.fire({
                 icon: 'error',
                 title: 'Error',

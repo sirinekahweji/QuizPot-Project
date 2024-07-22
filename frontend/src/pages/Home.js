@@ -105,7 +105,7 @@ const Home = () => {
                 <p onClick={handleClick} className='logout-btn'><i className="bi bi-box-arrow-right"></i> {currentLangData.logout}</p>
             </div>
 
-            {selectedContent === 'form' && <Form />}
+            {selectedContent === 'form' && <Form handleScoreUpdate={handleScoreUpdate}  onContentSelect={handleContentSelect}/>}
             {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate} />}
             {selectedContent === 'myquizzes' && <Quizzes  />}
         </div>

@@ -10,6 +10,9 @@
     margin-top: -2%;
     margin-left: -3%;
 }
+.noQuestions{
+    padding: 15px;
+}
 .QuestionsIcon{
     width: 30px;
     height: 30px;

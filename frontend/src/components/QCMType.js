@@ -163,7 +163,7 @@ const QCMType = ({ handleScoreUpdate }) => {
        
                }
              
-                 } catch (error) {
+                 } catch (error){
                    console.error('Error  save questions', error);
                    setError('Failed to save questions. Please try again later.');
                  }
@@ -194,6 +194,10 @@ const QCMType = ({ handleScoreUpdate }) => {
             <img src={questionsIcon} className='QuestionsIcon' alt='questionsIcon' />
             Questions</p>
 
+            {!questions && <div className='noQuestions'> No Questions Avaible ...<br></br>
+                Fill the form and get your Questions</div>}
+            
+
             {questions && questions.map((question, questionIndex) => (
                 <div className='quizexemple' key={questionIndex}>
                     <div className='quizdiv'>
@@ -220,9 +224,11 @@ const QCMType = ({ handleScoreUpdate }) => {
                     <hr />
                 </div>
             ))}
-
+            {questions && 
+            <div>
             <button className="more" onClick={handleSubmit}><i className="bi bi-arrow-clockwise"></i>{currentLangData.openQType.generateMore}</button>
             <button className='save' onClick={handleSave}>{currentLangData.questions.buttons.save} <i className="bi bi-chevron-right"></i></button>
+             </div>}             
             </div>
     );
 };
