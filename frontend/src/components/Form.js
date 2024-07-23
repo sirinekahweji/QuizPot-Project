@@ -123,7 +123,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
             <form onSubmit={handleSubmit} className="quizbot-form">
             <div className='formtitle'>
             <img src={formIcon} className='IconForm' alt='formIcon' />
-            Form</div>
+            {currentLangData.services.form}</div>
                 <div className="form-group">
                     <label>{currentLangData.formModal.topicLabel}</label>
                     <input

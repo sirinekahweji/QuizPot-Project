@@ -51,7 +51,7 @@ const QCMType = ({ handleScoreUpdate }) => {
                     'Authorization': `Bearer ${user.token}`,
                 },
             });
-            const newQuestions = response.data.message; // Assurez-vous que votre API renvoie les nouvelles questions dans cette propriété
+            const newQuestions = response.data.message; 
             console.log('new questions:', newQuestions); 
 
             setQuestions(prevQuestions => [...prevQuestions, ...newQuestions]);
@@ -106,8 +106,6 @@ const QCMType = ({ handleScoreUpdate }) => {
         e.preventDefault();
         let idform=0;
         try {
-            //saveformresponses();
-            //console.log("saveformresponses done ");
             try {
               const newformdata={
                ...formData,
@@ -127,7 +125,6 @@ const QCMType = ({ handleScoreUpdate }) => {
                setSelectedChoices({})
    
                console.log("formResponseId:base de donner",response.data._id)
-               //return response.data._id; 
                idform=response.data._id;
                console.log("idformvariable:",idform)
   
@@ -136,11 +133,6 @@ const QCMType = ({ handleScoreUpdate }) => {
                setError('Failed to save formData. Please try again later.');
              }
     
-  
-  
-          
-             //savequestions();
-            //console.log("savequestions done ");
             try {
               console.log("form id dans sabe questionsvariable",idform)
               console.log("questions a enregistrer ",questions);
@@ -160,7 +152,6 @@ const QCMType = ({ handleScoreUpdate }) => {
                     timer: 1500,
                     showConfirmButton: false
                 });
-                   //return response.data;
                }
                else{
                  console.log("Error : form id is null")
@@ -197,7 +188,7 @@ const QCMType = ({ handleScoreUpdate }) => {
         <div className='listQuestionsQCM'>
             <p className='titleList'>
             <img src={questionsIcon} className='QuestionsIcon' alt='questionsIcon' />
-            Questions</p>
+            {currentLangData.services.questions}</p>
 
             {!questions && <div className='noQuestions'> No Questions Avaible ...<br></br>
                 Fill the form and get your Questions</div>}
