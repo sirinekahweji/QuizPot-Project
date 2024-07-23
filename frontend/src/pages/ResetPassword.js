@@ -50,10 +50,10 @@ const ResetPassword = () => {
                 Your browser does not support the video tag.
             </video>
             <div className="ResetForm">
-                <h2 className="TitleReset">Resend Password</h2>
+                <h2 className="TitleReset">{currentLangData.resetPassword.title}</h2>
                 <form onSubmit={handleForgotPassword}>
                     <div className="ResendFormField">
-                        <label htmlFor="mail" className="Resendemail">{currentLangData.signIn.emailLabel}</label><br />
+                        <label htmlFor="mail" className="Resendemail">{currentLangData.resetPassword.emailLabel}</label><br />
                         <input
                             type="email"
                             id="mail"
@@ -65,7 +65,7 @@ const ResetPassword = () => {
                         />
                     </div>
                     <button type="submit" className="SeConnecter">
-                        Resend
+                        {currentLangData.resetPassword.button}
                     </button>
                 </form>
             </div>

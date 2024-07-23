@@ -42,6 +42,11 @@
           "profile":"Profile",
           "logout":"Log Out"
       },
+      "resetPassword":{
+        "title": "Resend Password",
+        "emailLabel": "Email Address",
+        "button":"Resend"
+      },
       "questionsType": {
         "title": "What type of content would you like to create?",
         "multipleChoice": {
@@ -180,6 +185,11 @@
         "focusAreasPlaceholder": "Des sous-thèmes ou concepts particuliers que vous souhaitez voir couverts dans les questions...",
         "continueButton": "Continuer"
       },
+   "resetPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "emailLabel": "Adresse e-mail",
+    "button": "Réinitialiser"
+   },
       "services": {
           "questionVideo": "Question à partir du vidéo",
           "questionFile": "Question à partir du fichier",
