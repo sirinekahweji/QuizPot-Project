@@ -4,15 +4,15 @@ const { runImage } = require('../../geminiImage');
 const multer = require('multer');
 const mammoth = require('mammoth');
 const pdf = require('pdf-parse');
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const upload = multer({ dest: 'uploads/' });
 
-  const extractTextFromFile = async (filePath) => {
+const extractTextFromFile = async (filePath) => {
 
   try {
-      const data = fs.readFileSync(filePath, 'utf8');
-      console.log('Text Content: ', data);
+    const data = await fs.readFile(filePath, 'utf8');
+    //console.log('Text Content: ', data);
       return data;
   } catch (error) {
       console.error('Error reading text file: ', error);
@@ -21,10 +21,10 @@ const upload = multer({ dest: 'uploads/' });
 
 const extractTextFromPDF = async (filePath) => {
   try {
-      const dataBuffer = fs.readFileSync(filePath);
-      const data = await pdf(dataBuffer);
+    const dataBuffer = await fs.readFile(filePath);
+    const data = await pdf(dataBuffer);
 
-      console.log('Text Content: ', data.text);
+      //console.log('Text Content: ', data.text);
       return data.text;
   } catch (error) {
       console.error('Error extracting text from PDF: ', error);
@@ -34,8 +34,8 @@ const extractTextFromPDF = async (filePath) => {
 
 const extractTextFromDOCX = async (filePath) => {
   try {
-      const result = await mammoth.extractRawText({ path: filePath });
-      console.log('Text Content: ', result.value);
+    const result = await mammoth.extractRawText({ path: filePath });
+    //console.log('Text Content: ', result.value);
       return result.value;
   } catch (error) {
       console.error('Error extracting text from DOCX: ', error);
@@ -73,6 +73,7 @@ const saveQuestions = async (req, res) => {
 const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
   const file = req.file; 
+  console.log("file",file)
   //console.log(topic, difficulty, level, numQuestions, focusAreas)
   if(file==null){
 
@@ -134,15 +135,18 @@ else
     case 'pdf':
       text = await extractTextFromPDF(file.path);
       console.log("text",text);
+      await fs.unlink(file.path)
       return await generateQuestionsfromText(req,res,text);
     case 'doc':
     case 'docx':
       text = await extractTextFromDOCX(file.path);
       console.log("text",text);
+      await fs.unlink(file.path)
       return await generateQuestionsfromText(req,res,text);
     case 'txt':
       text = await extractTextFromFile(file.path)
       console.log("text",text);
+      await fs.unlink(file.path)
       return await generateQuestionsfromText(req,res,text);
     case 'jpg':
     case 'jpeg':
@@ -200,6 +204,7 @@ const generateFromImage = async (req, res) => {
       questions = parseGeminiResponse(response);
 
       if (questions.length > 0) {
+        await fs.unlink(file.path)
         break;
       }
       console.log("Questions were not generated. Retrying...");
@@ -278,7 +283,8 @@ c) <Choice C>
 
 const generateQuestionsfromText = async (req, res ,text) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
-  console.log(topic, difficulty, level, numQuestions, focusAreas)
+  console.log(topic, difficulty, level, numQuestions, focusAreas);
+
 
   //console.log(text);
   try {
@@ -388,29 +394,15 @@ function parseGeminiResponse(response) {
 
       parsedQuestions[index].answer = `${answerLetter}) ${answerDetail.trim()}`;
   
-      //console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
+      console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
     } else {
      // console.error(`Answer format is incorrect or question not found at index ${index}.`);
     }
   });
-
+  console.log("parsedQuestions",parsedQuestions);
   return parsedQuestions;
 }
 
-
-function validateQuestions(questions) {
-  for (const question of questions) {
-    if (!question.question || question.choices.length !== 3 || !question.answer) {
-      return false;
-    }
-    for (const choice of question.choices) {
-      if (!choice) {
-        return false;
-      }
-    }
-  }
-  return questions;
-}
 
 
 const getQuestionsByFormResponseId = async (req, res) => {

@@ -106,6 +106,7 @@ const Myquizzes = () => {
       </p>
       <Glowsearch setSearchQuery={setSearchQuery} />
       <div className='myquizzes'>
+        {formResponses.length==0 && <div> No Quizzes Saved ... </div>}
         {filteredResponses && filteredResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
             <p className='quizTitle' onClick={() => handleOpenModal(formResponse,index)}>
