@@ -188,7 +188,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
                 </div>
 
                 <div className="form-group">
-                    <label>Upload File:</label>
+                    <label>{currentLangData.formModal.file}</label>
                     <input
                         type="file"
                         name="file"
