@@ -14,16 +14,16 @@ const Services = () => {
       <div className='service'>
       <img src={formIcon} className='FormIcon' alt='formIcon' />
 
-        <p>Form</p>
+        <p>{currentLangData.services.form}</p>
       </div>
       <div className='service'>
       <img src={questionsIcon} className='serviceIcon' alt='questionsIcon' />
 
-        <p>Questions</p>
+        <p>{currentLangData.services.questions}</p>
       </div>
       <div className='service'>
       <img src={myquizzesIcon} className='serviceIcon' alt='myquizzesIcon' />
-        <p>My Quizzes</p>
+        <p>{currentLangData.services.myquizzes}</p>
       </div>
     </div>
   );

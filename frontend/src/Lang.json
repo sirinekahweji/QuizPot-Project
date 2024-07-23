@@ -33,14 +33,9 @@
         "continueButton": "Continue"
       },
       "services": {
-          "questionVideo": "Question From Video",
-          "questionFile": "Question From File",
-          "questionAudio": "Question From Audio",
-          "questionImage": "Question From Image",
-          "questionForm": "Question From subject",
-
-          "profile":"Profile",
-          "logout":"Log Out"
+         "form":"Form",
+         "questions":"Questions",
+         "myquizzes":"My Quizzes "
       },
       "resetPassword":{
         "title": "Resend Password",
@@ -191,13 +186,10 @@
     "button": "Réinitialiser"
    },
       "services": {
-          "questionVideo": "Question à partir du vidéo",
-          "questionFile": "Question à partir du fichier",
-          "questionAudio": "Question à partir d'audio",
-          "questionImage": "Question à partir d'image",
-          "questionForm": "Question à partir d'sujet",
-          "profile":"Profil",
-          "logout":"Déconnexion"
+        "form":"Formulaire",
+        "questions":"Questions",
+        "myquizzes":"Mes Quiz "
+        
       },
       "questionsType": {
         "title": "Quel type de contenu souhaitez-vous créer?",
