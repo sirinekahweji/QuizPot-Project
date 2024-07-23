@@ -32,6 +32,12 @@
         "focusAreasPlaceholder": "Any particular subtopics or concepts you want to be covered in the questions...",
         "continueButton": "Continue"
       },
+      "home":{
+        "welcome":"Welcome",
+        "text":"Fill the form and get your quizzes",
+        "content":"Content"
+      },
+  
       "services": {
          "form":"Form",
          "questions":"Questions",
@@ -42,66 +48,11 @@
         "emailLabel": "Email Address",
         "button":"Resend"
       },
-      "questionsType": {
-        "title": "What type of content would you like to create?",
-        "multipleChoice": {
-            "title": "Multiple choice questions",
-            "description": "Generate MCQ statements, their correct answers and associated distractors",
-            "correctAnswers": "Number of correct answers*",
-            "falseAnswers": "Number of false answers*"
-        },
-        "openQuestions": {
-            "title": "Open questions",
-            "description": "Generate open-ended question statements and associated correct answers"
-        },
-        "generateQuizButton": "Generate Quiz"
-    },
-      "steps": {
-          "source": "Source",
-          "questionsType": "Questions Type",
-          "questions": "Questions"
-      },
-      "sources": {
-          "title": "From which source would you like to generate questions?",
-          "file": "File",
-          "video": "Video",
-          "audio": "Audio",
-          "image": "Image",
-          "form": "Form",
-          "continue": "Continue"
-      },
-      "videoSource": {
-          "title": "Give Quizbot a link to a YouTube video, and it will create questions about its content!",
-          "placeholder": "https://www.youtube.com"
-      },
-      "fileSource": {
-          "title": "Give Quizbot a document, and it will create questions about its content!",
-          "uploadPrompt": "Click here to upload a file",
-          "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Text",
-          "maxSize": "Max 200 MB"
-      },
-      "formSource": {
-          "title": "Give Quizbot informations , and it will create questions personalizate for you!",
-          "uploadPrompt":"Click here to open the form"
-        
-      },
-      "audioSource": {
-          "title": "Give Quizbot an audio file, it will create questions about its content!",
-          "uploadPrompt": "Click here to upload a file",
-          "supportedFormats": "MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM",
-          "maxSize": "Max 25 MB"
-      },
-      "imageSource": {
-          "title": "Give Quizbot an image file, it will create questions about its content!",
-          "uploadPrompt": "Click here to upload a file",
-          "supportedFormats": "JPEG, PNG, GIF, BMP, TIFF"
-      },
       "signIn": {
           "titleSignIn": "Sign in",
           "emailLabel": "Email Address",
           "passwordLabel": "Password",
           "forgotPassword": "Forgot Password?",
-          "rememberMe": "Remember me",
           "signInButton": "Sign in",
           "noAccount": "Don't have an account?",
           "signUpHere": "Sign up here"
@@ -115,7 +66,8 @@
           "signUpButton": "Sign Up ",
           "signInLink": "Sign in "
       },
-      "questions": {
+    
+        "questions": {
             "title": "Questions",
             "content": "Content",
             "mcq": {
@@ -130,17 +82,8 @@
                 "export": "Export",
                 "save": "Save"
             }
-        }
-        ,
-        "openQType": {
-      "title": "Open Questions",
-      "addQuestion": "Add a question manually",
-      "generateMore": "Generate more content on the same section"
-    },
-    "mcqType": {
-      "text": "Multiple Choice Questions",
-      "description": "Generate MCQ statements, their correct answers and associated distractors"
-    },
+        },
+       
     "profile": {
       "myQuizzesTitle": "My Quizzes",
       "createQuizFolder": "Create Folder",
@@ -160,6 +103,11 @@
       "Évaluez automatiquement avec les scores des questions",
       "Sélectionnez un sujet et passez un test",
       "Créez des quiz instantanément"],
+      "home":{
+        "welcome":"Bienvenue",
+         "text":"Remplissez le formulaire et obtenez vos quiz",
+         "content":"contenu"
+      },
     "formModal": {
         "title": "Formulaire de Quiz",
         "topicLabel": "Sujet:",
@@ -185,65 +133,29 @@
     "emailLabel": "Adresse e-mail",
     "button": "Réinitialiser"
    },
+
       "services": {
         "form":"Formulaire",
         "questions":"Questions",
         "myquizzes":"Mes Quiz "
         
       },
-      "questionsType": {
-        "title": "Quel type de contenu souhaitez-vous créer?",
-        "multipleChoice": {
-            "title": "Questions à choix multiples",
-            "description": "Générez des énoncés de QCM, leurs réponses correctes et des distracteurs associés",
-            "correctAnswers": "Nombre de réponses correctes*",
-            "falseAnswers": "Nombre de mauvaises réponses*"
+      "questions": {
+        "title": "Questions",
+        "content": "Content",
+        "mcq": {
+            "icon": "bi bi-list-check",
+            "text": "MCQ"
         },
-        "openQuestions": {
-            "title": "Questions ouvertes",
-            "description": "Générez des énoncés de questions ouvertes et des réponses correctes associées"
+        "open": {
+            "icon": "bi bi-chat-square-fill",
+            "text": "Open Questions"
         },
-        "generateQuizButton": "Générer Quiz"
+        "buttons": {
+            "export": "Export",
+            "save": "Save"
+        }
     },
-      "steps": {
-          "source": "Source",
-          "questionsType": "Type de Questions",
-          "questions": "Questions"
-      },
-      "sources": {
-          "title": "De quelle source souhaitez-vous générer des questions?",
-          "file": "Fichier",
-          "video": "Vidéo",
-          "audio": "Audio",
-          "image": "Image",
-          "form": "Formulaire",
-          "continue": "Continuer"
-      },
-      "videoSource": {
-          "title": "Donnez à Quizbot un lien vers une vidéo YouTube, et il créera des questions sur son contenu!",
-          "placeholder": "https://www.youtube.com"
-      },
-      "fileSource": {
-          "title": "Donnez à Quizbot un document, et il créera des questions sur son contenu!",
-          "uploadPrompt": "Cliquez ici pour charger un fichier",
-          "supportedFormats": "PDF, PowerPoint, OpenDocuments, Pages, Texte",
-          "maxSize": "Max 200 MB"
-      },
-      "formSource": {
-          "title": "Donnez des informations à Quizbot, et il créera des questions personnalisées pour vous!",
-          "uploadPrompt": "Cliquez ici pour ouvrir le formulaire "
-      },
-      "audioSource": {
-          "title": "Donnez à Quizbot un fichier audio, il créera des questions sur son contenu!",
-          "uploadPrompt": "Cliquez ici pour télécharger un fichier",
-          "supportedFormats": "MP3, MP4, MPEG, MPGA, M4A, WAV, WEBM",
-          "maxSize": "Max 25 MB"
-      },
-      "imageSource": {
-          "title": "Donnez à Quizbot un fichier image, il créera des questions sur son contenu!",
-          "uploadPrompt": "Cliquez ici pour charger un fichier",
-          "supportedFormats": "JPEG, PNG, GIF, BMP, TIFF"
-      },
       "signIn": {
           "titleSignIn": "Connectez-Vous",
           "emailLabel": "e-mail",
@@ -263,32 +175,6 @@
           "signUpButton": "S'inscrire",
           "signInLink": "Se connecter"
       }
-      ,
-      "questions": {
-        "title": "Questions",
-        "content": "Contenu",
-        "mcq": {
-            "icon": "bi bi-list-check",
-            "text": "Questions à choix multiples"
-        },
-        "open": {
-            "icon": "bi bi-chat-square-fill",
-            "text": "Questions ouvertes"
-        },
-        "buttons": {
-            "export": "Exporter",
-            "save": "Sauvegarder"
-        }
-    },
-    "openQType": {
-      "title": "Questions ouvertes",
-      "addQuestion": "Ajouter une question manuellement",
-      "generateMore": "Générer plus de contenu dans la même section"
-    },
-    "mcqType": {
-      "text": "Questions à choix multiples",
-      "description": "Générez des énoncés de QCM, leurs réponses correctes et des distracteurs associés"
-    }
     ,
     "profile": {
       "myQuizzesTitle": "Mes Quiz",

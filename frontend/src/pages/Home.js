@@ -6,7 +6,6 @@ import Questions from '../components/QCMType';
 import Sources from '../components/services';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
-import { FormDataContext } from '../context/FormDataContext';
 import { LangContext } from '../context/LangContext';
 import { useLogout } from "../Hooks/useLogout";
 
@@ -14,7 +13,6 @@ const Home = () => {
     const { user } = useAuthContext();
     const [score, setScore] = useState(0);
     const { questions } = useContext(QuestionsContext);
-    const { formData } = useContext(FormDataContext);
     const { currentLangData } = useContext(LangContext);
     const logout = useLogout();
     const [selectedContent, setSelectedContent] = useState('form');
@@ -63,28 +61,28 @@ const Home = () => {
     return (
         <div className="homePage">
             <Sources></Sources>
-            <h2 className='welcome'>Welcome, {user.name}</h2>
-            <p className='welcomeText'>Fill the form and get your quizzes</p>
+            <h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>
+            <p className='welcomeText'>{currentLangData.home.text}</p>
 
             <div className='content'>
-            <p className='titleContent'>Content</p>
+            <p className='titleContent'>{currentLangData.home.content}</p>
             <p
                 className={`formcontent ${selectedContent === 'form' ? 'selected' : ''}`}
                 onClick={() => handleContentSelect('form')}
             >
-                <i className={currentLangData.questions.mcq.icon}></i> Form
+                <i className={currentLangData.questions.mcq.icon}></i> {currentLangData.services.form}
             </p>
             <p
                 className={`questionsContent ${selectedContent === 'questions' ? 'selected' : ''}`}
                 onClick={() => handleContentSelect('questions')}
             >
-                <i className={currentLangData.questions.open.icon}></i> Questions
+                <i className={currentLangData.questions.open.icon}></i> {currentLangData.services.questions}
             </p>
             <p 
              className={`myquizzesContent ${selectedContent === 'myquizzes' ? 'selected' : ''}`}
              onClick={() => handleContentSelect('myquizzes')}
             >
-                <i className="bi bi-chat-heart-fill"></i> My Quizzes
+                <i className="bi bi-chat-heart-fill"></i> {currentLangData.services.myquizzes}
             </p>
                 <div className="score-wrap">
                     <div className="score">
