@@ -6,13 +6,7 @@ import { LangContext } from '../context/LangContext';
 
 const PageGarde = () => {
     const { currentLangData } = useContext(LangContext); 
-    const descriptions = [
-        'Transform Learning Into An Easy Adventure With Our QuizBot',
-        'Track Your Progress And Improve With Each Attempt',
-        'Auto-evaluate With Quizzes Scores',
-        'Select A Topic And Take A Test',
-        'Create Quizzes Instantly'
-    ];
+  
 
        
     return (  
@@ -27,8 +21,8 @@ const PageGarde = () => {
                     <h3 className='description'>
                         <div className="wordCarousel">
                             <div>
-                                <ul className={`flip${descriptions.length}`}>
-                                    {descriptions.map((desc, index) => (
+                                <ul className={`flip${currentLangData.descriptions.length}`}>
+                                    {currentLangData.descriptions.map((desc, index) => (
                                         <li key={index}>{desc}</li>
                                     ))}
                                 </ul>

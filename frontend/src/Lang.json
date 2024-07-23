@@ -2,15 +2,16 @@
   "EN": {
       "navbar": {
           "en": "EN",
-          "fr": "FR",
-          "home":"Home"
+          "fr": "FR"
       },
-      "search": "type something...",
       "logout": "Log Out",
-      "searchLetters": ["S", "E", "A", "R", "C", "H"],
       "title": "Discover the power of AI",
-      "descriptionP1": "Transform learning into a fun adventure",
-      "descriptionP2": "with our Quizbot",
+      "descriptions": [ "Transform Learning Into An Easy Adventure With Our QuizBot",
+      "Track Your Progress And Improve With Each Attempt",
+      "Auto-evaluate With Quizzes Scores",
+      "Select A Topic And Take A Test",
+      "Create Quizzes Instantly"],
+    
       "formModal": {
         "title": "Quiz Form",
         "topicLabel": "Topic:",
@@ -149,18 +150,16 @@
   "FR": {
       "navbar": {
           "en": "EN",
-          "fr": "FR",
-          "home":"Acceuil"
+          "fr": "FR"
 
       },
       "logout": "Se Déconnecter",
-      "search": "tape quelque chose...",
-      "searchLetters": ["C", "H", "E", "R", "C", "H", "E", "R"],
       "title": "Découvrez la puissance de l'IA",
-      "descriptionP1": "Transformez l'apprentissage en une aventure",
-      "descriptionP2": "amusante avec notre Quizbot",
-
-  
+      "descriptions": [ "Transformez l'apprentissage en une aventure facile avec notre QuizBot",
+      "Suivez vos progrès et améliorez-vous à chaque tentative",
+      "Évaluez automatiquement avec les scores des questions",
+      "Sélectionnez un sujet et passez un test",
+      "Créez des quiz instantanément"],
     "formModal": {
         "title": "Formulaire de Quiz",
         "topicLabel": "Sujet:",

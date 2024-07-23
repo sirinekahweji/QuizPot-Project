@@ -17,17 +17,13 @@ const QCMType = ({ handleScoreUpdate }) => {
     const { questions, setQuestions } = useContext(QuestionsContext);
     const [selectedChoices, setSelectedChoices] = useState({});
     const { user } = useAuthContext();
-    const { formData, setFormData } = useContext(FormDataContext);
-    const [loading, setLoading] = useState(false);
+    const { formData } = useContext(FormDataContext);
+    const [ setLoading] = useState(false);
     const [score, setScore] = useState(0);
 
-    const [error, setError] = useState(null);
+    const [ setError] = useState(null);
     const MySwal = withReactContent(Swal);
 
-    
-    const sanitizeString = (str) => {
-        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").toLowerCase();
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();

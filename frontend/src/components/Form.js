@@ -19,14 +19,8 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
     const { setQuestions } = useContext(QuestionsContext);
     const { formData, setFormData } = useContext(FormDataContext);
     const [file, setFile] = useState(null);  
-    const [loading, setLoading] = useState(false);
+    const [ setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [paragraphs, setParagraphs] = useState([]);
-    const [text, setText] = useState(null);
-
-  
-
-
 
     const handleChange = (e) => {
         if (e.target.name === 'file') {
@@ -62,11 +56,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
             return;
         }
 
-        const submitData = {
-          ...formData,
-          numQuestions: parseInt(formData.numQuestions),
-        };
-        //console.log(submitData)
+
 
         const formDataToSend = new FormData();
      //console.log("file",file);
