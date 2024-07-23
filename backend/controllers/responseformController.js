@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const User = require('../models/userModel'); 
 const Question = require('../models/question');
 const path = require('path');
+const fs = require('fs').promises;
+
 
 
 
@@ -13,7 +15,7 @@ const saveResponseForm = async (req, res) => {
   console.log("file",file)
 
 
-  console.log("path",file.path)
+  //console.log("path",file.path)
  
 
  console.log(topic, difficulty, level, numQuestions, focusAreas,userId, score)
@@ -31,7 +33,10 @@ const saveResponseForm = async (req, res) => {
     if (!userExists) {
       return res.status(404).json({ error: 'User not found' });
     }
-    const responseForm = new ResponseForm({
+    let responseForm =null;
+    if(file==null){
+      console.log("null")
+    responseForm = new ResponseForm({
       userId,
       topic,
       difficulty,
@@ -39,8 +44,25 @@ const saveResponseForm = async (req, res) => {
       numQuestions,
       focusAreas,
       score,
-      file: file.path 
+      file
     });
+
+  }
+  else{
+    console.log("!null")
+
+     responseForm = new ResponseForm({
+      userId,
+      topic,
+      difficulty,
+      level,
+      numQuestions,
+      focusAreas,
+      score,
+      file:file.path 
+      });
+
+  }
 
     const savedResponseForm = await responseForm.save();
     console.log(savedResponseForm)
@@ -84,13 +106,18 @@ const getResponseForms = async (req, res) => {
   
     try {
       if (!mongoose.Types.ObjectId.isValid(id)) {
+        console.log( 'Invalid quiz ID');
+
         return res.status(400).json({ error: 'Invalid quiz ID' });
       }
   
       const responseForm = await ResponseForm.findOneAndDelete({ _id: id, userId });
+      await fs.unlink(responseForm.file)
+
       console.log("responseForm deleted" ,responseForm);
 
       if (!responseForm) {
+        console.log(  'Quiz not found');
         return res.status(404).json({ error: 'Quiz not found' });
       }
   
@@ -99,6 +126,8 @@ const getResponseForms = async (req, res) => {
   
       res.status(200).json({ message: 'Quiz and associated questions deleted successfully' });
     } catch (error) {
+      console.log(  'Failed');
+
       res.status(500).json({ error: 'Failed to delete quiz' });
     }
   };

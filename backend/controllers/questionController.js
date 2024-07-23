@@ -130,7 +130,6 @@ else
   const fileName = file.originalname;
   const fileExtension = fileName.split('.').pop().toLowerCase();
   let text='';
-  let questions = null;
   switch (fileExtension) {
     case 'pdf':
       text = await extractTextFromPDF(file.path);

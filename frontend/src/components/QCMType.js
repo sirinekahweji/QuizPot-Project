@@ -127,6 +127,8 @@ const QCMType = ({ handleScoreUpdate }) => {
                
                });
                console.log('formData saved successfully:', response.data);
+               handleScoreUpdate(0)
+               setSelectedChoices({})
    
                console.log("formResponseId:base de donner",response.data._id)
                //return response.data._id; 
@@ -137,6 +139,7 @@ const QCMType = ({ handleScoreUpdate }) => {
                console.error('Error  save formData', error);
                setError('Failed to save formData. Please try again later.');
              }
+    
   
   
           
@@ -154,10 +157,24 @@ const QCMType = ({ handleScoreUpdate }) => {
                    
                    });
                    console.log('Questions saved successfully:', response.data);
+                   Swal.fire({
+                    icon: 'success',
+                    title: 'Saved',
+                    text: 'Your Questions has been saved successfully.',
+                    timer: 1500,
+                    showConfirmButton: false
+                });
                    //return response.data;
                }
                else{
                  console.log("Error : form id is null")
+                 Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to save Questions. Please try again.',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
        
                }
              
@@ -166,13 +183,7 @@ const QCMType = ({ handleScoreUpdate }) => {
                    setError('Failed to save questions. Please try again later.');
                  }
     
-            Swal.fire({
-                icon: 'success',
-                title: 'Saved',
-                text: 'Your Questions has been saved successfully.',
-                timer: 1500,
-                showConfirmButton: false
-            });
+        
         } catch (error) {
             console.error('Error saving data:', error);
             Swal.fire({
