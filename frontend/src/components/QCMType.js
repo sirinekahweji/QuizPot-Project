@@ -110,11 +110,9 @@ const QCMType = ({ handleScoreUpdate }) => {
         e.preventDefault();
         let idform=0;
         try {
-             //saveformresponses();
+            //saveformresponses();
             //console.log("saveformresponses done ");
-  
             try {
-  
               const newformdata={
                ...formData,
                score: Math.round((score / questions.length) * 100)
@@ -123,8 +121,8 @@ const QCMType = ({ handleScoreUpdate }) => {
                console.log(newformdata);
                const response = await axios.post('http://localhost:5000/api/responseForm/save',newformdata,{
                  headers: {
-                   'Content-Type': 'application/json',
-                   'Authorization': `Bearer ${user.token}` 
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${user.token}` 
                  }
                
                });
@@ -146,7 +144,7 @@ const QCMType = ({ handleScoreUpdate }) => {
             //console.log("savequestions done ");
             try {
               console.log("form id dans sabe questionsvariable",idform)
-              console.log("questions",questions);
+              console.log("questions a enregistrer ",questions);
                   if(idform!==0){
                    const response = await axios.post('http://localhost:5000/api/question/save-questions',{ questions,idform },{
                      headers: {

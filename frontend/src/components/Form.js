@@ -30,13 +30,21 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
 
     const handleChange = (e) => {
         if (e.target.name === 'file') {
-            setFile(e.target.files[0]);
+            const selectedFile = e.target.files[0];
+            setFile(selectedFile);
+            setFormData({
+                ...formData,
+                file: selectedFile,
+            });
+            console.log("setFormData", formData);
         } else {
             setFormData({
                 ...formData,
                 [e.target.name]: e.target.value,
             });
+            console.log("setFormData", formData);
         }
+
     };
 
     const handleSubmit = async (e) => {
@@ -58,13 +66,15 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
           ...formData,
           numQuestions: parseInt(formData.numQuestions),
         };
-        console.log(submitData)
+        //console.log(submitData)
 
         const formDataToSend = new FormData();
-
+     //console.log("file",file);
         if (file !== null) {
             formDataToSend.append('file', file);
         }
+        //console.log("file",file);
+
 
         formDataToSend.append('topic', formData.topic);
         formDataToSend.append('level', formData.level);
@@ -72,7 +82,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
         formDataToSend.append('numQuestions', parseInt(formData.numQuestions));
         formDataToSend.append('focusAreas', formData.focusAreas);
 
-        console.log(formDataToSend)
+        //console.log("formDataToSend",formDataToSend)
 
         MySwal.fire({
             title: 'Generating...',
@@ -91,7 +101,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
                 },
             });
 
-            console.log('Response:', response.data);
+            //console.log('Response:', response.data);
             setQuestions(response.data.message);
             setLoading(false);
 
@@ -193,7 +203,6 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
                         type="file"
                         name="file"
                         accept=".pdf, .doc, .docx , .txt , .jpg,.jpeg,.png,.webp,.heic,.heif"
-                        value={formData.file}
                         onChange={handleChange} 
                     />
                 </div>

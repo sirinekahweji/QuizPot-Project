@@ -46,14 +46,14 @@ const extractTextFromDOCX = async (filePath) => {
 const saveQuestions = async (req, res) => {
   const { questions ,idform} = req.body;
 
-   //console.log(questions)
+   console.log(questions)
    //console.log(idform)
   try {
       const questionsToSave = questions.map(question => ({
         formResponseId: idform, 
           questionText: question.question,
           options: question.choices,
-          correctAnswer: question.answer.split(') ')[1], 
+          correctAnswer: question.answer, 
           explanation: question.explanation || null 
       }));
 

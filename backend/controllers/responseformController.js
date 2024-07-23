@@ -2,12 +2,18 @@ const ResponseForm = require('../models/responseform');
 const mongoose = require('mongoose');
 const User = require('../models/userModel'); 
 const Question = require('../models/question');
+const path = require('path');
+
 
 
 const saveResponseForm = async (req, res) => {
   const {  topic, difficulty, level, numQuestions, focusAreas ,score} = req.body;
   const userId = req.user._id;
   const file = req.file; 
+  console.log("file",file)
+
+
+  console.log("path",file.path)
  
 
  console.log(topic, difficulty, level, numQuestions, focusAreas,userId, score)
@@ -33,7 +39,7 @@ const saveResponseForm = async (req, res) => {
       numQuestions,
       focusAreas,
       score,
-      file
+      file: file.path 
     });
 
     const savedResponseForm = await responseForm.save();

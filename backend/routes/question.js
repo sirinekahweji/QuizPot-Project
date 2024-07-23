@@ -21,8 +21,6 @@ const storage = multer.diskStorage({
 
 router.post('/generate',requireAuth, upload.single('file'), generateQuestions);
 router.post('/generatemore', requireAuth, generateMoreQuestions);
-router.post('/generateFromText', requireAuth, generateQuestionsfromText);
-router.post('/generateFromImage', requireAuth, upload.single('image'), generateFromImage);
 router.post('/save-questions', requireAuth,saveQuestions);
 router.get('/:formResponseId', requireAuth,getQuestionsByFormResponseId);
 
