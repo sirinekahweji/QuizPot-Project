@@ -38,6 +38,11 @@
         "text":"Fill the form and get your quizzes",
         "content":"Content"
       },
+      "noQuestions":{
+        "text1":"No Questions Avaible ...",
+        "text2":"Fill the form and get your Questions"
+
+      },
   
       "services": {
          "form":"Form",
@@ -108,6 +113,10 @@
         "welcome":"Bienvenue",
          "text":"Remplissez le formulaire et obtenez vos quiz",
          "content":"contenu"
+      },
+      "noQuestions":{
+        "text1": "Aucune question disponible ...",
+        "text2": "Remplissez le formulaire et obtenez vos questions"
       },
     "formModal": {
         "title": "Formulaire de Quiz",

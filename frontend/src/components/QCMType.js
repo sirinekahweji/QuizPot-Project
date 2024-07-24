@@ -190,8 +190,8 @@ const QCMType = ({ handleScoreUpdate }) => {
             <img src={questionsIcon} className='QuestionsIcon' alt='questionsIcon' />
             {currentLangData.services.questions}</p>
 
-            {!questions && <div className='noQuestions'> No Questions Avaible ...<br></br>
-                Fill the form and get your Questions</div>}
+            {!questions && <div className='noQuestions'> {currentLangData.noQuestions.text1}<br></br>
+            {currentLangData.noQuestions.text2}</div>}
             
 
             {questions && questions.map((question, questionIndex) => (
