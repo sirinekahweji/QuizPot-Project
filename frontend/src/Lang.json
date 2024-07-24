@@ -4,6 +4,13 @@
           "en": "EN",
           "fr": "FR"
       },
+      "openQType": {
+        "title": "Open Questions",
+        "addQuestion": "Add a question manually",
+        "generateMore": "Generate more content on the same section",
+        "save":"save"
+
+      },
       "logout": "Log Out",
       "title": "Discover the power of AI",
       "descriptions": [ "Transform Learning Into An Easy Adventure With Our QuizBot",
@@ -72,6 +79,7 @@
           "signUpButton": "Sign Up ",
           "signInLink": "Sign in "
       },
+   
     
         "questions": {
             "title": "Questions",
@@ -121,6 +129,7 @@
         "text1": "Aucune question disponible ...",
         "text2": "Remplissez le formulaire et obtenez vos questions"
       },
+     
       "search":{
         "placeholder": "Que cherchez-vous ?"
     },
@@ -197,6 +206,12 @@
       "myQuizzesTitle": "Mes Quiz",
       "createQuizFolder": "Créer un dossier",
       "exportButton": "Exporter"
+    },
+    "openQType": {
+      "title": "Questions ouvertes",
+      "addQuestion": "Ajouter une question manuellement",
+      "generateMore": "Générer plus de contenu dans la même section",
+      "save":"enregistrer"
     }
   }
 }

@@ -1,14 +1,18 @@
-import React ,{ useState, useEffect } from 'react';
+import React ,{ useState,useContext ,useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import jsPDF from 'jspdf';
 import './QuizDetails.css';
+import { LangContext } from '../context/LangContext';
+
 
 
 const QuizDetailsModal = ({ show, handleClose, selectedQuiz }) => {
   const { user } = useAuthContext();
   const [questions, setquestions] = useState(null);
+  const { currentLangData } = useContext(LangContext);
+
 
 
   useEffect(() => {
@@ -76,15 +80,15 @@ const generatePDF = (qs, formresponse) => {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(18);
   doc.setTextColor(255, 0, 0);
-  doc.text(`Topic : ${formresponse.topic}`, margin, yPos);
+  doc.text(`${currentLangData.formModal.topicLabel}  ${formresponse.topic}`, margin, yPos);
   yPos += 10;
   addPageIfNeeded();
 
   doc.setFontSize(9);
   doc.setTextColor(0, 0, 0);
-  doc.text(`Education Level : ${formresponse.level}`, margin + 10, yPos);
-  doc.text(`Difficulty Level : ${formresponse.difficulty}`, margin + 70, yPos);
-  doc.text(`Specific Focus Areas: ${formresponse.focusAreas}`, margin + 120, yPos);
+  doc.text(`${currentLangData.formModal.levelLabel}  ${formresponse.level}`, margin + 10, yPos);
+  doc.text(`${currentLangData.formModal.difficultyLabel}  ${formresponse.difficulty}`, margin + 70, yPos);
+  doc.text(`${currentLangData.formModal.focusAreasLabel}  ${formresponse.focusAreas}`, margin + 120, yPos);
   yPos += 10;
   addPageIfNeeded();
 
@@ -136,9 +140,9 @@ const generatePDF = (qs, formresponse) => {
         <Modal.Title ><p className='topic' >{selectedQuiz.topic}</p></Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p className='details'><b>Education Level: </b>{selectedQuiz.level}</p>
-        <p className='details' ><b>Difficulty Level: </b>{selectedQuiz.difficulty}</p>
-        {selectedQuiz.focusAreas && <p className='details' ><b>Specific Focus Areas:  </b>{selectedQuiz.focusAreas}</p>}
+        <p className='details'><b>{currentLangData.formModal.levelLabel} </b>{selectedQuiz.level}</p>
+        <p className='details' ><b>{currentLangData.formModal.difficultyLabel} </b>{selectedQuiz.difficulty}</p>
+        {selectedQuiz.focusAreas && <p className='details' ><b>{currentLangData.formModal.focusAreasLabel}  </b>{selectedQuiz.focusAreas}</p>}
         <div className='questionsList'>
           <p><b>Questions</b></p>
           {questions && questions.map((question, index) => (

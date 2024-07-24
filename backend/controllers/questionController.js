@@ -13,9 +13,9 @@ const extractTextFromFile = async (filePath) => {
   try {
     const data = await fs.readFile(filePath, 'utf8');
     //console.log('Text Content: ', data);
-      return data;
+    return data;
   } catch (error) {
-      console.error('Error reading text file: ', error);
+    console.error('Error reading text file: ', error);
   }
 };
 
@@ -24,10 +24,10 @@ const extractTextFromPDF = async (filePath) => {
     const dataBuffer = await fs.readFile(filePath);
     const data = await pdf(dataBuffer);
 
-      //console.log('Text Content: ', data.text);
-      return data.text;
+    //console.log('Text Content: ', data.text);
+    return data.text;
   } catch (error) {
-      console.error('Error extracting text from PDF: ', error);
+    console.error('Error extracting text from PDF: ', error);
   }
 };
 
@@ -36,50 +36,50 @@ const extractTextFromDOCX = async (filePath) => {
   try {
     const result = await mammoth.extractRawText({ path: filePath });
     //console.log('Text Content: ', result.value);
-      return result.value;
+    return result.value;
   } catch (error) {
-      console.error('Error extracting text from DOCX: ', error);
+    console.error('Error extracting text from DOCX: ', error);
   }
 };
 
 
 const saveQuestions = async (req, res) => {
-  const { questions ,idform} = req.body;
+  const { questions, idform } = req.body;
 
-   console.log(questions)
-   //console.log(idform)
+  console.log(questions)
+  //console.log(idform)
   try {
-      const questionsToSave = questions.map(question => ({
-        formResponseId: idform, 
-          questionText: question.question,
-          options: question.choices,
-          correctAnswer: question.answer, 
-          explanation: question.explanation || null 
-      }));
+    const questionsToSave = questions.map(question => ({
+      formResponseId: idform,
+      questionText: question.question,
+      options: question.choices,
+      correctAnswer: question.answer,
+      explanation: question.explanation || null
+    }));
 
-      const savedQuestions = await Question.insertMany(questionsToSave);
-      console.log("savedQuestions",savedQuestions)
+    const savedQuestions = await Question.insertMany(questionsToSave);
+    console.log("savedQuestions", savedQuestions)
 
-      res.status(200).json({
-          message: "Questions saved successfully",
-          questions: savedQuestions
-      });
+    res.status(200).json({
+      message: "Questions saved successfully",
+      questions: savedQuestions
+    });
   } catch (error) {
-      console.error("Error saving questions:", error);
-      res.status(500).json({ error: error.message });
+    console.error("Error saving questions:", error);
+    res.status(500).json({ error: error.message });
   }
 };
 
 const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
-  const file = req.file; 
-  console.log("file",file)
+  const file = req.file;
+  console.log("file", file)
   //console.log(topic, difficulty, level, numQuestions, focusAreas)
-  if(file==null){
+  if (file == null) {
 
-  try {
-      
-          const testPrompt = `create ${numQuestions} QCM questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
+    try {
+
+      const testPrompt = `create ${numQuestions} QCM questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
           1. <Question 1>
 a) <Choice A>
 b) <Choice B>
@@ -93,79 +93,78 @@ c) <Choice C>
 1. <Answer 1>;
 2. <Answer 2>;
 ..`;
-          
-          
-        let questions = [];
 
-        while (questions.length === 0) {
-          const response = await run(testPrompt);
-          questions= parseGeminiResponse(response);
-              
-          if (questions.length > 0) {
-            break;
-          }
-          console.log("Questions were not generated. Retrying...");
-        }
 
-        for (const question of questions) {
-          if (!question.question || question.choices.length !== 3 || !question.answer) {
-            res.status(500).json({message:"Error generating questions"});
-          }
-          for (const choice of question.choices) {
-            if (!choice) {
-              res.status(500).json({message:"Error generating questions"});
-            }
+      let questions = [];
+
+      while (questions.length === 0) {
+        const response = await run(testPrompt);
+        questions = parseGeminiResponse(response);
+
+        if (questions.length > 0) {
+          break;
+        }
+        console.log("Questions were not generated. Retrying...");
+      }
+
+      for (const question of questions) {
+        if (!question.question || question.choices.length !== 3 || !question.answer) {
+          res.status(500).json({ message: "Error generating questions" });
+        }
+        for (const choice of question.choices) {
+          if (!choice) {
+            res.status(500).json({ message: "Error generating questions" });
           }
         }
-       
-        res.status(200).json({ message: questions });
-  
-  } catch (error) {
+      }
+
+      res.status(200).json({ message: questions });
+
+    } catch (error) {
       console.error('Error generating questions:', error);
       res.status(500).json({ error: error.message });
+    }
   }
-}
-else
-{
-  const fileName = file.originalname;
-  const fileExtension = fileName.split('.').pop().toLowerCase();
-  let text='';
-  switch (fileExtension) {
-    case 'pdf':
-      text = await extractTextFromPDF(file.path);
-      console.log("text",text);
-      await fs.unlink(file.path)
-      return await generateQuestionsfromText(req,res,text);
-    case 'doc':
-    case 'docx':
-      text = await extractTextFromDOCX(file.path);
-      console.log("text",text);
-      await fs.unlink(file.path)
-      return await generateQuestionsfromText(req,res,text);
-    case 'txt':
-      text = await extractTextFromFile(file.path)
-      console.log("text",text);
-      await fs.unlink(file.path)
-      return await generateQuestionsfromText(req,res,text);
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-    case 'webp':
-    case 'heic':
-    case 'heif':
-      return await generateFromImage(req, res);
-    default:
+  else {
+    const fileName = file.originalname;
+    const fileExtension = fileName.split('.').pop().toLowerCase();
+    let text = '';
+    switch (fileExtension) {
+      case 'pdf':
+        text = await extractTextFromPDF(file.path);
+        console.log("text", text);
+        await fs.unlink(file.path)
+        return await generateQuestionsfromText(req, res, text);
+      case 'doc':
+      case 'docx':
+        text = await extractTextFromDOCX(file.path);
+        console.log("text", text);
+        await fs.unlink(file.path)
+        return await generateQuestionsfromText(req, res, text);
+      case 'txt':
+        text = await extractTextFromFile(file.path)
+        console.log("text", text);
+        await fs.unlink(file.path)
+        return await generateQuestionsfromText(req, res, text);
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'webp':
+      case 'heic':
+      case 'heif':
+        return await generateFromImage(req, res);
+      default:
         break;
-}
+    }
 
 
 
-}
+  }
 };
 
 const generateFromImage = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
-  const file = req.file; 
+  const file = req.file;
 
   const image = file;
   if (!image) {
@@ -174,8 +173,8 @@ const generateFromImage = async (req, res) => {
   }
 
   try {
-    const imagePath = file.path; 
-    const mimeType = file.mimetype; 
+    const imagePath = file.path;
+    const mimeType = file.mimetype;
     const promptText = `create  ${numQuestions} QCM questions from the content of the image on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre et le text de correct answer et sans des etoiles avant et apres la correct answer:
       1. <Question 1>
       a) <Choice A>
@@ -209,14 +208,14 @@ const generateFromImage = async (req, res) => {
       console.log("Questions were not generated. Retrying...");
     }
 
-  
+
     for (const question of questions) {
       if (!question.question || question.choices.length !== 3 || !question.answer) {
-        res.status(500).json({message:"Error generating questions"});
+        res.status(500).json({ message: "Error generating questions" });
       }
       for (const choice of question.choices) {
         if (!choice) {
-          res.status(500).json({message:"Error generating questions"});
+          res.status(500).json({ message: "Error generating questions" });
         }
       }
     }
@@ -228,66 +227,15 @@ const generateFromImage = async (req, res) => {
 };
 
 
-const generateMoreQuestions = async (req, res) => {
-  const { topic, difficulty, level, numQuestions, focusAreas, questionType } = req.body;
-
-  try {
-      
-          const testPrompt = `create another ${numQuestions} ${questionType} questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
-          1. <Question 1>
-a) <Choice A>
-b) <Choice B>
-c) <Choice C>
-2. <Question 2>
-a) <Choice A>
-b) <Choice B>
-c) <Choice C>
-...
-## Answers:
-1. <Answer 1>;
-2. <Answer 2>;
-..`;
-          let questions = [];
-
-          while (questions.length === 0) {
-            const response = await run(testPrompt);
-            questions= parseGeminiResponse(response);
-                
-            if (questions.length > 0) {
-              break;
-            }
-            console.log("Questions were not generated. Retrying...");
-          }
-      
-          for (const question of questions) {
-            if (!question.question || question.choices.length !== 3 || !question.answer) {
-              res.status(500).json({message:"Error generating questions"});
-            }
-            for (const choice of question.choices) {
-              if (!choice) {
-                res.status(500).json({message:"Error generating questions"});
-              }
-            }
-          }
-          res.status(200).json({ message: questions });
-
-   
-
-  } catch (error) {
-      console.error('Error generating questions:', error);
-      res.status(500).json({ error: error.message });
-  }
-};
 
 
-const generateQuestionsfromText = async (req, res ,text) => {
+
+const generateQuestionsfromText = async (req, res, text) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
   console.log(topic, difficulty, level, numQuestions, focusAreas);
 
-
-  //console.log(text);
   try {
- 
+
 
     const testPrompt = `create  ${numQuestions} QCM  questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas} on se baser a cette content ${text}.with each question having 3 choices and only one correct choice. The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
   
@@ -305,29 +253,29 @@ c) <Choice C>
 2. <Answer 2>;
 ..`;
 
-       let questions = [];
+    let questions = [];
 
-      while (questions.length === 0) {
-        const response = await run(testPrompt);
-        questions= parseGeminiResponse(response);
-            
-        if (questions.length > 0) {
-          break;
-        }
-        console.log("Questions were not generated. Retrying...");
+    while (questions.length === 0) {
+      const response = await run(testPrompt);
+      questions = parseGeminiResponse(response);
+
+      if (questions.length > 0) {
+        break;
       }
-  
-      for (const question of questions) {
-        if (!question.question || question.choices.length !== 3 || !question.answer) {
-          res.status(500).json({message:"Error generating questions"});
-        }
-        for (const choice of question.choices) {
-          if (!choice) {
-            res.status(500).json({message:"Error generating questions"});
-          }
+      console.log("Questions were not generated. Retrying...");
+    }
+
+    for (const question of questions) {
+      if (!question.question || question.choices.length !== 3 || !question.answer) {
+        res.status(500).json({ message: "Error generating questions" });
+      }
+      for (const choice of question.choices) {
+        if (!choice) {
+          res.status(500).json({ message: "Error generating questions" });
         }
       }
-      res.status(200).json({ message: questions });
+    }
+    res.status(200).json({ message: questions });
 
   } catch (error) {
     console.error('Error generating questions:', error);
@@ -379,26 +327,26 @@ function parseGeminiResponse(response) {
   const answerLines = answersSection.split("\n").filter((line) => line.trim() !== '');
   //console.log("answerLines",answerLines);
   answerLines.forEach((answerText, index) => {
-    const text=answerText.replace(/\*/g, '')
+    const text = answerText.replace(/\*/g, '')
     const answerMatch = text.match(/^\d+\.\s*([a-c])\)\s*(.*)\s*$/);
     //console.log("answerText",answerText);
     //console.log("answerMatch",answerMatch);
 
     if (answerMatch && index < parsedQuestions.length) {
-     // console.log("answerMatch2",answerMatch);
+      // console.log("answerMatch2",answerMatch);
 
       const [, answerLetter, answerDetail] = answerMatch;
       //console.log("answerLetter",answerLetter);
       //console.log("answerDetail",answerDetail);
 
       parsedQuestions[index].answer = `${answerLetter}) ${answerDetail.trim()}`;
-  
+
       console.log("Answer for Question", index + 1, ":", parsedQuestions[index].answer);
     } else {
-     // console.error(`Answer format is incorrect or question not found at index ${index}.`);
+      // console.error(`Answer format is incorrect or question not found at index ${index}.`);
     }
   });
-  console.log("parsedQuestions",parsedQuestions);
+  console.log("parsedQuestions", parsedQuestions);
   return parsedQuestions;
 }
 
@@ -409,7 +357,7 @@ const getQuestionsByFormResponseId = async (req, res) => {
 
   try {
     console.log(formResponseId)
-    const questions = await Question.find({ formResponseId: formResponseId});
+    const questions = await Question.find({ formResponseId: formResponseId });
     console.log(questions)
     if (!questions || questions.length === 0) {
       return res.status(404).json({ message: 'No questions found for the given form response ID' });
@@ -423,5 +371,5 @@ const getQuestionsByFormResponseId = async (req, res) => {
 };
 
 
-module.exports = {generateFromImage, generateQuestions , saveQuestions ,getQuestionsByFormResponseId,generateQuestionsfromText,generateMoreQuestions};
+module.exports = { generateFromImage, generateQuestions, saveQuestions, getQuestionsByFormResponseId, generateQuestionsfromText };
 

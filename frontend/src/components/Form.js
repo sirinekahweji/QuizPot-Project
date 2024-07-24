@@ -19,7 +19,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
     const { setQuestions } = useContext(QuestionsContext);
     const { formData, setFormData } = useContext(FormDataContext);
     const [file, setFile] = useState(null);  
-    const [ setLoading] = useState(false);
+    const [ loading,setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const handleChange = (e) => {

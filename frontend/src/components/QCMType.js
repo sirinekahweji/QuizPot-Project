@@ -18,10 +18,9 @@ const QCMType = ({ handleScoreUpdate }) => {
     const [selectedChoices, setSelectedChoices] = useState({});
     const { user } = useAuthContext();
     const { formData } = useContext(FormDataContext);
-    const [ setLoading] = useState(false);
+    const [ loading,setLoading] = useState(false);
     const [score, setScore] = useState(0);
-
-    const [ setError] = useState(null);
+    const [ error,setError] = useState(null);
     const MySwal = withReactContent(Swal);
 
 
@@ -45,9 +44,9 @@ const QCMType = ({ handleScoreUpdate }) => {
 
         try {
             console.log("submitData", submitData)
-            const response = await axios.post('http://localhost:5000/api/question/generatemore', submitData, {
+            const response = await axios.post('http://localhost:5000/api/question/generate', submitData, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${user.token}`,
                 },
             });
@@ -223,7 +222,7 @@ const QCMType = ({ handleScoreUpdate }) => {
             {questions && 
             <div>
             <button className="more" onClick={handleSubmit}><i className="bi bi-arrow-clockwise"></i>{currentLangData.openQType.generateMore}</button>
-            <button className='save' onClick={handleSave}>{currentLangData.questions.buttons.save} <i className="bi bi-chevron-right"></i></button>
+            <button className='save' onClick={handleSave}>{currentLangData.openQType.save} <i className="bi bi-chevron-right"></i></button>
              </div>}             
             </div>
     );
