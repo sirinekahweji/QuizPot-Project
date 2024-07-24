@@ -94,7 +94,10 @@
       "myQuizzesTitle": "My Quizzes",
       "createQuizFolder": "Create Folder",
       "exportButton": "Export"
-    }
+    },
+    "search":{
+        "placeholder":"What are you looking for?"
+      }
   },
   "FR": {
       "navbar": {
@@ -118,6 +121,9 @@
         "text1": "Aucune question disponible ...",
         "text2": "Remplissez le formulaire et obtenez vos questions"
       },
+      "search":{
+        "placeholder": "Que cherchez-vous ?"
+    },
     "formModal": {
         "title": "Formulaire de Quiz",
         "topicLabel": "Sujet:",

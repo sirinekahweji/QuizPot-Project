@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import './ImageSource.css';
 import { LangContext } from '../context/LangContext';
 import axios from 'axios';

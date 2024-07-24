@@ -1,6 +1,10 @@
+import React, { useContext } from 'react';
 import './Glowsearch.css';
+import { LangContext } from '../context/LangContext';
 
 const Glowsearch = ({ setSearchQuery }) => {
+  const { currentLangData } = useContext(LangContext);
+
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -8,7 +12,7 @@ const Glowsearch = ({ setSearchQuery }) => {
   return (
     <section className="webdesigntuts-workshop">
       <form action="" method="">
-        <input type="search" placeholder="What are you looking for?" onChange={handleSearchChange} />
+        <input type="search" placeholder={currentLangData.search.placeholder} onChange={handleSearchChange} />
         <button type="submit"><i class="bi bi-search"></i></button>
       </form>
     </section>
