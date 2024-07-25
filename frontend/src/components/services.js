@@ -5,8 +5,6 @@ import React, { useContext } from 'react';
 import './Services.css'; 
 import { LangContext } from '../context/LangContext'; 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 const Services = () => {
   const { currentLangData } = useContext(LangContext); 
   return ( 

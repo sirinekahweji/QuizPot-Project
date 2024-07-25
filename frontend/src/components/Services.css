@@ -19,7 +19,16 @@
   margin-left: 3%;
 
 }
-
+.serviceform{
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-left: 3%;
+}
+.serviceform p{
+  padding-top: 10px;
+  font-weight: bold;
+}
 .service p {
   padding-top: 10px;
   font-weight: bold;
@@ -30,7 +39,7 @@
   height: 19%;
 }
 .FormIcon{
-  width: 30%;
+  width: 20%;
   height: 19%;
 }
 

@@ -110,9 +110,15 @@ const getResponseForms = async (req, res) => {
 
         return res.status(400).json({ error: 'Invalid quiz ID' });
       }
-  
+      console.log("avant deleted" );
+
       const responseForm = await ResponseForm.findOneAndDelete({ _id: id, userId });
-      await fs.unlink(responseForm.file)
+      console.log("responseForm deleted" ,responseForm);
+
+      if(responseForm.file){
+        await fs.unlink(responseForm.file)
+
+      }
 
       console.log("responseForm deleted" ,responseForm);
 

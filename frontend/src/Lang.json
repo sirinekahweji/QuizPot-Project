@@ -58,7 +58,7 @@
       "text2": "Fill the form and get your Questions"
     },
     "services": {
-      "form": "Form",
+      "form": "  Form       ",
       "questions": "Questions",
       "myquizzes": "My Quizzes "
     },

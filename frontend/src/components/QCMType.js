@@ -17,11 +17,23 @@ const QCMType = ({ handleScoreUpdate }) => {
     const { questions, setQuestions } = useContext(QuestionsContext);
     const [selectedChoices, setSelectedChoices] = useState({});
     const { user } = useAuthContext();
-    const { formData } = useContext(FormDataContext);
+    const { formData, setFormData } = useContext(FormDataContext);
     const [ loading,setLoading] = useState(false);
     const [score, setScore] = useState(0);
     const [ error,setError] = useState(null);
     const MySwal = withReactContent(Swal);
+
+    const resetForm = () => {
+        setFormData({
+            topic: '',
+            level: '',
+            difficulty: '',
+            numQuestions: '',
+            focusAreas: '',
+            file: null,
+        });
+    };
+
 
 
     const handleSubmit = async (e) => {
@@ -151,6 +163,8 @@ const QCMType = ({ handleScoreUpdate }) => {
                     timer: 1500,
                     showConfirmButton: false
                 });
+                resetForm();
+
                }
                else{
                  console.log("Error : form id is null")

@@ -40,6 +40,17 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
         }
 
     };
+    const resetForm = () => {
+        setFormData({
+            topic: '',
+            level: '',
+            difficulty: '',
+            numQuestions: '',
+            focusAreas: '',
+            file: null,
+        });
+        setFile(null);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -103,6 +114,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
                 timer: 1500,
                 showConfirmButton: false
             });
+            //resetForm();
             onContentSelect('questions'); 
         } catch (error) {
             console.error('Error generating questions:', error);
