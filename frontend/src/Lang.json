@@ -1,207 +1,219 @@
 {
   "EN": {
-      "navbar": {
-          "en": "EN",
-          "fr": "FR"
-      },
-      "openQType": {
-        "title": "Open Questions",
-        "addQuestion": "Add a question manually",
-        "generateMore": "Generate more content on the same section",
-        "save":"save"
-
-      },
-      "logout": "Log Out",
-      "title": "Discover the power of AI",
-      "descriptions": [ "Transform Learning Into An Easy Adventure With Our QuizBot",
+    "navbar": {
+      "en": "EN",
+      "fr": "FR"
+    },
+    "success": "Success",
+    "passwordUpdated": "Password updated successfully",
+    "error": "Error",
+    "passwordUpdateFailed": "Failed to update password. Please try again.",
+    "updatePasswordTitle": "Update Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "updatePasswordButton": "Update",
+    "openQType": {
+      "title": "Open Questions",
+      "addQuestion": "Add a question manually",
+      "generateMore": "Generate more content on the same section",
+      "save": "save"
+    },
+    "logout": "Log Out",
+    "title": "Discover the power of AI",
+    "descriptions": [
+      "Transform Learning Into An Easy Adventure With Our QuizBot",
       "Track Your Progress And Improve With Each Attempt",
       "Auto-evaluate With Quizzes Scores",
       "Select A Topic And Take A Test",
-      "Create Quizzes Instantly"],
-    
-      "formModal": {
-        "title": "Quiz Form",
-        "topicLabel": "Topic:",
-        "levelLabel": "Education Level:",
-        "selectLevel": "Select level",
-        "university": "University",
-        "elementary": "Elementary School",
-        "middle": "Middle School",
-        "high": "High School",
-        "difficultyLabel": "Difficulty Level:",
-        "selectDifficulty": "Select difficulty",
-        "easy": "Easy",
-        "average": "Average",
-        "aboveAverage": "Above Average",
-        "difficult": "Difficult",
-        "file": "Upload File:",
-        "numQuestionsLabel": "Number of Questions:",
-        "focusAreasLabel": "Specific Focus Areas:",
-        "focusAreasPlaceholder": "Any particular subtopics or concepts you want to be covered in the questions...",
-        "continueButton": "Continue"
+      "Create Quizzes Instantly"
+    ],
+    "formModal": {
+      "title": "Quiz Form",
+      "topicLabel": "Topic:",
+      "levelLabel": "Education Level:",
+      "selectLevel": "Select level",
+      "university": "University",
+      "elementary": "Elementary School",
+      "middle": "Middle School",
+      "high": "High School",
+      "difficultyLabel": "Difficulty Level:",
+      "selectDifficulty": "Select difficulty",
+      "easy": "Easy",
+      "average": "Average",
+      "aboveAverage": "Above Average",
+      "difficult": "Difficult",
+      "file": "Upload File:",
+      "numQuestionsLabel": "Number of Questions:",
+      "focusAreasLabel": "Specific Focus Areas:",
+      "focusAreasPlaceholder": "Any particular subtopics or concepts you want to be covered in the questions...",
+      "continueButton": "Continue"
+    },
+    "home": {
+      "welcome": "Welcome",
+      "text": "Fill the form and get your quizzes",
+      "content": "Content"
+    },
+    "noQuestions": {
+      "text1": "No Questions Avaible ...",
+      "text2": "Fill the form and get your Questions"
+    },
+    "services": {
+      "form": "Form",
+      "questions": "Questions",
+      "myquizzes": "My Quizzes "
+    },
+    "resendPassword": {
+  "title": "Resend Password",
+  "emailLabel": "Email Address",
+  "sentPassword": "Sent Password",
+  "newPassword": "New Password",
+  "button": "Resend"
+},
+    "signIn": {
+      "titleSignIn": "Sign in",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "forgotPassword": "Forgot Password?",
+      "signInButton": "Sign in",
+      "noAccount": "Don't have an account?",
+      "signUpHere": "Sign up here"
+    },
+    "signUpPage": {
+      "title": "Sign Up",
+      "fullNameLabel": "Full Name *",
+      "emailLabel": "Email *",
+      "passwordLabel": "Password *",
+      "confirmPasswordLabel": "Confirm Password *",
+      "signUpButton": "Sign Up ",
+      "signInLink": "Sign in "
+    },
+    "questions": {
+      "title": "Questions",
+      "content": "Content",
+      "mcq": {
+        "icon": "bi bi-list-check",
+        "text": "MCQ"
       },
-      "home":{
-        "welcome":"Welcome",
-        "text":"Fill the form and get your quizzes",
-        "content":"Content"
+      "open": {
+        "icon": "bi bi-chat-square-fill",
+        "text": "Open Questions"
       },
-      "noQuestions":{
-        "text1":"No Questions Avaible ...",
-        "text2":"Fill the form and get your Questions"
-
-      },
-  
-      "services": {
-         "form":"Form",
-         "questions":"Questions",
-         "myquizzes":"My Quizzes "
-      },
-      "resetPassword":{
-        "title": "Resend Password",
-        "emailLabel": "Email Address",
-        "button":"Resend"
-      },
-      "signIn": {
-          "titleSignIn": "Sign in",
-          "emailLabel": "Email Address",
-          "passwordLabel": "Password",
-          "forgotPassword": "Forgot Password?",
-          "signInButton": "Sign in",
-          "noAccount": "Don't have an account?",
-          "signUpHere": "Sign up here"
-      },
-      "signUpPage": {
-          "title": "Sign Up",
-          "fullNameLabel": "Full Name *",
-          "emailLabel": "Email *",
-          "passwordLabel": "Password *",
-          "confirmPasswordLabel": "Confirm Password *",
-          "signUpButton": "Sign Up ",
-          "signInLink": "Sign in "
-      },
-   
-    
-        "questions": {
-            "title": "Questions",
-            "content": "Content",
-            "mcq": {
-                "icon": "bi bi-list-check",
-                "text": "MCQ"
-            },
-            "open": {
-                "icon": "bi bi-chat-square-fill",
-                "text": "Open Questions"
-            },
-            "buttons": {
-                "export": "Export",
-                "save": "Save"
-            }
-        },
-       
+      "buttons": {
+        "export": "Export",
+        "save": "Save"
+      }
+    },
     "profile": {
       "myQuizzesTitle": "My Quizzes",
       "createQuizFolder": "Create Folder",
       "exportButton": "Export"
     },
-    "search":{
-        "placeholder":"What are you looking for?"
-      }
+    "search": {
+      "placeholder": "What are you looking for?"
+    }
   },
   "FR": {
-      "navbar": {
-          "en": "EN",
-          "fr": "FR"
-
-      },
-      "logout": "Se Déconnecter",
-      "title": "Découvrez la puissance de l'IA",
-      "descriptions": [ "Transformez l'apprentissage en une aventure facile avec notre QuizBot",
+    "navbar": {
+      "en": "EN",
+      "fr": "FR"
+    },
+    "success": "Succès",
+    "passwordUpdated": "Mot de passe mis à jour avec succès",
+    "error": "Erreur",
+    "passwordUpdateFailed": "Échec de la mise à jour du mot de passe. Veuillez réessayer.",
+    "updatePasswordTitle": "Modifier mot de passe",
+    "oldPassword": "Ancien mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "updatePasswordButton": "Modifier",
+    "logout": "Se Déconnecter",
+    "title": "Découvrez la puissance de l'IA",
+    "descriptions": [
+      "Transformez l'apprentissage en une aventure facile avec notre QuizBot",
       "Suivez vos progrès et améliorez-vous à chaque tentative",
       "Évaluez automatiquement avec les scores des questions",
       "Sélectionnez un sujet et passez un test",
-      "Créez des quiz instantanément"],
-      "home":{
-        "welcome":"Bienvenue",
-         "text":"Remplissez le formulaire et obtenez vos quiz",
-         "content":"contenu"
-      },
-      "noQuestions":{
-        "text1": "Aucune question disponible ...",
-        "text2": "Remplissez le formulaire et obtenez vos questions"
-      },
-     
-      "search":{
-        "placeholder": "Que cherchez-vous ?"
+      "Créez des quiz instantanément"
+    ],
+    "home": {
+      "welcome": "Bienvenue",
+      "text": "Remplissez le formulaire et obtenez vos quiz",
+      "content": "contenu"
+    },
+    "noQuestions": {
+      "text1": "Aucune question disponible ...",
+      "text2": "Remplissez le formulaire et obtenez vos questions"
+    },
+    "search": {
+      "placeholder": "Que cherchez-vous ?"
     },
     "formModal": {
-        "title": "Formulaire de Quiz",
-        "topicLabel": "Sujet:",
-        "levelLabel": "Niveau d'éducation:",
-        "selectLevel": "Sélectionnez le niveau",
-        "university": "Université",
-        "elementary": "École primaire",
-        "middle": "Collège",
-        "high": "Lycée",
-        "difficultyLabel": "Niveau de difficulté:",
-        "selectDifficulty": "Sélectionnez la difficulté",
-        "easy": "Facile",
-        "average": "Moyen",
-        "aboveAverage": "Au-dessus de la moyenne",
-        "difficult": "Difficile",
-        "file": "Charger Fichier:",
-        "numQuestionsLabel": "Nombre de questions:",
-        "focusAreasLabel": "Domaines de focus spécifiques:",
-        "focusAreasPlaceholder": "Des sous-thèmes ou concepts particuliers que vous souhaitez voir couverts dans les questions...",
-        "continueButton": "Continuer"
-      },
-   "resetPassword": {
-    "title": "Réinitialiser le mot de passe",
-    "emailLabel": "Adresse e-mail",
-    "button": "Réinitialiser"
-   },
-
-      "services": {
-        "form":"Formulaire",
-        "questions":"Questions",
-        "myquizzes":"Mes Quiz "
-        
-      },
-      "questions": {
-        "title": "Questions",
-        "content": "Content",
-        "mcq": {
-            "icon": "bi bi-list-check",
-            "text": "MCQ"
-        },
-        "open": {
-            "icon": "bi bi-chat-square-fill",
-            "text": "Open Questions"
-        },
-        "buttons": {
-            "export": "Export",
-            "save": "Save"
-        }
+      "title": "Formulaire de Quiz",
+      "topicLabel": "Sujet:",
+      "levelLabel": "Niveau d'éducation:",
+      "selectLevel": "Sélectionnez le niveau",
+      "university": "Université",
+      "elementary": "École primaire",
+      "middle": "Collège",
+      "high": "Lycée",
+      "difficultyLabel": "Niveau de difficulté:",
+      "selectDifficulty": "Sélectionnez la difficulté",
+      "easy": "Facile",
+      "average": "Moyen",
+      "aboveAverage": "Au-dessus de la moyenne",
+      "difficult": "Difficile",
+      "file": "Charger Fichier:",
+      "numQuestionsLabel": "Nombre de questions:",
+      "focusAreasLabel": "Domaines de focus spécifiques:",
+      "focusAreasPlaceholder": "Des sous-thèmes ou concepts particuliers que vous souhaitez voir couverts dans les questions...",
+      "continueButton": "Continuer"
     },
-      "signIn": {
-          "titleSignIn": "Connectez-Vous",
-          "emailLabel": "e-mail",
-          "passwordLabel": "Mot de passe",
-          "forgotPassword": "Mot de passe oublié?",
-          "rememberMe": "Mémoriser le mot de passe ?",
-          "signInButton": "Se connecter",
-          "noAccount": "Vous n'avez pas de compte?",
-          "signUpHere": "Inscrivez-vous ici"
+    "resendPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "emailLabel": "Adresse e-mail",
+      "sentPassword": "Mot de passe envoyé",
+      "newPassword": "Nouveau mot de passe",
+      "button": "Réinitialiser"
+    },
+      "services": {
+      "form": "Formulaire",
+      "questions": "Questions",
+      "myquizzes": "Mes Quiz "
+    },
+    "questions": {
+      "title": "Questions",
+      "content": "Content",
+      "mcq": {
+        "icon": "bi bi-list-check",
+        "text": "MCQ"
       },
-      "signUpPage": {
-          "title": "Inscrivez-vous",
-          "fullNameLabel": "Nom Complet *",
-          "emailLabel": "E-mail *",
-          "passwordLabel": "Mot de passe *",
-          "confirmPasswordLabel": "Confirmer le mot de passe *",
-          "signUpButton": "S'inscrire",
-          "signInLink": "Se connecter"
+      "open": {
+        "icon": "bi bi-chat-square-fill",
+        "text": "Open Questions"
+      },
+      "buttons": {
+        "export": "Export",
+        "save": "Save"
       }
-    ,
+    },
+    "signIn": {
+      "titleSignIn": "Connectez-Vous",
+      "emailLabel": "e-mail",
+      "passwordLabel": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié?",
+      "rememberMe": "Mémoriser le mot de passe ?",
+      "signInButton": "Se connecter",
+      "noAccount": "Vous n'avez pas de compte?",
+      "signUpHere": "Inscrivez-vous ici"
+    },
+    "signUpPage": {
+      "title": "Inscrivez-vous",
+      "fullNameLabel": "Nom Complet *",
+      "emailLabel": "E-mail *",
+      "passwordLabel": "Mot de passe *",
+      "confirmPasswordLabel": "Confirmer le mot de passe *",
+      "signUpButton": "S'inscrire",
+      "signInLink": "Se connecter"
+    },
     "profile": {
       "myQuizzesTitle": "Mes Quiz",
       "createQuizFolder": "Créer un dossier",
@@ -211,7 +223,7 @@
       "title": "Questions ouvertes",
       "addQuestion": "Ajouter une question manuellement",
       "generateMore": "Générer plus de contenu dans la même section",
-      "save":"enregistrer"
+      "save": "enregistrer"
     }
   }
 }

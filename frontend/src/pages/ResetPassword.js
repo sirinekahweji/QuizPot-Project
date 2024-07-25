@@ -1,16 +1,24 @@
 import './ResetPassword.css';
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { LangContext } from '../context/LangContext';
 import videoBg from '../assets/videos/bg1.mp4';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
+import UpdatePasswordModal from '../components/Updatepassword';
 
 const ResetPassword = () => {
     const [email, setEmail] = useState('');
     const { currentLangData } = useContext(LangContext);
-    const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+
+    const openModal = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
@@ -23,7 +31,7 @@ const ResetPassword = () => {
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
-                    navigate('/');
+                    openModal();  
                 });
             } else {
                 Swal.fire({
@@ -50,10 +58,10 @@ const ResetPassword = () => {
                 Your browser does not support the video tag.
             </video>
             <div className="ResetForm">
-                <h2 className="TitleReset">{currentLangData.resetPassword.title}</h2>
+                <h2 className="TitleReset">{currentLangData.resendPassword.title}</h2>
                 <form onSubmit={handleForgotPassword}>
                     <div className="ResendFormField">
-                        <label htmlFor="mail" className="Resendemail">{currentLangData.resetPassword.emailLabel}</label><br />
+                        <label htmlFor="mail" className="Resendemail">{currentLangData.resendPassword.emailLabel}</label><br />
                         <input
                             type="email"
                             id="mail"
@@ -65,7 +73,7 @@ const ResetPassword = () => {
                         />
                     </div>
                     <button type="submit" className="SeConnecter">
-                        {currentLangData.resetPassword.button}
+                        {currentLangData.resendPassword.button}
                     </button>
                 </form>
             </div>
@@ -79,6 +87,8 @@ const ResetPassword = () => {
                     textDecoration: "none"
                 }}>{currentLangData.signUpPage.signInLink}</Link>
             </div>
+            <UpdatePasswordModal showModal={showModal} closeModal={closeModal} email={email }/>
+
         </div>
     );
 };
