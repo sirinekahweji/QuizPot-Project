@@ -2,7 +2,7 @@ import{BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
 import PageGarde from './pages/PageGarde';
 import Home from './pages/Home';
 import ResetPassword from './pages/ResetPassword';
-import Dashbord from './pages/Dashbord';
+import Dashbord from './pages/Dashboard';
 import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import './index.css'; 
