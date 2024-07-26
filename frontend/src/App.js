@@ -31,7 +31,7 @@ function App() {
             <Route path="/" element={!user ? <PageGarde/>:<Navigate to='/quizbot'/>  } />
             <Route path="/signup" element={!user ? <SignUp/> : <Navigate to='/quizbot'/> } />
             <Route path="/quizbot" element={user ? <Home/> :<Navigate to='/'/> } />
-            <Route path="/dashbord" element={user ? <Dashbord/> :<Navigate to='/'/> } />
+            <Route path="/dashbord" element={<Dashbord/>} />
             <Route path="/profile" element={user ? <Profile/> :<Navigate to='/'/> } />
             <Route path="/ResetPassword" element={!user ? <ResetPassword/> :<Navigate to='/quizbot'/> } />
          </Routes>
