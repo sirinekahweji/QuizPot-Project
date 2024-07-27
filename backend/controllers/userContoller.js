@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const Quiz = require('../models/responseform');
+const Question = require('../models/question');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt')
 const crypto = require('crypto');
@@ -62,13 +63,7 @@ const forgotPassword = async (req, res) => {
 
     user.password = hash;
     console.log("user passwor:", user.password)
-
-
     await user.save();
-
-
-
-
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -140,7 +135,7 @@ const getUsers = async (req, res) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+/*const deleteUser = async (req, res) => {
   const { id } = req.params;
   console.log("id user delete", id)
 
@@ -159,6 +154,41 @@ const deleteUser = async (req, res) => {
     console.log("server erreur")
 
     res.status(500).json({ message: 'Server error' });
+  }
+};*/
+
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Find user's quizzes
+    const quizzes = await Quiz.find({ userId: id });
+    console.log("quizzes",quizzes)
+
+    // Collect quiz IDs
+    const quizIds = quizzes.map(quiz => quiz._id);
+    console.log("quizIds",quizIds)
+
+
+    // Delete user's quizzes
+    await Quiz.deleteMany({ userId: id });
+    console.log(" Quizzes deleted successfully")
+
+
+    // Delete questions associated with user's quizzes
+    await Question.deleteMany({ formResponseId: { $in: quizIds } });
+    console.log(" Questuins deleted successfully")
+
+
+    // Delete user
+    await User.findByIdAndDelete(id);
+    console.log(" user deleted successfully")
+
+
+    res.status(200).json({ message: 'User and associated quizzes and questions deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user, quizzes, and questions:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 };
 
