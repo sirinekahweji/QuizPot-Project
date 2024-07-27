@@ -4,8 +4,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
+const dashboardRoutes = require('./routes/dashboard');
 const questionRoutes = require('./routes/question');
 const responseFormRoutes = require('./routes/responseform');
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,7 +21,7 @@ app.use((req, res, next) => {
     console.log(req.path, req.method);
     next();
 });
-
+app.use('/api', dashboardRoutes); 
 app.use('/api/user', userRoutes);
 app.use('/api/question', questionRoutes);
 app.use('/api/responseForm', responseFormRoutes); 
