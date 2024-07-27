@@ -20,7 +20,7 @@ const userSchema = new Schema({
         required:true
     }
 
-})
+}, { timestamps: true })
 
 //static signup methode
 userSchema.statics.signup = async function (name,email,password){

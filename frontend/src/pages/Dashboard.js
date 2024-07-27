@@ -7,6 +7,8 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import DashboardComponent from '../components/Dashboard/Dashboard';
 import UsersComponent from '../components/Dashboard/Users';
 import QuizzesComponent from '../components/Dashboard/Quizzes';
+import { useLogout } from "../Hooks/useLogout";
+
 
 const Sidebar = styled(Box)(({ theme }) => ({
   width: 200,
@@ -37,6 +39,12 @@ const ListItemStyled = styled(ListItem)(({ theme, selected }) => ({
 
 const Dashboard = () => {
   const [selectedComponent, setSelectedComponent] = useState('Dashboard');
+  const logout = useLogout();
+  
+  const handleClick = () => {
+    logout();
+};
+
 
   const renderComponent = () => {
     switch (selectedComponent) {
@@ -87,11 +95,11 @@ const Dashboard = () => {
             <ListItemText primary="Quizzes" />
           </ListItemStyled>
           <Box mt="auto">
-            <ListItem button onClick={() => alert('Logout')}>
+            <ListItem onClick={handleClick} >
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary="Logout" />
+              <ListItemText primary="Logout"  />
             </ListItem>
           </Box>
         </List>

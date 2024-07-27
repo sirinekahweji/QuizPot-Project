@@ -6,8 +6,12 @@ const Question = require('../models/question');
 const getDashboardData = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
+    console.log("totalUsers",totalUsers)
     const totalQuizzes = await Quiz.countDocuments();
+    console.log("totalQuizzes",totalQuizzes)
     const totalQuestions = await Question.countDocuments();
+    console.log("totalQuestions",totalQuestions)
+
 
     const quizzesPerDay = await Quiz.aggregate([
       { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } }, count: { $sum: 1 } } },

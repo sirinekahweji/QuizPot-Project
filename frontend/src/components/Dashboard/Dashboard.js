@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuthContext } from '../../Hooks/useAuthContext';
+
+
+import axios from 'axios';
 import {
   Grid,
   Paper,
@@ -12,27 +16,39 @@ import PersonIcon from '@mui/icons-material/Person';
 import QuizIcon from '@mui/icons-material/Quiz';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 
-const quizData = [
-  { name: 'Day 1', quizzes: 3 },
-  { name: 'Day 2', quizzes: 5 },
-  { name: 'Day 3', quizzes: 2 },
-  { name: 'Day 4', quizzes: 6 },
-  { name: 'Day 5', quizzes: 4 },
-  { name: 'Day 6', quizzes: 7 },
-  { name: 'Day 7', quizzes: 3 },
-];
-
-const accountData = [
-  { name: 'Day 1', accounts: 2 },
-  { name: 'Day 2', accounts: 4 },
-  { name: 'Day 3', accounts: 1 },
-  { name: 'Day 4', accounts: 5 },
-  { name: 'Day 5', accounts: 3 },
-  { name: 'Day 6', accounts: 6 },
-  { name: 'Day 7', accounts: 2 },
-];
-
 const Dashboard = () => {
+  const { user } = useAuthContext();
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalQuizzes, setTotalQuizzes] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [quizData, setQuizData] = useState([]);
+  const [accountData, setAccountData] = useState([]);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/dashboard', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
+        console.log("responnce",response);
+        const { totalUsers, totalQuizzes, totalQuestions, quizzesPerDay, accountsPerDay } = response.data;
+
+        setTotalUsers(totalUsers);
+        setTotalQuizzes(totalQuizzes);
+        setTotalQuestions(totalQuestions);
+        setQuizData(quizzesPerDay);
+        setAccountData(accountsPerDay);
+      } catch (error) {
+        console.error('Error fetching dashboard data', error);
+      }
+    };
+
+    fetchDashboardData();
+  }, [user]);
+
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
@@ -46,7 +62,7 @@ const Dashboard = () => {
                 <PersonIcon /> Total Users
               </Typography>
               <Typography variant="h5" style={{ color: 'purple' }}>
-                120
+                {totalUsers}
               </Typography>
             </CardContent>
           </Card>
@@ -58,7 +74,7 @@ const Dashboard = () => {
                 <QuizIcon /> Total Quizzes
               </Typography>
               <Typography variant="h5" style={{ color: 'orange' }}>
-                80
+                {totalQuizzes}
               </Typography>
             </CardContent>
           </Card>
@@ -70,7 +86,7 @@ const Dashboard = () => {
                 <QuestionAnswerIcon /> Total Questions
               </Typography>
               <Typography variant="h5" style={{ color: 'purple' }}>
-                500
+                {totalQuestions}
               </Typography>
             </CardContent>
           </Card>
@@ -96,11 +112,11 @@ const Dashboard = () => {
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="_id" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="quizzes" fill="purple" />
+                <Bar dataKey="count" fill="purple" />
               </BarChart>
             </Paper>
           </Grid>
@@ -121,11 +137,11 @@ const Dashboard = () => {
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="_id" />
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Line type="monotone" dataKey="accounts" stroke="orange" />
+                <Line type="monotone" dataKey="count" stroke="orange" />
               </LineChart>
             </Paper>
           </Grid>
