@@ -13,13 +13,17 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -80,11 +84,39 @@ const Users = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
-        Users
-      </Typography>
-      <Paper elevation={3}>
-        <TableContainer style={{ maxHeight: 400, overflowY: 'auto' }}>
+         <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+          <Typography variant="h4">Users</Typography>
+          <TextField
+            variant="outlined"
+            placeholder="Search users"
+            size="small"
+            sx={{
+              width: '250px',
+              '& .MuiOutlinedInput-root': {
+                '& fieldset': {
+                  borderColor: 'black', 
+                },
+                '&:hover fieldset': {
+                  borderColor: 'black', 
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'black', 
+                },
+              },
+            }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Box>
+      <Paper elevation={3} style={{ padding: 16 }}>
+        <TableContainer style={{ maxHeight: 350, overflowY: 'auto' }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
@@ -94,21 +126,23 @@ const Users = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((user) => (
-                <TableRow key={user._id}>
-                  <TableCell>
-                    <PersonIcon /> {user.name}
-                  </TableCell>
-                  <TableCell>
-                    <MailOutlineIcon /> {user.email}
-                  </TableCell>
-                  <TableCell>
-                    <IconButton aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(user._id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {users
+                .filter(user => user.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map((user) => (
+                  <TableRow key={user._id}>
+                    <TableCell>
+                      <PersonIcon /> {user.name}
+                    </TableCell>
+                    <TableCell>
+                      <MailOutlineIcon /> {user.email}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(user._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

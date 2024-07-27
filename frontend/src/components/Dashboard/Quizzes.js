@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import {
   Typography,
   Box,
@@ -12,13 +13,16 @@ import {
   TableHead,
   TableRow,
   IconButton,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Swal from 'sweetalert2';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -77,11 +81,39 @@ const Quizzes = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
-        Quizzes
-      </Typography>
-      <Paper elevation={3}>
-        <TableContainer style={{ maxHeight: 400, overflowY: 'auto' }}>
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+        <Typography variant="h4">Quizzes</Typography>
+        <TextField
+          variant="outlined"
+          placeholder="Search quizzes"
+          size="small"
+          sx={{
+            width: '250px',
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: 'black',
+              },
+              '&:hover fieldset': {
+                borderColor: 'black',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: 'black',
+              },
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </Box>
+      <Paper elevation={3} style={{ padding: 16 }}>
+        <TableContainer style={{ maxHeight: 420, overflowY: 'auto' }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
@@ -92,20 +124,22 @@ const Quizzes = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {quizzes.map((quiz) => (
-                <TableRow key={quiz._id}>
-                  <TableCell>{quiz.topic}</TableCell>
-                  <TableCell>
-                    <PersonIcon /> {quiz.userId.name}
-                  </TableCell>
-                  <TableCell>{quiz.createdAt}</TableCell>
-                  <TableCell>
-                    <IconButton aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(quiz._id)}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {quizzes
+                .filter(quiz => quiz.topic.toLowerCase().includes(searchTerm.toLowerCase()))
+                .map((quiz) => (
+                  <TableRow key={quiz._id}>
+                    <TableCell>{quiz.topic}</TableCell>
+                    <TableCell>
+                      <PersonIcon /> {quiz.userId.name}
+                    </TableCell>
+                    <TableCell>{quiz.createdAt}</TableCell>
+                    <TableCell>
+                      <IconButton aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(quiz._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
