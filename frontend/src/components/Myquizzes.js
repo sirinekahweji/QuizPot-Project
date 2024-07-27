@@ -58,7 +58,7 @@ const Myquizzes = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/api/responseForm/${Id}`, {
+          await axios.delete(`http://localhost:5000/api/responseForm/delete/${Id}`, {
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${user.token}`
@@ -106,7 +106,7 @@ const Myquizzes = () => {
       </p>
       <Glowsearch setSearchQuery={setSearchQuery} />
       <div className='myquizzes'>
-        {formResponses.length==0 && <div> No Quizzes Saved ... </div>}
+        {formResponses.length===0 && <div> No Quizzes Saved ... </div>}
         {filteredResponses && filteredResponses.map((formResponse, index) => (
           <div className='myquiz' key={index}>
             <p className='quizTitle' onClick={() => handleOpenModal(formResponse,index)}>

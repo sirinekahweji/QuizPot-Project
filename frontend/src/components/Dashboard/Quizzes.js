@@ -1,5 +1,6 @@
-// Quizzes.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../../Hooks/useAuthContext';
+import axios from 'axios';
 import {
   Typography,
   Box,
@@ -14,25 +15,77 @@ import {
 } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-const quizzes = [
-  { id: 1, title: 'Math Quiz', creator: 'John Doe', date: '2024-07-20' },
-  { id: 2, title: 'Science Quiz', creator: 'Jane Smith', date: '2024-07-21' },
-  { id: 3, title: 'History Quiz', creator: 'Mike Johnson', date: '2024-07-22' },
-];
+import Swal from 'sweetalert2';
 
 const Quizzes = () => {
+  const [quizzes, setQuizzes] = useState([]);
+  const { user } = useAuthContext();
+
+  useEffect(() => {
+    const fetchQuizzes = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/responseForm/all', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
+        setQuizzes(response.data);
+      } catch (error) {
+        console.error('Error fetching quizzes:', error);
+      }
+    };
+
+    fetchQuizzes();
+  }, [user]);
+
+  const handleDelete = async (id) => {
+    const confirmation = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    });
+
+    if (confirmation.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:5000/api/responseForm/delete/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
+        setQuizzes(quizzes.filter(quiz => quiz._id !== id));
+        Swal.fire(
+          'Deleted!',
+          'Your quiz has been deleted.',
+          'success'
+        );
+      } catch (error) {
+        console.error('Error deleting quiz:', error);
+        Swal.fire(
+          'Error!',
+          'Failed to delete the quiz.',
+          'error'
+        );
+      }
+    }
+  };
+
   return (
     <Box>
-        <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         Quizzes
       </Typography>
       <Paper elevation={3}>
-        <TableContainer>
-          <Table>
+        <TableContainer style={{ maxHeight: 400, overflowY: 'auto' }}>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
-                <TableCell>Title</TableCell>
+                <TableCell>Topic</TableCell>
                 <TableCell>Creator</TableCell>
                 <TableCell>Date</TableCell>
                 <TableCell>Actions</TableCell>
@@ -40,14 +93,14 @@ const Quizzes = () => {
             </TableHead>
             <TableBody>
               {quizzes.map((quiz) => (
-                <TableRow key={quiz.id}>
-                  <TableCell>{quiz.title}</TableCell>
+                <TableRow key={quiz._id}>
+                  <TableCell>{quiz.topic}</TableCell>
                   <TableCell>
-                    <PersonIcon /> {quiz.creator}
+                    <PersonIcon /> {quiz.userId.name}
                   </TableCell>
-                  <TableCell>{quiz.date}</TableCell>
+                  <TableCell>{quiz.createdAt}</TableCell>
                   <TableCell>
-                    <IconButton aria-label="delete" style={{ color: 'red' }}>
+                    <IconButton aria-label="delete" style={{ color: 'red' }} onClick={() => handleDelete(quiz._id)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

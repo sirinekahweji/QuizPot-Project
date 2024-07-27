@@ -84,8 +84,8 @@ const Users = () => {
         Users
       </Typography>
       <Paper elevation={3}>
-        <TableContainer>
-          <Table>
+        <TableContainer style={{ maxHeight: 400, overflowY: 'auto' }}>
+          <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>

@@ -102,8 +102,8 @@ const getResponseForms = async (req, res) => {
 
   const deleteResponseForm = async (req, res) => {
     const { id } = req.params;
-    const userId = req.user._id;
-  
+
+    
     try {
       if (!mongoose.Types.ObjectId.isValid(id)) {
         console.log( 'Invalid quiz ID');
@@ -112,9 +112,8 @@ const getResponseForms = async (req, res) => {
       }
       console.log("avant deleted" );
 
-      const responseForm = await ResponseForm.findOneAndDelete({ _id: id, userId });
+      const responseForm = await ResponseForm.findOneAndDelete({ _id: id });
       console.log("responseForm deleted" ,responseForm);
-
       if(responseForm.file){
         await fs.unlink(responseForm.file)
 
@@ -138,6 +137,17 @@ const getResponseForms = async (req, res) => {
     }
   };
 
+
+  const getAllFormResponses = async (req, res) => {
+    try {
+      const responseForms = await ResponseForm.find().populate('userId', 'name');
+
+      res.status(200).json(responseForms);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to retrieve all response forms' });
+    }
+  };
+
 module.exports = {
-  saveResponseForm,getResponseForms,deleteResponseForm
+  saveResponseForm,getResponseForms,deleteResponseForm,getAllFormResponses
 };
