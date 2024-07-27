@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthContext } from '../../Hooks/useAuthContext';
+import { useLogout } from "../../Hooks/useLogout";
 
 
 import axios from 'axios';
@@ -102,11 +103,11 @@ const Dashboard = () => {
             <Paper elevation={3}>
               <BarChart
                 width={400}
-                height={250}
+                height={265}
                 data={quizData}
                 margin={{
                   top: 5,
-                  right: 20,
+                  right: 10,
                   left: 10,
                   bottom: 5,
                 }}
@@ -127,11 +128,11 @@ const Dashboard = () => {
             <Paper elevation={3}>
               <LineChart
                 width={400}
-                height={250}
+                height={265}
                 data={accountData}
                 margin={{
                   top: 5,
-                  right: 20,
+                  right: 10,
                   left: 10,
                   bottom: 5,
                 }}

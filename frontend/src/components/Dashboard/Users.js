@@ -116,13 +116,13 @@ const Users = () => {
           />
         </Box>
       <Paper elevation={3} style={{ padding: 16 }}>
-        <TableContainer style={{ maxHeight: 350, overflowY: 'auto' }}>
+        <TableContainer style={{ maxHeight: 386, overflowY: 'auto' }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>Email</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

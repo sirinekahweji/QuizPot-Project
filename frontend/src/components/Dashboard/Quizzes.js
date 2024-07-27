@@ -113,14 +113,14 @@ const Quizzes = () => {
         />
       </Box>
       <Paper elevation={3} style={{ padding: 16 }}>
-        <TableContainer style={{ maxHeight: 420, overflowY: 'auto' }}>
+        <TableContainer style={{ maxHeight: 386, overflowY: 'auto' }}>
           <Table stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Topic</TableCell>
                 <TableCell>Creator</TableCell>
                 <TableCell>Date</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
