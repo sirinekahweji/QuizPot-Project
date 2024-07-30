@@ -73,9 +73,8 @@ const Home = () => {
                 <h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>
                 {user.role === 'admin' && (
                     <button className="dashboard-button" onClick={handleDashboardClick}>
-                                    <img src={dashboardIcon} className='IconForm' alt='formIcon' />
-
-                        Dashboard
+                                <img src={dashboardIcon} className='IconDashboard' alt='formIcon' />
+                                {currentLangData.home.dashboard}
                     </button>
                 )}
             </div>

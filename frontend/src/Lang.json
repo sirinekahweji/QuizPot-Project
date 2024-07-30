@@ -51,7 +51,8 @@
     "home": {
       "welcome": "Welcome",
       "text": "Fill the form and get your quizzes",
-      "content": "Content"
+      "content": "Content",
+      "dashboard":"dashboard"
     },
     "noQuestions": {
       "text1": "No Questions Avaible ...",
@@ -137,7 +138,9 @@
     "home": {
       "welcome": "Bienvenue",
       "text": "Remplissez le formulaire et obtenez vos quiz",
-      "content": "contenu"
+      "content": "contenu",
+      "dashboard":"tableau de bord"
+
     },
     "noQuestions": {
       "text1": "Aucune question disponible ...",

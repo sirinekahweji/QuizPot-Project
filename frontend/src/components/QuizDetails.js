@@ -158,7 +158,6 @@ const generatePDF = (qs, formresponse) => {
         
             </div>
           ))}
-
         </div>
       </Modal.Body>
       <Modal.Footer>

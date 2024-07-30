@@ -12,6 +12,18 @@
     width: 150px;
     margin-left: 2%;
 }
+.home-button {
+    margin-left:  70%;
+    margin-top: 17px;
+    color: rgb(14, 14, 14);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.home-button:hover {
+}
+
 
 .language {
     padding-right: 2%;
