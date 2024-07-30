@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useAuthContext } from '../../Hooks/useAuthContext';
-import { useLogout } from "../../Hooks/useLogout";
-
-
 import axios from 'axios';
 import {
   Grid,
@@ -16,6 +13,7 @@ import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, L
 import PersonIcon from '@mui/icons-material/Person';
 import QuizIcon from '@mui/icons-material/Quiz';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import { LangContext } from '../../context/LangContext';
 
 const Dashboard = () => {
   const { user } = useAuthContext();
@@ -24,6 +22,7 @@ const Dashboard = () => {
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [quizData, setQuizData] = useState([]);
   const [accountData, setAccountData] = useState([]);
+  const { currentLangData } = useContext(LangContext);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -34,7 +33,6 @@ const Dashboard = () => {
             'Authorization': `Bearer ${user.token}`
           }
         });
-        console.log("responnce",response);
         const { totalUsers, totalQuizzes, totalQuestions, quizzesPerDay, accountsPerDay } = response.data;
 
         setTotalUsers(totalUsers);
@@ -53,14 +51,14 @@ const Dashboard = () => {
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
-        Dashboard
+        {currentLangData.dashboard.dashboard}
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4}>
           <Card>
             <CardContent>
               <Typography variant="subtitle1" color="textSecondary" gutterBottom>
-                <PersonIcon /> Total Users
+                <PersonIcon /> {currentLangData.dashboard.users}
               </Typography>
               <Typography variant="h5" style={{ color: 'purple' }}>
                 {totalUsers}
@@ -72,7 +70,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography variant="subtitle1" color="textSecondary" gutterBottom>
-                <QuizIcon /> Total Quizzes
+                <QuizIcon /> {currentLangData.dashboard.quizzes}
               </Typography>
               <Typography variant="h5" style={{ color: 'orange' }}>
                 {totalQuizzes}
@@ -84,7 +82,7 @@ const Dashboard = () => {
           <Card>
             <CardContent>
               <Typography variant="subtitle1" color="textSecondary" gutterBottom>
-                <QuestionAnswerIcon /> Total Questions
+                <QuestionAnswerIcon /> {currentLangData.dashboard.questions}
               </Typography>
               <Typography variant="h5" style={{ color: 'purple' }}>
                 {totalQuestions}
@@ -98,7 +96,7 @@ const Dashboard = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1" gutterBottom>
-              Quizzes Per Day
+              {currentLangData.dashboard.quizzesPerDay}
             </Typography>
             <Paper elevation={3}>
               <BarChart
@@ -123,7 +121,7 @@ const Dashboard = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="subtitle1" gutterBottom>
-              Accounts Created Per Day
+              {currentLangData.dashboard.accountsPerDay}
             </Typography>
             <Paper elevation={3}>
               <LineChart

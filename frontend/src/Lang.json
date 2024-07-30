@@ -2,7 +2,8 @@
   "EN": {
     "navbar": {
       "en": "EN",
-      "fr": "FR"
+      "fr": "FR",
+      "home":"Home"
     },
     "success": "Success",
     "passwordUpdated": "Password updated successfully",
@@ -54,12 +55,16 @@
       "content": "Content",
       "dashboard":"dashboard"
     },
-    "dashboard":{
-       "dashboard":"Dashboard",
-       "users":"Users",
-       "quizzes":"Quizzes",
-       "logout":"Logout"
-        },
+ 
+    "dashboard": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "quizzes": "Quizzes",
+      "questions":"Questions",
+      "logout": "Logout",
+      "quizzesPerDay": "Quizzes Per Day",
+      "accountsPerDay": "Accounts Created Per Day"
+    },
     "noQuestions": {
       "text1": "No Questions Avaible ...",
       "text2": "Fill the form and get your Questions"
@@ -122,7 +127,9 @@
   "FR": {
     "navbar": {
       "en": "EN",
-      "fr": "FR"
+      "fr": "FR",
+      "home":"Accueil"
+
     },
     "success": "Succès",
     "passwordUpdated": "Mot de passe mis à jour avec succès",
@@ -183,12 +190,7 @@
       "newPassword": "Nouveau mot de passe",
       "button": "Réinitialiser"
     },
-    "dashboard": {
-    "dashboard": "Tableau de bord",
-    "users": "Utilisateurs",
-    "quizzes": "Questionnaires",
-    "logout": "Déconnexion"
-},
+  
       "services": {
       "form": "Formulaire",
       "questions": "Questions",
@@ -229,6 +231,16 @@
       "signUpButton": "S'inscrire",
       "signInLink": "Se connecter"
     },
+    "dashboard": {
+      "dashboard": "Tableau de bord",
+      "users": "Utilisateurs",
+      "quizzes": "Questionnaires",
+      "questions":"Questions",
+      "logout": "Déconnexion",
+      "quizzesPerDay": "Questionnaires par jour",
+      "accountsPerDay": "Comptes créés par jour"
+    },
+
     "profile": {
       "myQuizzesTitle": "Mes Quiz",
       "createQuizFolder": "Créer un dossier",

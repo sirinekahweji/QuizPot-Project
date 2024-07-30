@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useContext} from 'react';
 import { useAuthContext } from '../../Hooks/useAuthContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { LangContext } from '../../context/LangContext';
+
 import {
   Typography,
   Box,
@@ -25,6 +27,8 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const { user } = useAuthContext();
+  const { currentLangData } = useContext(LangContext);
+
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -85,7 +89,9 @@ const Users = () => {
   return (
     <Box>
          <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-          <Typography variant="h4">Users</Typography>
+          <Typography variant="h4">{currentLangData.dashboard.users} 
+            
+          </Typography>
           <TextField
             variant="outlined"
             placeholder="Search users"

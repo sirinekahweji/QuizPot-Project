@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { useAuthContext } from '../../Hooks/useAuthContext';
+import { LangContext } from '../../context/LangContext';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import {
@@ -24,6 +25,8 @@ const Quizzes = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const { user } = useAuthContext();
+  const { currentLangData } = useContext(LangContext);
+
 
   useEffect(() => {
     const fetchQuizzes = async () => {
@@ -82,7 +85,7 @@ const Quizzes = () => {
   return (
     <Box>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h4">Quizzes</Typography>
+        <Typography variant="h4">{currentLangData.dashboard.quizzes} </Typography>
         <TextField
           variant="outlined"
           placeholder="Search quizzes"

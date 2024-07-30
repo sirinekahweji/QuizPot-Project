@@ -23,7 +23,8 @@ const NavBar = () => {
             
             {location.pathname === '/dashboard' && (
                 <p className="home-button" onClick={handleHomeClick}>
-                    <i class="bi bi-house-fill"></i>  Home
+                    <i class="bi bi-house-fill"></i>  
+                    {currentLangData.navbar.home}
                 </p>
             )}
             
