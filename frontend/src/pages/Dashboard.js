@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useContext} from 'react';
 import { Box, List, ListItem, ListItemIcon, ListItemText, styled,  } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
@@ -8,23 +8,25 @@ import DashboardComponent from '../components/Dashboard/Dashboard';
 import UsersComponent from '../components/Dashboard/Users';
 import QuizzesComponent from '../components/Dashboard/Quizzes';
 import { useLogout } from "../Hooks/useLogout";
+import { LangContext } from '../context/LangContext';
+
 
 
 const Sidebar = styled(Box)(({ theme }) => ({
-  width: 200,
+  width: 240,
   position: 'fixed',
   top: 70,
   left: 0,
   height: '100%',
   backgroundColor: theme.palette.background.paper,
-  padding: theme.spacing(2),
+  padding: theme.spacing(1),
   boxShadow: theme.shadows[2],
   display: 'flex',
   flexDirection: 'column',
 }));
 
 const MainContent = styled(Box)(({ theme }) => ({
-  marginLeft: 200,
+  marginLeft: 240,
   marginTop: -70,
   padding: theme.spacing(3),
   flexGrow: 1,
@@ -38,8 +40,11 @@ const ListItemStyled = styled(ListItem)(({ theme, selected }) => ({
 }));
 
 const Dashboard = () => {
+
   const [selectedComponent, setSelectedComponent] = useState('Dashboard');
   const logout = useLogout();
+  const { currentLangData } = useContext(LangContext);
+
   
   const handleClick = () => {
     logout();
@@ -72,7 +77,7 @@ const Dashboard = () => {
             <ListItemIcon>
               <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Dashboard" />
+            <ListItemText primary={currentLangData.dashboard.dashboard} />
           </ListItemStyled>
           <ListItemStyled 
             button 
@@ -82,7 +87,7 @@ const Dashboard = () => {
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary="Users" />
+            <ListItemText primary={currentLangData.dashboard.users}  />
           </ListItemStyled>
           <ListItemStyled 
             button 
@@ -92,14 +97,14 @@ const Dashboard = () => {
             <ListItemIcon>
               <QuizIcon />
             </ListItemIcon>
-            <ListItemText primary="Quizzes" />
+            <ListItemText primary={currentLangData.dashboard.quizzes}  />
           </ListItemStyled>
           <Box mt="auto">
             <ListItem onClick={handleClick} >
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary="Logout"  />
+              <ListItemText primary={currentLangData.dashboard.logout}   />
             </ListItem>
           </Box>
         </List>

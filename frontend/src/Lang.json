@@ -54,6 +54,12 @@
       "content": "Content",
       "dashboard":"dashboard"
     },
+    "dashboard":{
+       "dashboard":"Dashboard",
+       "users":"Users",
+       "quizzes":"Quizzes",
+       "logout":"Logout"
+        },
     "noQuestions": {
       "text1": "No Questions Avaible ...",
       "text2": "Fill the form and get your Questions"
@@ -177,6 +183,12 @@
       "newPassword": "Nouveau mot de passe",
       "button": "Réinitialiser"
     },
+    "dashboard": {
+    "dashboard": "Tableau de bord",
+    "users": "Utilisateurs",
+    "quizzes": "Questionnaires",
+    "logout": "Déconnexion"
+},
       "services": {
       "form": "Formulaire",
       "questions": "Questions",
