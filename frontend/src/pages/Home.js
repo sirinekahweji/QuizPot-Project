@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import Form from '../components/Form';
 import Quizzes from '../components/Myquizzes';
@@ -8,6 +9,8 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { LangContext } from '../context/LangContext';
 import { useLogout } from "../Hooks/useLogout";
+import dashboardIcon from '../assets/dashboardIcon.png';
+
 
 const Home = () => {
     const { user } = useAuthContext();
@@ -16,6 +19,7 @@ const Home = () => {
     const { currentLangData } = useContext(LangContext);
     const logout = useLogout();
     const [selectedContent, setSelectedContent] = useState('form');
+    const navigate = useNavigate();
 
     const handleClick = () => {
         logout();
@@ -27,6 +31,10 @@ const Home = () => {
 
     const handleContentSelect = (content) => {
         setSelectedContent(content);
+    };
+
+    const handleDashboardClick = () => {
+        navigate('/dashboard');
     };
 
     const progressBar = (widthPerc, gradient = false) => {
@@ -60,30 +68,39 @@ const Home = () => {
 
     return (
         <div className="homePage">
-            <Sources></Sources>
-            <h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>
+            <Sources />
+            <div className="welcome-header">
+                <h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>
+                {user.role === 'admin' && (
+                    <button className="dashboard-button" onClick={handleDashboardClick}>
+                                    <img src={dashboardIcon} className='IconForm' alt='formIcon' />
+
+                        Dashboard
+                    </button>
+                )}
+            </div>
             <p className='welcomeText'>{currentLangData.home.text}</p>
 
             <div className='content'>
-            <p className='titleContent'>{currentLangData.home.content}</p>
-            <p
-                className={`formcontent ${selectedContent === 'form' ? 'selected' : ''}`}
-                onClick={() => handleContentSelect('form')}
-            >
-                <i className={currentLangData.questions.mcq.icon}></i> {currentLangData.services.form}
-            </p>
-            <p
-                className={`questionsContent ${selectedContent === 'questions' ? 'selected' : ''}`}
-                onClick={() => handleContentSelect('questions')}
-            >
-                <i className={currentLangData.questions.open.icon}></i> {currentLangData.services.questions}
-            </p>
-            <p 
-             className={`myquizzesContent ${selectedContent === 'myquizzes' ? 'selected' : ''}`}
-             onClick={() => handleContentSelect('myquizzes')}
-            >
-                <i className="bi bi-chat-heart-fill"></i> {currentLangData.services.myquizzes}
-            </p>
+                <p className='titleContent'>{currentLangData.home.content}</p>
+                <p
+                    className={`formcontent ${selectedContent === 'form' ? 'selected' : ''}`}
+                    onClick={() => handleContentSelect('form')}
+                >
+                    <i className={currentLangData.questions.mcq.icon}></i> {currentLangData.services.form}
+                </p>
+                <p
+                    className={`questionsContent ${selectedContent === 'questions' ? 'selected' : ''}`}
+                    onClick={() => handleContentSelect('questions')}
+                >
+                    <i className={currentLangData.questions.open.icon}></i> {currentLangData.services.questions}
+                </p>
+                <p
+                    className={`myquizzesContent ${selectedContent === 'myquizzes' ? 'selected' : ''}`}
+                    onClick={() => handleContentSelect('myquizzes')}
+                >
+                    <i className="bi bi-chat-heart-fill"></i> {currentLangData.services.myquizzes}
+                </p>
                 <div className="score-wrap">
                     <div className="score">
                         <div className="score-bar">
@@ -103,11 +120,11 @@ const Home = () => {
                 <p onClick={handleClick} className='logout-btn'><i className="bi bi-box-arrow-right"></i> {currentLangData.logout}</p>
             </div>
 
-            {selectedContent === 'form' && <Form handleScoreUpdate={handleScoreUpdate}  onContentSelect={handleContentSelect}/>}
+            {selectedContent === 'form' && <Form handleScoreUpdate={handleScoreUpdate} onContentSelect={handleContentSelect} />}
             {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate} />}
-            {selectedContent === 'myquizzes' && <Quizzes  />}
+            {selectedContent === 'myquizzes' && <Quizzes />}
         </div>
     );
-}
+};
 
 export default Home;

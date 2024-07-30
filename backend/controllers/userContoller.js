@@ -18,7 +18,7 @@ const loginUser = async (req, res) => {
     // create token
     const token = createToken(user._id);
 
-    const response = { name: user.name, email, token };
+    const response = { name: user.name,role: user.role, email, token };
     //console.log('Login Response:', response); 
     res.status(200).json(response);
   } catch (error) {
@@ -38,7 +38,7 @@ const signupUser = async (req, res) => {
     // create token
     const token = createToken(user._id);
 
-    const response = { name, email, token };
+    const response = { name,role: user.role , email, token };
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -134,28 +134,6 @@ const getUsers = async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-
-/*const deleteUser = async (req, res) => {
-  const { id } = req.params;
-  console.log("id user delete", id)
-
-  try {
-    const user = await User.findByIdAndDelete(id);
-
-    if (!user) {
-      console.log("not found  user delete")
-
-      return res.status(404).json({ message: 'User not found' });
-    }
-    console.log("deleted successfully")
-
-    res.status(200).json({ message: 'User deleted successfully' });
-  } catch (error) {
-    console.log("server erreur")
-
-    res.status(500).json({ message: 'Server error' });
-  }
-};*/
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;

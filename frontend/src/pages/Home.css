@@ -10,6 +10,29 @@
   padding-left: 6%;
   font-weight: bold;
 }
+.welcome-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard-button {
+  background-color: white;
+  color: rgb(238, 156, 4);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  display: flex;
+  font-weight: bold;
+}
+
+.dashboard-button:hover {
+  color: rgb(135, 3, 150);
+
+}
+
 .welcome{
   padding-top: 1%;
   color: rgb(236, 155, 5);
