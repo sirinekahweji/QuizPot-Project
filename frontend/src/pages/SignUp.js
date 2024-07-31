@@ -4,6 +4,8 @@ import { LangContext } from '../context/LangContext';
 import './SignUp.css';
 import videoBg from '../assets/videos/bg1.mp4';
 import { useSignup } from '../Hooks/useSignUp';
+import swal from 'sweetalert2';
+
 
 const SignUp = () => {
     const { currentLangData } = useContext(LangContext);
@@ -18,8 +20,11 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (password !== passwordConf) {
-            alert("Passwords do not match");
-            return;
+            swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Passwords do not match',
+            });            return;
         }
         await signup(name, email, password);
     }

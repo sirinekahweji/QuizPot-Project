@@ -66,11 +66,13 @@ const Quizzes = () => {
           }
         });
         setQuizzes(quizzes.filter(quiz => quiz._id !== id));
-        Swal.fire(
-          'Deleted!',
-          'Your quiz has been deleted.',
-          'success'
-        );
+        Swal.fire({
+          icon: 'success',
+          title: 'Deleted',
+          text: 'The quiz has been deleted.',
+          timer: 2000,
+          showConfirmButton: false
+        });
       } catch (error) {
         console.error('Error deleting quiz:', error);
         Swal.fire(
