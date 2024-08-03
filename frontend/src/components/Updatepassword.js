@@ -26,6 +26,8 @@ const Updatepassword = ({ showModal, closeModal ,email}) => {
                     icon: 'success',
                     confirmButtonText: 'OK'
                 });
+                setOldPassword("");
+                setNewPassword("");
                 closeModal();
             } else {
                 Swal.fire({
@@ -48,7 +50,7 @@ const Updatepassword = ({ showModal, closeModal ,email}) => {
 
     return (
         <div className={`modal fade ${showModal ? 'show' : ''}`} tabIndex="-1" role="dialog" style={{ display: showModal ? 'block' : 'none' }}>
-            <div className="modal-dialog" role="document">
+            <div className="modal-dialogupdate" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">{currentLangData.updatePasswordTitle}</h5>

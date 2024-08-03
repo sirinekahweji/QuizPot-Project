@@ -70,7 +70,7 @@ const saveQuestions = async (req, res) => {
   }
 };
 
-const generateQuestions = async (req, res) => {
+/*const generateQuestions = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
   const file = req.file;
   console.log("file", file)
@@ -160,7 +160,102 @@ c) <Choice C>
 
 
   }
+};*/
+
+const generateQuestions = async (req, res) => {
+  const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
+  const file = req.file;
+  console.log("file", file);
+
+  if (!file) {
+    try {
+      const testPrompt = `create ${numQuestions} QCM questions on the topic "${topic}" at ${level} level with ${difficulty} difficulty. Focus areas: ${focusAreas}.with each question having 3 choices and only one correct choice.The format should be like these and in the Answers il ya le lettre  et le text de correct answer et sans des etoiles avant et apres la correct answer :
+        1. <Question 1>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+2. <Question 2>
+a) <Choice A>
+b) <Choice B>
+c) <Choice C>
+...
+## Answers:
+1. <Answer 1>;
+2. <Answer 2>;
+..`;
+
+      let questions = [];
+
+      while (questions.length === 0) {
+        const response = await run(testPrompt);
+        questions = parseGeminiResponse(response);
+
+        if (questions.length > 0) {
+          break;
+        }
+        console.log("Questions were not generated. Retrying...");
+      }
+
+      for (const question of questions) {
+        if (!question.question || question.choices.length !== 3 || !question.answer) {
+          return res.status(500).json({ message: "Error generating questions" });
+        }
+        for (const choice of question.choices) {
+          if (!choice) {
+            return res.status(500).json({ message: "Error generating questions" });
+          }
+        }
+      }
+
+      return res.status(200).json({ message: questions });
+    } catch (error) {
+      console.error('Error generating questions:', error);
+      if (!res.headersSent) {
+        return res.status(500).json({ error: error.message });
+      }
+    }
+  } else {
+    try {
+      const fileName = file.originalname;
+      const fileExtension = fileName.split('.').pop().toLowerCase();
+      let text = '';
+
+      switch (fileExtension) {
+        case 'pdf':
+          text = await extractTextFromPDF(file.path);
+          console.log("text", text);
+          await fs.unlink(file.path);
+          return await generateQuestionsfromText(req, res, text);
+        case 'doc':
+        case 'docx':
+          text = await extractTextFromDOCX(file.path);
+          console.log("text", text);
+          await fs.unlink(file.path);
+          return await generateQuestionsfromText(req, res, text);
+        case 'txt':
+          text = await extractTextFromFile(file.path);
+          console.log("text", text);
+          await fs.unlink(file.path);
+          return await generateQuestionsfromText(req, res, text);
+        case 'jpg':
+        case 'jpeg':
+        case 'png':
+        case 'webp':
+        case 'heic':
+        case 'heif':
+          return await generateFromImage(req, res);
+        default:
+          return res.status(400).json({ message: "Unsupported file format" });
+      }
+    } catch (error) {
+      console.error('Error processing file:', error);
+      if (!res.headersSent) {
+        return res.status(500).json({ error: error.message });
+      }
+    }
+  }
 };
+
 
 const generateFromImage = async (req, res) => {
   const { topic, difficulty, level, numQuestions, focusAreas } = req.body;
