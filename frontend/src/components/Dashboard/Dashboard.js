@@ -14,6 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import QuizIcon from '@mui/icons-material/Quiz';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import { LangContext } from '../../context/LangContext';
+import './Dashboard.css'; 
 
 const Dashboard = () => {
   const { user } = useAuthContext();
@@ -55,7 +56,7 @@ const Dashboard = () => {
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
+          <Card className="card-container">
             <CardContent>
               <Typography variant="subtitle1" color="textSecondary" gutterBottom>
                 <PersonIcon /> {currentLangData.dashboard.users}
@@ -67,7 +68,7 @@ const Dashboard = () => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
+          <Card className="card-container">
             <CardContent>
               <Typography variant="subtitle1" color="textSecondary" gutterBottom>
                 <QuizIcon /> {currentLangData.dashboard.quizzes}
@@ -79,7 +80,7 @@ const Dashboard = () => {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Card>
+          <Card className="card-container">
             <CardContent>
               <Typography variant="subtitle1" color="textSecondary" gutterBottom>
                 <QuestionAnswerIcon /> {currentLangData.dashboard.questions}
@@ -94,11 +95,11 @@ const Dashboard = () => {
 
       <Box mt={2}>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <Typography variant="subtitle1" gutterBottom>
+          <Grid item xs={12} md={6} >
+            <Typography variant="subtitle1" gutterBottom >
               {currentLangData.dashboard.quizzesPerDay}
             </Typography>
-            <Paper elevation={3}>
+            <Paper elevation={3} className="card-container" >
               <BarChart
                 width={400}
                 height={265}
@@ -123,7 +124,7 @@ const Dashboard = () => {
             <Typography variant="subtitle1" gutterBottom>
               {currentLangData.dashboard.accountsPerDay}
             </Typography>
-            <Paper elevation={3}>
+            <Paper elevation={3} className="card-container">
               <LineChart
                 width={400}
                 height={265}

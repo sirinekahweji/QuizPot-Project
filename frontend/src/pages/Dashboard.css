@@ -1,0 +1,10 @@
+.icon-fade {
+    animation: fade 2s infinite;
+  }
+  
+  @keyframes fade {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  

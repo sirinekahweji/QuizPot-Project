@@ -1,5 +1,5 @@
-import React, { useState ,useContext} from 'react';
-import { Box, List, ListItem, ListItemIcon, ListItemText, styled,  } from '@mui/material';
+import React, { useState, useContext } from 'react';
+import { Box, List, ListItem, ListItemIcon, ListItemText, styled } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import QuizIcon from '@mui/icons-material/Quiz';
@@ -9,8 +9,7 @@ import UsersComponent from '../components/Dashboard/Users';
 import QuizzesComponent from '../components/Dashboard/Quizzes';
 import { useLogout } from "../Hooks/useLogout";
 import { LangContext } from '../context/LangContext';
-
-
+import './Dashboard.css'; // Assurez-vous d'importer le fichier CSS
 
 const Sidebar = styled(Box)(({ theme }) => ({
   width: 240,
@@ -40,16 +39,13 @@ const ListItemStyled = styled(ListItem)(({ theme, selected }) => ({
 }));
 
 const Dashboard = () => {
-
   const [selectedComponent, setSelectedComponent] = useState('Dashboard');
   const logout = useLogout();
   const { currentLangData } = useContext(LangContext);
 
-  
   const handleClick = () => {
     logout();
-};
-
+  };
 
   const renderComponent = () => {
     switch (selectedComponent) {
@@ -67,44 +63,43 @@ const Dashboard = () => {
   return (
     <Box display="flex">
       <Sidebar>
-
         <List>
-          <ListItemStyled 
-            button 
-            onClick={() => setSelectedComponent('Dashboard')} 
+          <ListItemStyled
+            button
+            onClick={() => setSelectedComponent('Dashboard')}
             selected={selectedComponent === 'Dashboard'}
           >
-            <ListItemIcon>
+            <ListItemIcon className="icon-fade">
               <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary={currentLangData.dashboard.dashboard} />
           </ListItemStyled>
-          <ListItemStyled 
-            button 
-            onClick={() => setSelectedComponent('Users')} 
+          <ListItemStyled
+            button
+            onClick={() => setSelectedComponent('Users')}
             selected={selectedComponent === 'Users'}
           >
-            <ListItemIcon>
+            <ListItemIcon className="icon-fade">
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary={currentLangData.dashboard.users}  />
+            <ListItemText primary={currentLangData.dashboard.users} />
           </ListItemStyled>
-          <ListItemStyled 
-            button 
-            onClick={() => setSelectedComponent('Quizzes')} 
+          <ListItemStyled
+            button
+            onClick={() => setSelectedComponent('Quizzes')}
             selected={selectedComponent === 'Quizzes'}
           >
-            <ListItemIcon>
+            <ListItemIcon className="icon-fade">
               <QuizIcon />
             </ListItemIcon>
-            <ListItemText primary={currentLangData.dashboard.quizzes}  />
+            <ListItemText primary={currentLangData.dashboard.quizzes} />
           </ListItemStyled>
           <Box mt="auto">
-            <ListItem onClick={handleClick} >
-              <ListItemIcon>
+            <ListItem onClick={handleClick}>
+              <ListItemIcon className="icon-fade">
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary={currentLangData.dashboard.logout}   />
+              <ListItemText primary={currentLangData.dashboard.logout} />
             </ListItem>
           </Box>
         </List>

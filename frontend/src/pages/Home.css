@@ -66,6 +66,26 @@
   color: rgb(236, 155, 5);
 }
 
+/* Home.css */
+
+.IconDashboard {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.IconContent {
+  width: 35px;
+  height: 35px;
+  margin-right: 8px;
+}
+
+.IconLogout {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
 
 /*score style*/
 .score-wrap {
