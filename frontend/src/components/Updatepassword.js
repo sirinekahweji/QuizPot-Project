@@ -1,15 +1,17 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 import './Updatepassword.css';
 import { LangContext } from '../context/LangContext';
 
-const Updatepassword = ({ showModal, closeModal ,email}) => {
+const Updatepassword = ({ showModal, closeModal, email }) => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [passwordConfVisible, setPasswordConfVisible] = useState(false);
     const [newPasswordVisible, setNewPasswordVisible] = useState(false);
     const { currentLangData } = useContext(LangContext);
+    const navigate = useNavigate();
 
     const handleChangePassword = async () => {
         try {
@@ -25,10 +27,12 @@ const Updatepassword = ({ showModal, closeModal ,email}) => {
                     text: currentLangData.passwordUpdated,
                     icon: 'success',
                     confirmButtonText: 'OK'
+                }).then(() => {
+                    setOldPassword("");
+                    setNewPassword("");
+                    closeModal();
+                    navigate('/');
                 });
-                setOldPassword("");
-                setNewPassword("");
-                closeModal();
             } else {
                 Swal.fire({
                     title: currentLangData.error,
@@ -36,6 +40,8 @@ const Updatepassword = ({ showModal, closeModal ,email}) => {
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
+                setOldPassword("");
+                setNewPassword("");
             }
         } catch (error) {
             console.error('Error updating password:', error);
@@ -45,6 +51,8 @@ const Updatepassword = ({ showModal, closeModal ,email}) => {
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
+            setOldPassword("");
+            setNewPassword("");
         }
     };
 

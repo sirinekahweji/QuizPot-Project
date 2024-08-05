@@ -12,7 +12,7 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 import questionsIcon from '../assets/questions.png';
 
 
-const QCMType = ({ handleScoreUpdate }) => {
+const QCMType = ({ handleScoreUpdate ,onContentSelect}) => {
     const { currentLangData } = useContext(LangContext);
     const { questions, setQuestions } = useContext(QuestionsContext);
     const [selectedChoices, setSelectedChoices] = useState({});
@@ -33,6 +33,7 @@ const QCMType = ({ handleScoreUpdate }) => {
             file: null,
         });
     };
+  
 
 
 
@@ -164,7 +165,8 @@ const QCMType = ({ handleScoreUpdate }) => {
                     showConfirmButton: false
                 });
                 resetForm();
-
+                setQuestions(null);
+                onContentSelect('myquizzes'); 
                }
                else{
                  console.log("Error : form id is null")

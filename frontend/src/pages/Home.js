@@ -120,7 +120,7 @@ const Home = () => {
             </div>
 
             {selectedContent === 'form' && <Form handleScoreUpdate={handleScoreUpdate} onContentSelect={handleContentSelect} />}
-            {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate} />}
+            {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate}   onContentSelect={handleContentSelect} />}
             {selectedContent === 'myquizzes' && <Quizzes />}
         </div>
     );

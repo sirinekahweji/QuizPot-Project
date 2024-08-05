@@ -18,6 +18,7 @@ const ResetPassword = () => {
 
     const closeModal = () => {
         setShowModal(false);
+        setEmail('')
     };
 
     const handleForgotPassword = async (e) => {
