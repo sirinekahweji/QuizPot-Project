@@ -39,7 +39,11 @@
 }
 .logout-btn{
   color: rgb(253, 166, 3);
+  cursor:pointer;
 
+}
+.logout-btn:hover{
+  cursor:pointer;
 }
 
 .formcontent.selected,
