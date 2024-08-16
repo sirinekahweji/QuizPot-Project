@@ -216,7 +216,7 @@ const QCMType = ({ handleScoreUpdate ,onContentSelect}) => {
                     </div>
                     <div className='responcesdiv'>
                         {question.choices.map((choice, choiceIndex) => {
-                            const choiceLetter = String.fromCharCode(65 + choiceIndex).toLowerCase(); // Convert index to letter (A, B, C, ...)
+                            const choiceLetter = String.fromCharCode(65 + choiceIndex).toLowerCase();
                             const correctAnswerLetter = question.answer.charAt(0).toLowerCase();
                             const isSelected = selectedChoices[questionIndex] && selectedChoices[questionIndex].choiceIndex === choiceIndex;
                             const icon = isSelected ? (selectedChoices[questionIndex].isCorrect ? <BiCheckCircle className="icon-correct" /> : <BiXCircle className="icon-incorrect" />) : null;

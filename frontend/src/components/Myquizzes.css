@@ -6,6 +6,8 @@
     padding-top: 2%;
     font-size: 20px;
     margin-top: 4%;
+    animation: bounce 2s infinite;
+
   
 }
 .myquizzesComponent{
@@ -16,6 +18,8 @@
     width: 30px;
     height: 30px;
     margin-right: 1%;
+    animation: bounce 2s infinite;
+
 }
 
 .myquizzes{
