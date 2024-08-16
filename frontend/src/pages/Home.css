@@ -14,6 +14,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .dashboard-button {
@@ -145,3 +146,49 @@
     color: black;
 
   }
+  
+  .welcome {
+    display: flex;
+    align-items: center; /* Aligne les éléments verticalement au centre */
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 25px ;  
+  }
+  
+  .welcome > div:first-of-type {
+    animation: showup 15s infinite;
+    margin-right: 5px; /* Espace entre le message de bienvenue et le nom de l'utilisateur */
+  }
+  
+  .welcome > div:last-of-type {
+    width: 0px;
+    animation: reveal 15s infinite;
+  }
+  
+  .welcome > div:last-of-type span {
+    margin-left: -355px;
+    animation: slidein 19s infinite;
+  }
+  
+  @keyframes showup {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes slidein {
+    0% { margin-left: -800px; }
+    20% { margin-left: -800px; }
+    35% { margin-left: 0px; }
+    100% { margin-left: 0px; }
+  }
+  
+  @keyframes reveal {
+    0% { opacity: 0; width: 0px; }
+    20% { opacity: 1; width: 0px; }
+    30% { width: 355px; }
+    80% { opacity: 1; }
+    100% { opacity: 0; width: 355px; }
+  }
+  

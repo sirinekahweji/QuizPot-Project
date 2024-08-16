@@ -11,7 +11,26 @@
     height: 150px;
     width: 150px;
     margin-left: 2%;
+    /*animation: fade 2s infinite;*/
+    animation: beat 4s infinite;
+
+
 }
+@keyframes beat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+}
+  
+@keyframes fade {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
 .home-button {
     margin-left:  70%;
     margin-top: 17px;

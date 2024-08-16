@@ -70,11 +70,17 @@ const Home = () => {
         <div className="homePage">
             <Sources />
             <div className="welcome-header">
-                <h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>
+                {/*<h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>*/}
+                <div class="welcome">
+                    <div>{currentLangData.home.welcome},</div>
+                    <div>
+                        <span>{user.name}</span>
+                    </div>
+                </div>
                 {user.role === 'admin' && (
                     <button className="dashboard-button" onClick={handleDashboardClick}>
-                                <img src={dashboardIcon} className='IconDashboard' alt='formIcon' />
-                                {currentLangData.home.dashboard}
+                        <img src={dashboardIcon} className='IconDashboard' alt='formIcon' />
+                        {currentLangData.home.dashboard}
                     </button>
                 )}
             </div>
@@ -120,7 +126,7 @@ const Home = () => {
             </div>
 
             {selectedContent === 'form' && <Form handleScoreUpdate={handleScoreUpdate} onContentSelect={handleContentSelect} />}
-            {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate}   onContentSelect={handleContentSelect} />}
+            {selectedContent === 'questions' && <Questions handleScoreUpdate={handleScoreUpdate} onContentSelect={handleContentSelect} />}
             {selectedContent === 'myquizzes' && <Quizzes />}
         </div>
     );
