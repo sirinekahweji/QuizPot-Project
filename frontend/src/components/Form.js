@@ -114,7 +114,6 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
                 timer: 1500,
                 showConfirmButton: false
             });
-            //resetForm();
             onContentSelect('questions'); 
         } catch (error) {
             console.error('Error generating questions:', error);

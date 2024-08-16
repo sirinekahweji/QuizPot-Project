@@ -27,7 +27,17 @@
   font-size: 16px;
   display: flex;
   font-weight: bold;
+  animation: beat 5s infinite;
 }
+@keyframes beat {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(0.8);
+  }
+}
+
 .IconDashboard{
   width: 30px;
   height: 30px;
@@ -71,7 +81,6 @@
   color: rgb(236, 155, 5);
 }
 
-/* Home.css */
 
 .IconDashboard {
   width: 24px;
@@ -149,7 +158,7 @@
   
   .welcome {
     display: flex;
-    align-items: center; /* Aligne les éléments verticalement au centre */
+    align-items: center; 
     overflow: hidden;
     white-space: nowrap;
     font-size: 25px ;  
@@ -157,7 +166,7 @@
   
   .welcome > div:first-of-type {
     animation: showup 15s infinite;
-    margin-right: 5px; /* Espace entre le message de bienvenue et le nom de l'utilisateur */
+    margin-right: 5px; 
   }
   
   .welcome > div:last-of-type {

@@ -11,7 +11,6 @@
     height: 150px;
     width: 150px;
     margin-left: 2%;
-    /*animation: fade 2s infinite;*/
     animation: beat 4s infinite;
 
 
@@ -25,11 +24,6 @@
     }
 }
   
-@keyframes fade {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
-  }
 
 .home-button {
     margin-left:  70%;
@@ -38,9 +32,6 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-}
-
-.home-button:hover {
 }
 
 
