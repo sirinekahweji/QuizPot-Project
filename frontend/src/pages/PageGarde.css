@@ -33,23 +33,28 @@
 
 
 .title {
-    font-size: 10vw;
-    font-family: Arial, sans-serif; /* Web-safe font */
-    color: #fff; /* White text */
-    text-align: center; /* Center the text */
-    position: relative; /* Position relative for pseudo-elements */
-    animation: glow 2s ease-in-out infinite;
-  }
-  
-  @keyframes glow {
-    0% {
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #ff00ff;
+    text-align: left;
+    font-family: 'Oswald';
+    font-weight: bold;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    color: #ffffff;
+    filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #614ad3);
+    animation: glowing 1.5s ease-in-out infinite alternate;
+
+}
+
+
+@keyframes glowing {
+    from {
+        filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #614ad3);
     }
-    100% {
-      text-shadow: 0 0 10px #fff, 0 0 15px #ff00ff, 0 0 25px #ff00ff, 0 0 35px #ff00ff, 0 0 45px #ff00ff, 0 0 55px #ff00ff, 0 0 70px #ff00ff;
+    to {
+        filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #614ad3);
     }
-  }
-  
+}
+
+
 
 .left-container {
     display: flex;

@@ -1,5 +1,6 @@
 .icon-fade {
     animation: fade 2s infinite;
+    cursor: pointer;
   }
   
   @keyframes fade {
