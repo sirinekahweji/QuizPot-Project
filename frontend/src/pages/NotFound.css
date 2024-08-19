@@ -1,0 +1,10 @@
+.notfoundText{
+    color:white;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5%;
+    background-color: rgba(110, 4, 4, 0.5);
+    padding: 20px 20px;
+    width: 450px;
+    margin-left: 32%;
+}

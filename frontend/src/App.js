@@ -1,6 +1,7 @@
 import{BrowserRouter,Routes,Route,Navigate} from 'react-router-dom'
 import PageGarde from './pages/PageGarde';
 import Home from './pages/Home';
+import NotFound from './pages/NotFound'; 
 import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
@@ -34,6 +35,9 @@ function App() {
             <Route path="/dashboard" element={user && user.role === 'admin' ? <Dashboard /> : <Navigate to='/quizbot' />} />
             <Route path="/profile" element={user ? <Profile/> :<Navigate to='/'/> } />
             <Route path="/ResetPassword" element={!user ? <ResetPassword/> :<Navigate to='/quizbot'/> } />
+            <Route path="*" element={<NotFound />} /> 
+
+
          </Routes>
       </BrowserRouter>
       
