@@ -27,8 +27,8 @@ const ResetPassword = () => {
             const response = await axios.post('http://localhost:5000/api/user/forgot-password', { email });
             if (response.status === 200) {
                 Swal.fire({
-                    title: 'Succès',
-                    text: 'Un nouveau mot de passe a été envoyé à votre email.',
+                    title: 'Success',
+                    text: 'A new password has been sent to your email.',
                     icon: 'success',
                     confirmButtonText: 'OK'
                 }).then(() => {
@@ -36,16 +36,16 @@ const ResetPassword = () => {
                 });
             } else {
                 Swal.fire({
-                    title: 'Erreur',
-                    text: 'Une erreur s\'est produite. Veuillez réessayer.',
+                    title: 'Error',
+                    text: 'An error has occurred. Please try again.',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
             }
         } catch (err) {
             Swal.fire({
-                title: 'Erreur',
-                text: 'Une erreur s\'est produite. Veuillez réessayer.',
+                title: 'Error',
+                text: 'An error has occurred. Please try again..',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });

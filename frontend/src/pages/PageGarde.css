@@ -49,6 +49,7 @@
     from {
         filter: drop-shadow(0 0 5px #ffffff) drop-shadow(0 0 10px #614ad3);
     }
+
     to {
         filter: drop-shadow(0 0 10px #ffffff) drop-shadow(0 0 20px #614ad3);
     }
@@ -69,6 +70,7 @@
     font-size: 24px;
     font-weight: 100;
     color: #eee;
+
     div {
         overflow: hidden;
         position: relative;
@@ -76,15 +78,17 @@
         height: 65px;
         padding-top: 10px;
         margin-top: -10px;
+
         ul {
             padding: 0;
             margin: 0;
             list-style: none;
             position: relative;
         }
+
         li {
             font-family: 'Microsoft YaHei UI';
-            color: #dad8d8; 
+            color: #dad8d8;
             font-weight: bold;
             height: 45px;
             margin-bottom: 45px;
@@ -92,77 +96,197 @@
         }
     }
 }
+
 .highlight {
     color: orange;
 }
+
 .description {
     padding-left: 2%;
 }
 
 
 
-.flip2 { animation: flip2 12s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
-.flip3 { animation: flip3 16s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
-.flip4 { animation: flip4 20s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
-.flip5 { animation: flip5 24s cubic-bezier(0.23, 1, 0.32, 1.2) infinite; }
+.flip2 {
+    animation: flip2 12s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+}
+
+.flip3 {
+    animation: flip3 16s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+}
+
+.flip4 {
+    animation: flip4 20s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+}
+
+.flip5 {
+    animation: flip5 24s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+}
 
 @keyframes flip2 {
-    0% { margin-top: -180px; }
-    5% { margin-top: -90px;  }
-    50% { margin-top: -90px; }
-    55% { margin-top: 0px; }
-    99.99% { margin-top: 0px; }
-    100% { margin-top: -180px; }
+    0% {
+        margin-top: -180px;
+    }
+
+    5% {
+        margin-top: -90px;
+    }
+
+    50% {
+        margin-top: -90px;
+    }
+
+    55% {
+        margin-top: 0px;
+    }
+
+    99.99% {
+        margin-top: 0px;
+    }
+
+    100% {
+        margin-top: -180px;
+    }
 }
 
 @keyframes flip3 {
-    0% { margin-top: -270px; }
-    5% { margin-top: -180px; }
-    33% { margin-top: -180px; }
-    38% { margin-top: -90px; }
-    66% { margin-top: -90px; }
-    71% { margin-top: 0px; }
-    99.99% { margin-top: 0px; }
-    100% { margin-top: -270px; }
+    0% {
+        margin-top: -270px;
+    }
+
+    5% {
+        margin-top: -180px;
+    }
+
+    33% {
+        margin-top: -180px;
+    }
+
+    38% {
+        margin-top: -90px;
+    }
+
+    66% {
+        margin-top: -90px;
+    }
+
+    71% {
+        margin-top: 0px;
+    }
+
+    99.99% {
+        margin-top: 0px;
+    }
+
+    100% {
+        margin-top: -270px;
+    }
 }
 
 @keyframes flip4 {
-    0% { margin-top: -360px; }
-    5% { margin-top: -270px; }
-    25% { margin-top: -270px; }
-    30% { margin-top: -180px; }
-    50% { margin-top: -180px; }
-    55% { margin-top: -90px; }
-    75% { margin-top: -90px; }
-    80% { margin-top: 0px; }
-    99.99% { margin-top: 0px; }
-    100% { margin-top: -360px; }
+    0% {
+        margin-top: -360px;
+    }
+
+    5% {
+        margin-top: -270px;
+    }
+
+    25% {
+        margin-top: -270px;
+    }
+
+    30% {
+        margin-top: -180px;
+    }
+
+    50% {
+        margin-top: -180px;
+    }
+
+    55% {
+        margin-top: -90px;
+    }
+
+    75% {
+        margin-top: -90px;
+    }
+
+    80% {
+        margin-top: 0px;
+    }
+
+    99.99% {
+        margin-top: 0px;
+    }
+
+    100% {
+        margin-top: -360px;
+    }
 }
 
 @keyframes flip5 {
-    0% { margin-top: -450px; }
-    5% { margin-top: -360px; }
-    20% { margin-top: -360px; }
-    25% { margin-top: -270px; }
-    40% { margin-top: -270px; }
-    45% { margin-top: -180px; }
-    60% { margin-top: -180px; }
-    65% { margin-top: -90px; }
-    80% { margin-top: -90px; }
-    85% { margin-top: 0px; }
-    99.99% { margin-top: 0px; }
-    100% { margin-top: -450px; }
+    0% {
+        margin-top: -450px;
+    }
+
+    5% {
+        margin-top: -360px;
+    }
+
+    20% {
+        margin-top: -360px;
+    }
+
+    25% {
+        margin-top: -270px;
+    }
+
+    40% {
+        margin-top: -270px;
+    }
+
+    45% {
+        margin-top: -180px;
+    }
+
+    60% {
+        margin-top: -180px;
+    }
+
+    65% {
+        margin-top: -90px;
+    }
+
+    80% {
+        margin-top: -90px;
+    }
+
+    85% {
+        margin-top: 0px;
+    }
+
+    99.99% {
+        margin-top: 0px;
+    }
+
+    100% {
+        margin-top: -450px;
+    }
 }
+
 /* style buttons sign in / signup */
-.signup-btn:hover{
+.signup-btn:hover {
     color: rgb(236, 155, 5);
-    background-color:  rgb(254, 252, 252);
+    background-color: rgb(254, 252, 252);
 }
-.signin-btn:hover{
+
+.signin-btn:hover {
     color: rgb(236, 155, 5);
     background-color: rgb(242, 239, 239);
 }
- .signup-btn{
+
+.signup-btn {
     border-radius: 25px;
     color: black;
     background-color: white;
@@ -174,6 +298,7 @@
     height: 50px;
     border: none;
 }
+
 .signin-btn {
     border-radius: 25px;
     color: rgb(254, 252, 252);
@@ -186,16 +311,84 @@
     height: 50px;
     border: none;
 }
-.signup-btn{
+
+.signup-btn {
     margin-left: 20px;
 }
 
 .buttons {
-   
-    margin-top: 30%; 
+
+    margin-top: 30%;
     margin-right: 36%;
     display: flex;
     height: 100px;
 }
 
 
+@media (max-width: 700px) {
+    .pageGarde {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .left-container {
+        width: 100%;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    .title {
+        font-size: 2.5em;
+        padding-left: 0;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+
+    /*.description {
+        padding-left: 0;
+        text-align: center;
+    }*/
+
+    .signin-container {
+        margin-top: -17%;
+        margin-left: 20%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttons {
+        margin-right: 0;
+        margin-top: 20px;
+        justify-content: center;
+    }
+    .description {
+        display: none;
+      }
+      .wordCarousel {
+        display: none;
+      }
+}
+
+@media (max-width: 400px) {
+    .left-container {
+        width: 100%;
+        height: 70%;
+        padding: 1%;
+    }
+    .signin-container {
+        width: 90%;
+        margin-left: 30%;
+        margin-top: -20%;
+
+    }
+    .description {
+      display: none;
+    }
+    .wordCarousel {
+      display: none;
+    }
+}

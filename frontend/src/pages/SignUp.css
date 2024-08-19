@@ -3,7 +3,8 @@
     position: relative;
     overflow: hidden;
 }
-.error{
+
+.error {
     color: #ff0000;
     font-size: 12px;
     width: 100%;
@@ -33,7 +34,7 @@
     padding-left: 8%;
     padding-top: 1%;
     margin-top: 1%;
-    
+
 }
 
 .footer {
@@ -51,14 +52,15 @@
 }
 
 .contentsignup {
-    
+
     display: flex;
     justify-content: space-between;
     padding-left: 20px;
     padding-top: 2%;
 }
-.contentsignup form{
-    width: 60%;
+
+.contentsignup form {
+    width: 65%;
     padding-left: 33%;
     margin-top: -2%;
 }
@@ -89,7 +91,7 @@
     padding: 10px 20px;
     border-radius: 25px;
     border: none;
-    background-image: linear-gradient(135deg, rgb(236, 155, 5) 30%,  rgb(243, 182, 69) );
+    background-image: linear-gradient(135deg, rgb(236, 155, 5) 30%, rgb(243, 182, 69));
     color: white;
     font-size: 1em;
     cursor: pointer;
@@ -99,7 +101,56 @@
     margin-top: 1%;
 }
 
+@media (max-width: 900px) {
+    .btn-signup {
+        width: 70%;
+
+    }
+
+    .contentsignup form {
+        width: 70%;
+        margin-left: 2%;
+        margin-top: 0%;
 
 
+    }
+
+}
+
+@media (max-width: 650px) {
+    .btn-signup {
+        width: 70%;
+
+    }
+
+    .contentsignup form {
+        width: 75%;
+        margin-top: 4%;
 
 
+    }
+    .titlesignup{
+        margin-top: 50px;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .btn-signup {
+        width: 70%;
+
+    }
+
+    .contentsignup form {
+        width: 90%;
+        margin-left: -15%;
+        margin-top: 15%;
+        padding-bottom: 12%;
+
+    }
+    .titlesignup{
+        margin-top: 60px;
+    }
+  
+
+}
