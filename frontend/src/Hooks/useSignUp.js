@@ -19,11 +19,8 @@ export const useSignup = () => {
             });
 
             const json = response.data;
-            console.log('API Response:', json); // Ajoutez ce console.log
+            //console.log('API Response:', json); 
 
-            // Axios throws an error for status codes outside of the 2xx range
-            // so we don't need to manually check `response.ok`
-            // Checking for presence of an error message in the response data
             if (response.status !== 200 || json.error) {
                 setIsLoading(false);
                 setError(json.error);

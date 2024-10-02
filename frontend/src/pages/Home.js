@@ -70,7 +70,6 @@ const Home = () => {
         <div className="homePage">
             <Sources />
             <div className="welcome-header">
-                {/*<h2 className='welcome'>{currentLangData.home.welcome}, {user.name}</h2>*/}
                 <div class="welcome">
                     <div>{currentLangData.home.welcome},</div>
                     <div>

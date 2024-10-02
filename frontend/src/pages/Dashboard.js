@@ -9,7 +9,7 @@ import UsersComponent from '../components/Dashboard/Users';
 import QuizzesComponent from '../components/Dashboard/Quizzes';
 import { useLogout } from "../Hooks/useLogout";
 import { LangContext } from '../context/LangContext';
-import './Dashboard.css'; // Assurez-vous d'importer le fichier CSS
+import './Dashboard.css'; 
 
 const Sidebar = styled(Box)(({ theme }) => ({
   width: 240,

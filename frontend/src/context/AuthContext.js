@@ -18,7 +18,7 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log('LocalStorage User:', user); // Ajoutez ce console.log
+        //console.log('LocalStorage User:', user); 
 
         if (user) {
             dispatch({ type: 'LOGIN', payload: user });

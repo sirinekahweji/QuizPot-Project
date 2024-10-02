@@ -18,7 +18,7 @@ export const useSignin = () => {
             });
 
             const json = response.data;
-            console.log('API Response:', json); // Ajoutez ce console.log
+            //console.log('API Response:', json); 
 
             if (response.status !== 200 || json.error) {
                 setIsLoading(false);

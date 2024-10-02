@@ -7,7 +7,7 @@ export const LangContext = createContext();
 // Fournisseur de contexte
 export const LangProvider = ({ children }) => {
 
-    const [language, setLanguage] = useState('EN'); // État initial de la langue
+    const [language, setLanguage] = useState('EN'); 
 
     // Fonction pour changer la langue
     const changeLanguage = (lang) => {
