@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound'; 
 import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
-import Profile from './pages/Profile';
 import NavBar from './components/NavBar';
 import './index.css'; 
 import './'
@@ -33,7 +32,6 @@ function App() {
             <Route path="/signup" element={!user ? <SignUp/> : <Navigate to='/quizbot'/> } />
             <Route path="/quizbot" element={user ? <Home/> :<Navigate to='/'/> } />
             <Route path="/dashboard" element={user && user.role === 'admin' ? <Dashboard /> : <Navigate to='/quizbot' />} />
-            <Route path="/profile" element={user ? <Profile/> :<Navigate to='/'/> } />
             <Route path="/ResetPassword" element={!user ? <ResetPassword/> :<Navigate to='/quizbot'/> } />
             <Route path="*" element={<NotFound />} /> 
 
