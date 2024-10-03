@@ -9,6 +9,8 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 import { QuestionsContext } from '../context/QuestionsContext';
 import { LangContext } from '../context/LangContext';
 import { useLogout } from "../Hooks/useLogout";
+import { FormDataContext } from '../context/FormDataContext'; 
+
 import dashboardIcon from '../assets/dashboardIcon.png';
 
 
@@ -20,9 +22,20 @@ const Home = () => {
     const logout = useLogout();
     const [selectedContent, setSelectedContent] = useState('form');
     const navigate = useNavigate();
+    const { formData, setFormData } = useContext(FormDataContext);
+
 
     const handleClick = () => {
+        setFormData({
+            topic: '',
+            level: '',
+            difficulty: '',
+            numQuestions: '',
+            focusAreas: '',
+            file: null,
+        });
         logout();
+       
     };
 
     const handleScoreUpdate = (newScore) => {
@@ -130,5 +143,4 @@ const Home = () => {
         </div>
     );
 };
-
 export default Home;

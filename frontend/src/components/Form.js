@@ -70,7 +70,7 @@ const Form = ({ handleScoreUpdate ,onContentSelect}) => {
 
 
         const formDataToSend = new FormData();
-     //console.log("file",file);
+        //console.log("file",file);
         if (file !== null) {
             formDataToSend.append('file', file);
         }
