@@ -13,7 +13,7 @@ const questionSchema = new Schema({
   },
   options: {
     type: [String],
-    required: function() { return this.questionType === 'QCM'; }
+    required: true
   },
   correctAnswer: {
     type: String,

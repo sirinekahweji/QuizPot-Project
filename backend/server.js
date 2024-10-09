@@ -39,7 +39,4 @@ mongoose.connect(process.env.MONGO_URI).then(() => {
     console.error(err);
 });
 
-// Define a simple route
-app.get('/', (req, res) => {
-    res.send('Hello, MERN Stack(BackEnd)!');
-});
+
