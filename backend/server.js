@@ -12,9 +12,6 @@ const responseFormRoutes = require('./routes/responseform');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.static('public'));
-
 
 // Middleware
 app.use(express.json());
