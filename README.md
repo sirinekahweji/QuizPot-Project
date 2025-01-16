@@ -10,7 +10,7 @@
 ## 📺 Video
 https://youtu.be/_09BtfQqvzg?si=k-xP-HFZlAXZ40e8
 ## Interfaces du Projet
-<img src="./images/signin.png" alt="Sign In" width=900" height="400" />
+<img src="./images/signin.png" alt="Sign In" width="900" height="400" />
 <img src="./images/signup.png" alt="Sign Up" width="900" height="400" />
 <img src="./images/resetpassword.png" alt="Reset password" width="900" height="400" />
 <img src="./images/updatepassword.png" alt="Update password" width="900" height="400" />
